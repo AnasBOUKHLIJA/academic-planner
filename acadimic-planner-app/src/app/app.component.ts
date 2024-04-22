@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { UtilsService } from './services/utils.service';
-import { GlobalConfig } from './entities/GlobalConfig';
+import { GlobalConfig } from './models/GlobalConfig';
 import { ActivatedRoute, Data, NavigationEnd, Router } from '@angular/router';
 import { MetaService } from './services/meta.service';
 import { filter, map, mergeMap, tap } from 'rxjs/operators';

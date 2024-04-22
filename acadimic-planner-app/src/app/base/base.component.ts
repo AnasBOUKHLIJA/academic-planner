@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ContactMeComponent } from '../home/contact-me/contact-me.component';
 import { UtilsService } from '../services/utils.service';
-import { GlobalConfig } from '../entities/GlobalConfig';
+import { GlobalConfig } from '../models/GlobalConfig';
 
 @Component({
   selector: 'app-base',
