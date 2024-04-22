@@ -1,0 +1,46 @@
+<div class="card-modal">
+  <a class="open-forward" [routerLink]="'/education-work-experience/' + workExperience?.code">
+    <ion-icon name="open-outline"></ion-icon>
+  </a>
+  <app-skeleton-image [src]="workExperience.thumbnail" [alt]="workExperience.name"></app-skeleton-image>
+  <div class="project-intro">
+    <div>
+      <span> {{ workExperience.startDate | date:'MMM, yyyy' }} {{ workExperience.endDate ? ' - ' +
+        (workExperience.endDate | date:'MMM, yyyy') : ' - present' }} </span>
+      <h1> {{ workExperience.title }} </h1>
+    </div>
+    <p> {{ workExperience.description }} </p>
+    <ion-button [id]="workExperience.code" shape="round">READ MORE</ion-button>
+  </div>
+</div>
+
+<ion-modal class="ion-modal-item" [keepContentsMounted]="true" [trigger]="workExperience.code"
+  [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation" #modal>
+  <ng-template>
+    <span class="close-modal" (click)="modal.dismiss()"><ion-icon name="close"></ion-icon></span>
+    <app-skeleton-image [src]="workExperience.thumbnail" [alt]="workExperience.name"
+      [routerLink]="'/education-work-experience/' + workExperience?.code"
+      (click)="modal.dismiss()"></app-skeleton-image>
+    <div class="modal-body">
+      <div class="titles">
+        <h1> {{ workExperience.title }} </h1>
+        <span> {{ workExperience.startDate | date:'MMM, yyyy' }} {{ workExperience.endDate ? ' - ' +
+          (workExperience.endDate | date:'MMM, yyyy') : ' - present' }} </span>
+      </div>
+      <p> {{ workExperience.description }} </p>
+      <div class="buttons">
+        <div>
+          <a *ngIf="workExperience.link" [href]="workExperience.link" target="_blank">
+            <ion-button shape="round"><ion-icon name="open-outline"></ion-icon></ion-button>
+          </a>
+        </div>
+        <div>
+          <ion-button shape="round" [routerLink]="'/education-work-experience/' + workExperience?.code"
+            (click)="modal.dismiss()">
+            <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ion-modal>

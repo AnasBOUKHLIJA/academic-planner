@@ -1,0 +1,49 @@
+<ion-app>
+  <ion-menu contentId="main-content">
+    <ion-header>
+        <div class="gradient"></div>
+        <img src="assets/icon/anasboukhlija.jpg" alt="Anas BOUKHLIJA">
+        <ion-title>Anas BOUKHLIHA</ion-title>
+        <span>SOFTWARE DEVELOPER</span>
+    </ion-header>
+    <ion-content>
+    <div class="gradient"></div>
+    <ion-menu-toggle autoHide="false" *ngFor="let p of pages; let i = index">
+      <ion-item [routerLink]="p.url">
+        <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+        <ion-label>
+          {{p.title}}
+        </ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+
+    <ion-menu-toggle autoHide="false">
+      <ion-item (click)="utilsService.openContactMeModal()" >
+        <ion-icon slot="start" ios="paper-plane-outline" md="paper-plane-sharp"></ion-icon>
+        <ion-label>
+          CONTACT ME 
+        </ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+
+    <ion-menu-toggle autoHide="false">
+      <ion-item (click)="utilsService.openCVModal()">
+        <ion-icon slot="start" ios="information-circle-outline" md="information-circle-sharp"></ion-icon>
+        <ion-label>
+          SEE MY CV        
+        </ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+
+    </ion-content>
+    <ion-footer>
+      <span>ANAS BOUKHLIJA HUB</span>
+      <span>Copyright © 2023 Anas BOUKHLIJA</span>
+      <span>
+        <a href="https://github.com/anasBOUKHLIJA" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
+        <a href="https://www.linkedin.com/in/anas-boukhlija-a2b9481a3" target="_blank"><ion-icon name="logo-linkedin"></ion-icon></a>
+        <a href="https://www.instagram.com/anasboukhlija1/" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
+      </span>    </ion-footer>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>

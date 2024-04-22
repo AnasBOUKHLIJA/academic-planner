@@ -1,0 +1,43 @@
+<div class="card-modal">
+  <a class="open-forward" [routerLink]="'/portfolio/' + project?.code">
+    <ion-icon name="open-outline"></ion-icon>
+  </a>
+  <app-skeleton-image [src]="project.thumbnail" [alt]="project.name"></app-skeleton-image>
+  <div class="project-intro">
+    <div>
+      <span> {{ project.date | date:'MMM, yyyy' }} </span>
+      <h1> {{ project.name }} </h1>
+    </div>
+    <p> {{ project.description }} </p>
+    <ion-button [id]="project.code" shape="round">READ MORE</ion-button>
+  </div>
+</div>
+
+<ion-modal class="ion-modal-item" [keepContentsMounted]="true" [trigger]="project.code"
+  [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation" #modal>
+  <ng-template>
+    <span class="close-modal" (click)="modal.dismiss()"><ion-icon name="close"></ion-icon></span>
+    <app-skeleton-image [src]="project.thumbnail" [alt]="project.name" [routerLink]="'/portfolio/' + project?.code"
+      (click)="modal.dismiss()"></app-skeleton-image>
+    <div class="modal-body">
+      <div class="titles">
+        <h1> {{ project.name }} </h1>
+        <span> {{ project.date | date:'MMM, yyyy' }} </span>
+      </div>
+      <p> {{ project.description }} </p>
+      <div class="buttons">
+        <div>
+          <a *ngIf="project.repository" [href]="project.repository" target="_blank"><ion-button shape="round"><ion-icon
+                name="logo-github"></ion-icon></ion-button></a>
+          <a *ngIf="project.link" [href]="project.link" target="_blank"><ion-button shape="round"><ion-icon
+                name="open-outline"></ion-icon></ion-button></a>
+        </div>
+        <div>
+          <ion-button shape="round" [routerLink]="'/portfolio/' + project?.code" (click)="modal.dismiss()">
+            <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ion-modal>

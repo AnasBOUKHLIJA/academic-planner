@@ -1,0 +1,76 @@
+<ion-content [fullscreen]="true">
+  <div class="contact-me">
+    <div class="header">
+      <div class="gradient"></div>
+      <div class="buttons">
+        <ion-button class="back-button" shape="round" (click)="cancel()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </div>
+      <div class="titles">
+        <h1>👋 Hello there!</h1>
+        <p>Your thoughts and questions are important to us. Reach out with your queries or just to say hello. We're here
+          to help and look forward to hearing from you!</p>
+      </div>
+    </div>
+    <div class="body">
+      <form [formGroup]="contactMeForm" (ngSubmit)="submitForm()" novalidate>
+        <h1>GET IN TOUCH</h1>
+        <ion-item lines="full">
+          <ion-input label="First Name" label-placement="floating" fill="solid" placeholder="Enter your first name"
+            [formControl]="contactMeForm.controls['firstName']" type="text" ngDefaultControl></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-input label="Last Name" label-placement="floating" fill="solid" placeholder="Enter your last name"
+            [formControl]="contactMeForm.controls['lastName']" type="text" ngDefaultControl></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-input label="Email" label-placement="floating" fill="solid" placeholder="Enter your email"
+            [formControl]="contactMeForm.controls['email']" type="email" ngDefaultControl></ion-input>
+        </ion-item>
+        <p class="error-message" *ngIf="contactMeForm.controls['email'].hasError('pattern')">Please provide valid email.</p>
+
+        <ion-item lines="full">
+          <ion-input label="Object" label-placement="floating" fill="solid" placeholder="Enter the object"
+            [formControl]="contactMeForm.controls['object']" type="text" ngDefaultControl></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-textarea label="Message" label-placement="floating" fill="solid" placeholder="Enter the message"
+            [formControl]="contactMeForm.controls['message']" [autoGrow]="true" rows="5" type="text"
+            ngDefaultControl></ion-textarea>
+        </ion-item>
+        <p class="error-message" *ngIf="contactMeForm.controls['message'].hasError('minlength')">The message should be min 20 chars long.</p>
+
+        <br />
+
+        <ion-row>
+          <ion-col>
+            <ion-button class="main-button" type="submit" expand="block">Send Message</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+      <div class="contact-infos">
+        <h1>CONTACT DETAILS</h1>
+        <div class="contact-info">
+          <div class="contact-info-header">
+            <span><ion-icon name="call-outline"></ion-icon></span>
+            <h1>Phone Number</h1>
+          </div>
+          <p>Call me directly at</p>
+          <h1>+212 6 66 24 81 57</h1>
+        </div>
+        <div class="contact-info">
+          <div class="contact-info-header">
+            <span><ion-icon name="mail-outline"></ion-icon></span>
+            <h1>Email</h1>
+          </div>
+          <p>Send me a message directly at</p>
+          <h1>anasboukhlijapro@gmail.com</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

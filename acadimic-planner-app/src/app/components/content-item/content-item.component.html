@@ -1,0 +1,28 @@
+<div class="content-item" *ngIf="contentItem">
+  <div class="section" *ngIf="contentItem?.type === 'section'">
+    <h3>{{ prifex }} {{ contentItem?.title }} </h3>
+    <p>{{ contentItem?.text }}</p>
+    <div [style.padding]="getPaddingBaseOnLevel()" *ngFor="let item of contentItem?.content; index as i">
+      <app-content-item [level]="getNextLevel()" [prifex]="getPrifex(i)" [contentItem]="item"></app-content-item>
+    </div>
+  </div>
+
+  <div class="paragraph" *ngIf="contentItem?.type === 'paragraph'">
+    <h3>{{ prifex }} {{ contentItem?.title }}</h3>
+    <p>{{ contentItem?.text }}</p>
+    <app-skeleton-image *ngIf="contentItem.imageUrl" [src]="contentItem.imageUrl" [alt]="contentItem?.imageCaption"></app-skeleton-image>
+    <p class="caption" *ngIf="contentItem.imageUrl && contentItem?.imageCaption">{{ prifex }} - {{ contentItem?.imageCaption }}</p>
+  </div>
+
+  <div class="image" *ngIf="contentItem?.type === 'image'">
+    <h3>{{ prifex }} {{ contentItem?.title }}</h3>
+    <app-skeleton-image *ngIf="contentItem.url" [src]="contentItem.url" [alt]="contentItem.caption"></app-skeleton-image>
+    <p class="caption">{{ prifex }} - {{ contentItem?.caption }}</p>
+  </div>
+
+  <div class="code" *ngIf="contentItem?.type === 'code'">
+    <h3>{{ prifex }} {{ contentItem?.title }}</h3>
+    <app-prism [code]="contentItem.body" [language]="contentItem.language"></app-prism>
+    <p class="caption">{{ prifex }} - {{ contentItem?.title }} ({{ contentItem?.language }})</p>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="card-modal">
+  <span class="open-forward" shape="round" [routerLink]="'/blogs-articles/' + article?.code"><ion-icon
+      name="open-outline"></ion-icon></span>
+  <app-skeleton-image [src]="article.thumbnail" [alt]="article.title"></app-skeleton-image>
+  <div class="project-intro">
+    <div>
+      <span> {{ article.createDate | date:'MMM d, yyyy' }} </span>
+      <h1> {{ article.title }} </h1>
+    </div>
+    <p> {{ article.description }} </p>
+    <ion-button [id]="article.code" shape="round">READ MORE</ion-button>
+  </div>
+</div>
+
+<ion-modal class="ion-modal-item" [keepContentsMounted]="true" [trigger]="article.code"
+  [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation" #modal>
+  <ng-template>
+    <span class="close-modal" (click)="modal.dismiss()"><ion-icon name="close"></ion-icon></span>
+    <app-skeleton-image [src]="article.thumbnail" [alt]="article.title"
+      [routerLink]="'/blogs-articles/' + article?.code" (click)="modal.dismiss()"></app-skeleton-image>
+    <div class="modal-body">
+      <div class="titles">
+        <h1> {{ article.title }} </h1>
+        <span> {{ article.createDate | date:'MMM d, yyyy' }} </span>
+      </div>
+      <p> {{ article.description }} </p>
+      <div class="buttons">
+        <div>
+        </div>
+        <div>
+          <ion-button shape="round" [routerLink]="'/blogs-articles/' + article?.code" (click)="modal.dismiss()">
+            <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ion-modal>

@@ -1,0 +1,19 @@
+<app-base>
+  <article *ngIf="article">
+    <div class="header">
+      <h1>{{ article?.title }}</h1>
+      <span>Published on {{ article?.date | date:'MMM d, yyyy' }} • {{article?.estimatedTime}} read</span>
+      <span>Published by {{ article?.author }}</span>
+    </div>
+    <div class="body">
+      <app-skeleton-image *ngIf="article.thumbnail" [src]="article.thumbnail" [alt]="article?.title"></app-skeleton-image>
+      <p class="description">{{ article?.description }}</p>
+      <div class="tags">
+        <ion-chip *ngFor="let tag of article?.tags" color="primary">{{ tag }}</ion-chip>
+      </div>
+      <div *ngFor="let contentItem of article?.content; index as i">
+        <app-content-item [level]="1" [prifex]="i+1 + '.'" [contentItem]="contentItem"></app-content-item>
+      </div>
+    </div>
+  </article>
+</app-base>
