@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NetworkServiceService } from './network-service.service';
 import { ConfigurationService } from './configuration.service';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { GlobalConfig } from '../entities/GlobalConfig';
+import { GlobalConfig } from '../models/GlobalConfig';
 import { ModalController } from '@ionic/angular';
 import { ContactMeComponent } from '../home/contact-me/contact-me.component';
 import { CvViewerComponent } from '../home/cv-viewer/cv-viewer.component';
@@ -63,35 +63,8 @@ export class UtilsService {
     if(this.global) return this.global;
 
     this.global = new GlobalConfig();
-    this.global.portfolio = this.configuration.configuration.portfolio;
-    this.global.firstName = this.configuration.configuration.firstName;
-    this.global.lastName = this.configuration.configuration.lastName;
-    this.global.thumbnail = this.configuration.configuration.thumbnail;
-    this.global.description = this.configuration.configuration.description;
-    this.global.title = this.configuration.configuration.title;
-    this.global.resume = this.configuration.configuration.resume;
-    this.global.icon = this.configuration.configuration.icon;
-    this.global.github = this.configuration.configuration.github;
-    this.global.linkedin = this.configuration.configuration.linkedin;
-    this.global.instagram = this.configuration.configuration.instagram;
     return this.global;
   }
 
-  async openCVModal() {
-    const modal = await this.modalCtrl.create({
-      component: CvViewerComponent,
-      cssClass: 'fullscreen'
-    });
-    modal.present();
-    await modal.onWillDismiss();
-  }
-
-  async openContactMeModal() {
-    const modal = await this.modalCtrl.create({
-      component: ContactMeComponent,
-      cssClass: 'fullscreen'
-    });
-    modal.present();
-    await modal.onWillDismiss();
-  }
+  
 }
