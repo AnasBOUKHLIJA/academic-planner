@@ -33,6 +33,7 @@ export function ConfigLoader(configurationService: ConfigurationService) {
     SkeletonItemComponent,
     SkeletonImageComponent,
     ClipboardDirective,
+    HomeComponent
     ],
   imports: [
     BrowserModule, 

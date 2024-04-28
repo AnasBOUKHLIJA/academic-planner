@@ -1,20 +1,7 @@
 {
-    "serverUrl"         : "http://localhost:3000/",
+    "serverUrl"         : "http://localhost:8080/academic-planner/api/v1",
     "applicationUrl"    : "http://localhost:8100/",
-    "toastDuration"     : 5000,
-    "portfolio": "Anas BOUKHLIJA HUB",
-    "firstName": "Anas",
-    "lastName": "BOUKHLIJA",
-    "thumbnail": "thumbnail.png",
-    "description": "Greetings! I am a passionate and ambitious software developer dedicated to crafting seamless digital experiences. With expertise in Java and its frameworks, alongside proficiency in JavaScript and TypeScript for both frontend and backend development, I thrive in creating robust and innovative solutions.",
-    "title": "SOFTWARE DEVELOPER",
-    "resume": "AnasBoukhlijaCv.pdf",
-    "icon": "anasboukhlija.jpg",
-    "github": "https://github.com/anasBOUKHLIJA",
-    "linkedin": "https://www.linkedin.com/in/anas-boukhlija-a2b9481a3",
-    "instagram": "https://www.instagram.com/anasboukhlija1",
-
-    "localServerUrl"    : "http://192.168.8.106:3000/ http://localhost:3000/",
-    "ngrokServerUrl"    : "https://b265-105-66-6-230.ngrok-free.app/",
-    "renderServerUrl"   : "https://anasboukhlija-backend.onrender.com/"
+    "applicationVersion": "v.1.0.0.dev",
+    "universityCode"    : "uit",
+    "toastDuration"     : 5000
 }

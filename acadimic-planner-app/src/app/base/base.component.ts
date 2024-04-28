@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ContactMeComponent } from '../home/contact-me/contact-me.component';
 import { UtilsService } from '../services/utils.service';
 import { GlobalConfig } from '../models/GlobalConfig';
 
@@ -29,11 +28,6 @@ export class BaseComponent implements OnInit {
   }
 
   async openContactMeModal() {
-    const modal = await this.modalCtrl.create({
-      component: ContactMeComponent,
-      cssClass: 'fullscreen'
-    });
-    modal.present();
-    await modal.onWillDismiss();
+    
   }
 }

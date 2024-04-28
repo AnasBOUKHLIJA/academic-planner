@@ -1,4 +1,80 @@
 <app-base>
-  <div id="welcome">
+  <div class="container">
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label>Username:</label>
+        <input type="text" formControlName="username">
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" formControlName="password">
+      </div>
+      <div>
+        <label>Gender:</label>
+        <input type="text" formControlName="gender">
+      </div>
+      <div>
+        <label>Email:</label>
+        <input type="email" formControlName="email">
+      </div>
+      <div>
+        <label>First Name:</label>
+        <input type="text" formControlName="firstName">
+      </div>
+      <div>
+        <label>Last Name:</label>
+        <input type="text" formControlName="lastName">
+      </div>
+      <div>
+        <label>Birth Date:</label>
+        <input type="date" formControlName="birthDate">
+      </div>
+      <div>
+        <label>Legal ID Number:</label>
+        <input type="text" formControlName="legalIdNumber">
+      </div>
+      <div>
+        <label>Legal ID Type:</label>
+        <select formControlName="legalIdType">
+          <option *ngFor="let legalIdType of legalIdTypes" [value]="legalIdType.id">
+            {{ legalIdType.name }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label>Citizenship:</label>
+        <select formControlName="citizenship">
+          <option *ngFor="let country of countries" [value]="country.id">
+            {{ country.name }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label>Profile:</label>
+        <select formControlName="profile">
+          <option *ngFor="let profile of profiles" [value]="profile.id">
+            {{ profile.name }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label>City:</label>
+        <select formControlName="city">
+          <option *ngFor="let city of cities" [value]="city.id">
+            {{ city.name }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label>Apogee Code:</label>
+        <input type="text" formControlName="apogeeCode">
+      </div>
+      <div>
+        <label>Student National Code:</label>
+        <input type="text" formControlName="studentNationalCode">
+      </div>
+      <button type="submit" [disabled]="!studentForm.valid">Submit</button>
+    </form>
   </div>
+  
 </app-base>

@@ -18,6 +18,9 @@ public class Person {
     @Column(name = "password", nullable=false)
     private String password;
 
+    @Column(name = "gender", nullable=false)
+    private Boolean gender;
+
     @Column(name = "email", nullable=false)
     private String email;
 
@@ -71,6 +74,22 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getGender() {
+        return gender;
+    }
+
+    public void setGender(Boolean gender) {
+        this.gender = gender;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     public String getEmail() {

@@ -8,16 +8,10 @@ import { SpinnerService } from './spinner.service';
 export class UserServiceService {
 
   private readonly MODULE_URL: string = 'user/';
-  projects        : Project[];
-  articles        : Article[];
-  workExperiences : WorkExperience[];
-  skills          : Skill[];
-  quotes          : Quote[];
 
   constructor(
     private networkService: NetworkServiceService,
     private spinnerService: SpinnerService
-    ) {}
-
+  ) {}
   
 }

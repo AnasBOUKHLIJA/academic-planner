@@ -22,7 +22,7 @@ public class Country {
     private String rank;
 
     @OneToMany(mappedBy="country")
-    private List<City> citys;
+    private List<City> cities;
 
     //--------------------------------------------------------------------------------
     // GETTER AND SETTERS
@@ -60,11 +60,11 @@ public class Country {
         this.rank = rank;
     }
 
-    public List<City> getCitys() {
-        return citys;
+    public List<City> getCities() {
+        return cities;
     }
 
-    public void setCitys(List<City> citys) {
-        this.citys = citys;
+    public void setCities(List<City> citys) {
+        this.cities = citys;
     }
 }

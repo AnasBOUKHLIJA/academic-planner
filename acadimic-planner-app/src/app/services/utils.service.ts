@@ -4,8 +4,6 @@ import { ConfigurationService } from './configuration.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { GlobalConfig } from '../models/GlobalConfig';
 import { ModalController } from '@ionic/angular';
-import { ContactMeComponent } from '../home/contact-me/contact-me.component';
-import { CvViewerComponent } from '../home/cv-viewer/cv-viewer.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +11,29 @@ import { CvViewerComponent } from '../home/cv-viewer/cv-viewer.component';
 export class UtilsService {
 
   global: GlobalConfig;
-  public pages = [
-    { code: 'home', title: 'Home', url: '/', icon: 'home' },
-    { code: 'portfolio', title: 'Portfolio', url: '/portfolio', icon: 'briefcase' },
-    { code: 'skills', title: 'Skills', url: '/skills', icon: 'construct' },
-    { code: 'experiences', title: 'Experiences', url: '/education-work-experience', icon: 'business' },
-    { code: 'erticles', title: 'Blogs/Articles', url: '/blogs-articles', icon: 'newspaper' },
-  ];
+  public pages = {
+    admin: [
+      { code: 'dashboard', title: 'Dashboard', url: '/dashboard', icon: 'home' },
+      { code: 'establishment-management', title: 'Establishment Management', url: '/establishment-management', icon: 'business' },
+      { code: 'user-management', title: 'User Management', url: '/user-management', icon: 'people' },
+      { code: 'course-management', title: 'Course Management', url: '/course-management', icon: 'book' },
+    ],
+    teacher: [
+      { code: 'dashboard', title: 'Dashboard', url: '/dashboard', icon: 'home' },
+      { code: 'course', title: 'Courses Management', url: '/courses', icon: 'book' },
+      { code: 'absence', title: 'Absences Management', url: '/absences', icon: 'calendar' },
+      { code: 'grade', title: 'Grades Management', url: '/grades', icon: 'school' },
+      { code: 'student', title: 'Students', url: '/students', icon: 'people' },
+    ],
+    student: [
+      { code: 'dashboard', title: 'Dashboard', url: '/dashboard', icon: 'home' },
+      { code: 'course', title: 'My Courses', url: '/courses', icon: 'book' },
+      { code: 'absence', title: 'My Absences', url: '/absences', icon: 'calendar' },
+      { code: 'grade', title: 'My Grades', url: '/grades', icon: 'school' },
+      { code: 'student', title: 'Students', url: '/students', icon: 'people' },
+    ]
+
+  };
 
   constructor(
     private networkService: NetworkServiceService,
@@ -28,7 +42,7 @@ export class UtilsService {
     private modalCtrl: ModalController
   ) { }
 
-  imageGet(path: string, toBeLoaded: boolean) : Promise<string> {
+  imageGet(path: string, toBeLoaded: boolean): Promise<string> {
     return new Promise((resolve, reject) => {
       this.networkService.get("blob/image/" + path, toBeLoaded).then((response: any) => {
         resolve(response.strArg1);
@@ -43,16 +57,16 @@ export class UtilsService {
   }
 
   pagesConfigGet() {
-    return this.pages;
+    return this.pages.admin;
   }
 
-  copyToClipBoard(text: string, needApplicationUrl: boolean){
-      if(needApplicationUrl && this.configuration.configuration.applicationUrl){
-          text = this.configuration.configuration.applicationUrl + text;
-      }
-      console.log(text);
-      const done = this.clipboard.copy(text);
-      console.log(done);
+  copyToClipBoard(text: string, needApplicationUrl: boolean) {
+    if (needApplicationUrl && this.configuration.configuration.applicationUrl) {
+      text = this.configuration.configuration.applicationUrl + text;
+    }
+    console.log(text);
+    const done = this.clipboard.copy(text);
+    console.log(done);
   }
 
   applicationUrlGet(): string {
@@ -60,11 +74,11 @@ export class UtilsService {
   }
 
   globalGet(): GlobalConfig {
-    if(this.global) return this.global;
+    if (this.global) return this.global;
 
     this.global = new GlobalConfig();
     return this.global;
   }
 
-  
+
 }
