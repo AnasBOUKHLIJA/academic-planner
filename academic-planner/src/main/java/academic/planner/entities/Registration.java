@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-public class PromotionStudent {
+public class Registration {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +21,8 @@ public class PromotionStudent {
     @JoinColumn(name="student_id", foreignKey=@ForeignKey(name="fk_promotion_student_student"), nullable=false)
     public Student student;
 
-    @Column(name = "creation_date", nullable=false)
-    private Date creationDate;
+    @Column(name = "registration_date", nullable=false)
+    private Date registrationDate;
 
     //--------------------------------------------------------------------------------
     // GETTER AND SETTERS
@@ -52,11 +52,11 @@ public class PromotionStudent {
         this.student = student;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public Date getRegistrationDate() {
+        return registrationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }
