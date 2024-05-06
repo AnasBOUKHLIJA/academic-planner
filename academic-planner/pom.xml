@@ -93,6 +93,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>academic-planner</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.asciidoctor</groupId>

@@ -16,12 +16,14 @@ public class Establishment {
     @Column(name = "name", nullable=false)
     private String name;
 
+    @Lob
     @Column(name = "description", nullable=false)
     private String description;
 
     @Column(name = "rank", nullable=false)
     private Integer rank;
 
+    @Lob
     @Column(name = "thumbnail", nullable=true)
     private String thumbnail;
 

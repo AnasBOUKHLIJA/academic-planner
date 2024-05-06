@@ -1,5 +1,6 @@
 package academic.planner.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,8 +20,9 @@ public class City {
     @Column(name= "rank", nullable=true)
     private Integer rank;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="country_id", foreignKey=@ForeignKey(name="fk_city_country"), nullable=false)
+    @JsonIgnore
     public Country country;
 
     //--------------------------------------------------------------------------------

@@ -21,7 +21,7 @@ public class Country {
     @Column(name = "rank", nullable=false)
     private String rank;
 
-    @OneToMany(mappedBy="country")
+    @OneToMany(mappedBy="country", fetch = FetchType.LAZY)
     private List<City> cities;
 
     //--------------------------------------------------------------------------------

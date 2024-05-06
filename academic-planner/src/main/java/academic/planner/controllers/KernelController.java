@@ -1,6 +1,9 @@
 package academic.planner.controllers;
 
 import academic.planner.entities.Country;
+import academic.planner.entities.LegalIdType;
+import academic.planner.entities.Profile;
+import academic.planner.entities.University;
 import academic.planner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -28,6 +32,7 @@ public class KernelController {
     private final SemesterService             semesterService;
     private final CourseService               courseService;
     private final LegalIdTypeService          legalIdTypeService;
+    private final ProfileService                profileService;
     private final StudentService              studentService;
     private final RegistrationService registrationService;
     private final GradeService                gradeService;
@@ -37,8 +42,8 @@ public class KernelController {
     public KernelController(CountryService countryService, CityService cityService, UniversityService universityService,
                             EstablishmentService establishmentService, DepartmentService departmentService, ClassRoomService classRoomService,
                             DegreeService degreeService, AcademicProgramService academicProgramService, PromotionService promotionService,
-                            SemesterService semesterService, CourseService courseService, LegalIdTypeService legalIdTypeService, StudentService studentService,
-                            RegistrationService registrationService, GradeService gradeService, ScheduleService scheduleService) {
+                            SemesterService semesterService, CourseService courseService, LegalIdTypeService legalIdTypeService, ProfileService profileService,
+                            StudentService studentService, RegistrationService registrationService, GradeService gradeService, ScheduleService scheduleService) {
         this.countryService = countryService;
         this.cityService = cityService;
         this.universityService = universityService;
@@ -51,6 +56,7 @@ public class KernelController {
         this.semesterService = semesterService;
         this.courseService = courseService;
         this.legalIdTypeService = legalIdTypeService;
+        this.profileService = profileService;
         this.studentService = studentService;
         this.registrationService = registrationService;
         this.gradeService = gradeService;
@@ -58,9 +64,31 @@ public class KernelController {
     }
 
     @GetMapping(
-            value = "/countriesGet",
+            value = "/countryGet/{code}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Country>> countriesGet() {
-        return new ResponseEntity<>(countryService.getAll(), HttpStatus.OK);
+    public ResponseEntity<Country> countriesGet(@PathVariable String code) {
+        return new ResponseEntity<>(countryService.getByCode(code), HttpStatus.OK);
     }
+
+    @GetMapping(
+            value = "/universityGet/{code}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<University> universityGet(@PathVariable String code) {
+        return new ResponseEntity<>(universityService.getByCode(code), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/legalIdTypesGet",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<LegalIdType>> legalIdTypesGet() {
+        return new ResponseEntity<>(legalIdTypeService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/profilesGet",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Profile>> profilesGet() {
+        return new ResponseEntity<>(profileService.getAll(), HttpStatus.OK);
+    }
+
 }

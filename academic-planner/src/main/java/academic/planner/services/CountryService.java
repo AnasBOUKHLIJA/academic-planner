@@ -1,5 +1,6 @@
 package academic.planner.services;
 
+import academic.planner.entities.City;
 import academic.planner.entities.Country;
 import academic.planner.repositories.CountryRepository;
 import academic.planner.utiles.AcademicPlannerException;
@@ -22,7 +23,13 @@ public class CountryService {
     }
 
     public List<Country> getAll() {
-        return countryRepository.findAll();
+        List<Country> countries = countryRepository.findAll();
+        for (Country country: countries) {
+            for(City city : country.getCities()){
+                city.setCountry(null);
+            }
+        }
+        return countries;
     }
 
     public Country getById(Long id) {

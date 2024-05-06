@@ -16,9 +16,11 @@ public class University {
     @Column(name = "name", nullable=false)
     private String name;
 
+    @Lob
     @Column(name = "description", nullable=false)
     private String description;
 
+    @Lob
     @Column(name = "thumbnail", nullable=true)
     private String thumbnail;
 

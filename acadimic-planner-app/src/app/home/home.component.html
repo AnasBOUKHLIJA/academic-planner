@@ -1,38 +1,15 @@
 <app-base>
   <div class="container">
     <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label>Username:</label>
-        <input type="text" formControlName="username">
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" formControlName="password">
-      </div>
-      <div>
-        <label>Gender:</label>
-        <input type="text" formControlName="gender">
-      </div>
-      <div>
-        <label>Email:</label>
-        <input type="email" formControlName="email">
-      </div>
-      <div>
-        <label>First Name:</label>
-        <input type="text" formControlName="firstName">
-      </div>
-      <div>
-        <label>Last Name:</label>
-        <input type="text" formControlName="lastName">
-      </div>
-      <div>
-        <label>Birth Date:</label>
-        <input type="date" formControlName="birthDate">
-      </div>
-      <div>
-        <label>Legal ID Number:</label>
-        <input type="text" formControlName="legalIdNumber">
-      </div>
+
+      <h1>GET IN TOUCH</h1>
+        <ion-item lines="full">
+          <ion-input label="First Name" label-placement="floating" fill="solid" placeholder="Enter your first name"
+            [formControl]="contactMeForm.controls['firstName']" type="text" ngDefaultControl></ion-input>
+        </ion-item>
+
+
+      
       <div>
         <label>Legal ID Type:</label>
         <select formControlName="legalIdType">
