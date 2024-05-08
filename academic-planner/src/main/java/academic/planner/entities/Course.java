@@ -29,6 +29,10 @@ public class Course {
     private Boolean hold = false;
 
     @ManyToOne
+    @JoinColumn(name="teacher_id", foreignKey=@ForeignKey(name="fk_course_teacher"), nullable=false)
+    private Teacher teacher;
+
+    @ManyToOne
     @JoinColumn(name="academic_program_id", foreignKey=@ForeignKey(name="fk_course_academic_program"), nullable=false)
     private AcademicProgram academicProgram;
 
@@ -102,6 +106,14 @@ public class Course {
 
     public void setHold(Boolean hold) {
         this.hold = hold;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     public AcademicProgram getAcademicProgram() {
