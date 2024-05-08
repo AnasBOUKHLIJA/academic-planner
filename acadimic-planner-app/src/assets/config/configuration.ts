@@ -5,6 +5,8 @@ export class Configuration {
 
     serverUrl       : string;
     applicationUrl  : string;
+    universityCode  : string;
+    countryCode     : string;
     toastDuration   : string;
 
 }

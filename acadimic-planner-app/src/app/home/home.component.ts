@@ -6,6 +6,11 @@ import { SwiperOptions } from 'swiper/types';
 import { UtilsService } from '../services/utils.service';
 import { GlobalConfig } from '../models/GlobalConfig';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { City } from '../models/City';
+import { Profile } from '../models/Profile';
+import { LegalIdType } from '../models/LegalIdType';
+import { Country } from '../models/Country';
+import { KernelServiceService } from '../services/kernel-service.service';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +22,10 @@ export class HomeComponent  implements OnInit {
   studentForm : FormGroup;
   baseSize    : number = 4;
   global      : GlobalConfig;
+  cities      : City[];
+  profiles    : Profile[];
+  legalIdTypes : LegalIdType[];
+  countries  : Country[];
 
   constructor(
     private utilsService: UtilsService,
@@ -24,9 +33,16 @@ export class HomeComponent  implements OnInit {
     private userServiceService: UserServiceService,
     private cdr: ChangeDetectorRef,
     private formBuilder: FormBuilder,
+    private kernelServiceService: KernelServiceService,
   ) {}
 
   ngOnInit(): void {
+
+    this.kernelServiceService.countryGet();
+    this.kernelServiceService.legalIdTypesGet();
+    this.kernelServiceService.profilesGet();
+    this.kernelServiceService.universityGet();
+
     this.studentForm = this.formBuilder.group({
       id: [''],
       username: ['', Validators.required],

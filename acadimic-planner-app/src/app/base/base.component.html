@@ -45,22 +45,6 @@
     <ng-content></ng-content>
   </div>
   <ion-footer>
-    <ion-skeleton-text *ngIf="!global" [animated]="true"></ion-skeleton-text>
-    <span *ngIf="global?.portfolio">{{ global.portfolio }}</span>
-    <span *ngIf="global?.firstName && global.lastName"
-      >Copyright © {{ currentYear }} {{ global.firstName }}
-      {{ global.lastName }}</span
-    >
-    <span>
-      <a *ngIf="global?.github" [href]="global.github" target="_blank"
-        ><ion-icon name="logo-facebook"></ion-icon
-      ></a>
-      <a *ngIf="global?.linkedin" [href]="global.linkedin" target="_blank"
-        ><ion-icon name="logo-linkedin"></ion-icon
-      ></a>
-      <a *ngIf="global?.instagram" [href]="global.instagram" target="_blank"
-        ><ion-icon name="logo-instagram"></ion-icon
-      ></a>
-    </span>
+
   </ion-footer>
 </ion-content>
