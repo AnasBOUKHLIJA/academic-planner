@@ -45,4 +45,24 @@ public class PersonService {
     public void delete(Person person) {
         personRepository.delete(person);
     }
+
+    public String generateUsername(String firstName, String lastName){
+        String[] firstNameParts = firstName.toLowerCase().split(" ");
+        String[] lastNameParts = lastName.toLowerCase().split(" ");
+
+        StringBuilder usernameBuilder = new StringBuilder();
+        for (String part : firstNameParts) {
+            usernameBuilder.append(part.charAt(0)).append(".");
+        }
+        for (String part : lastNameParts) {
+            usernameBuilder.append(part.charAt(0)).append(".");
+        }
+
+        // Check if this combination firstName and lastName already exists
+        String username = usernameBuilder.toString();
+        List<Person> persons = personRepository.findByUsernameContaining(username);
+        if(persons.size() > 0) username += "."+ persons.size();
+
+        return username;
+    }
 }

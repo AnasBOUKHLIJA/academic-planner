@@ -12,7 +12,7 @@ import { Univesity } from '../models/Univesity';
 })
 export class KernelServiceService {
 
-  private readonly MODULE_GET_URL: string = '/kernel/';
+  private readonly MODULE_GET_URL: string = 'kernel/';
 
   constructor(
     private configurationService  : ConfigurationService,

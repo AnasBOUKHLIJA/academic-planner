@@ -12,6 +12,8 @@ import { LegalIdType } from '../models/LegalIdType';
 import { Country } from '../models/Country';
 import { KernelServiceService } from '../services/kernel-service.service';
 import { Univesity } from '../models/Univesity';
+import { AdminServiceService } from '../services/admin-service.service';
+import { SpinnerService } from '../services/spinner.service';
 
 @Component({
   selector: 'app-home',
@@ -21,27 +23,34 @@ import { Univesity } from '../models/Univesity';
 export class HomeComponent  implements OnInit {
 
   studentForm : FormGroup;
+  teacherForm : FormGroup;
+  adminForm   : FormGroup;
   baseSize    : number = 4;
   global      : GlobalConfig;
   countries   : Country[];
   profiles    : Profile[];
   legalIdTypes : LegalIdType[];
   univesity   : Univesity;
+  selectedStudentCountry: Country;
+  selectedTeacherCountry: Country;
+  selectedAdminCountry: Country;
 
   constructor(
-    private utilsService: UtilsService,
-    private modalCtrl: ModalController,
-    private userServiceService: UserServiceService,
-    private cdr: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
-    private kernelServiceService: KernelServiceService,
+    private utilsService            : UtilsService,
+    private modalCtrl               : ModalController,
+    private userServiceService      : UserServiceService,
+    private cdr                     : ChangeDetectorRef,
+    private formBuilder             : FormBuilder,
+    private kernelServiceService    : KernelServiceService,
+    private adminServiceService     : AdminServiceService,
+    private spinnerService          : SpinnerService,
   ) {}
 
   async ngOnInit() {
     this.studentForm = this.formBuilder.group({
       // id: [''],
       // username: ['', Validators.required],
-      //password: ['', [Validators.required, Validators.minLength(6)]],
+      // password: ['', [Validators.required, Validators.minLength(6)]],
       gender: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       firstName: ['', Validators.required],
@@ -56,21 +65,70 @@ export class HomeComponent  implements OnInit {
       studentNationalCode: ['', Validators.required]
     });
 
+    this.teacherForm = this.formBuilder.group({
+      gender: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      legalIdNumber: ['', Validators.required],
+      legalIdType: ['', Validators.required],
+      citizenship: ['', Validators.required],
+      profile: ['', Validators.required],
+      city: ['', Validators.required],
+    });
+
+    this.adminForm = this.formBuilder.group({
+      gender: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      legalIdNumber: ['', Validators.required],
+      legalIdType: ['', Validators.required],
+      citizenship: ['', Validators.required],
+      profile: ['', Validators.required],
+      city: ['', Validators.required],
+    });
+
     this.countries = await this.kernelServiceService.countriesGet();
     this.legalIdTypes = await this.kernelServiceService.legalIdTypesGet();
     this.profiles = await this.kernelServiceService.profilesGet();
     this.univesity = await this.kernelServiceService.universityGet();
 
-    console.log(this.countries);
-    console.log(this.legalIdTypes);
-    console.log(this.profiles);
-    console.log(this.univesity);
+    this.studentForm.get('citizenship')?.valueChanges.subscribe((selectedCountry: Country) => {
+      this.selectedStudentCountry = selectedCountry;
+    });
+
+    this.teacherForm.get('citizenship')?.valueChanges.subscribe((selectedCountry: Country) => {
+      this.selectedTeacherCountry = selectedCountry;
+    });
+
+    this.teacherForm.get('citizenship')?.valueChanges.subscribe((selectedCountry: Country) => {
+      this.selectedAdminCountry = selectedCountry;
+    });
+    
   }
 
-  async submitForm() {
+  async submitStudentForm() {
     if (this.studentForm.valid) {
-      console.log('Student data:', this.studentForm.value);
-      // Submit data
+      this.adminServiceService.createStudent(this.studentForm.value);
+    } else {
+      console.log('Form is not valid');
+    }
+  }
+
+  async submitTeacherForm() {
+    if (this.teacherForm.valid) {
+      this.adminServiceService.createTeacher(this.teacherForm.value);
+    } else {
+      console.log('Form is not valid');
+    }
+  }
+
+  async submitAdminForm() {
+    if (this.adminForm.valid) {
+      this.adminServiceService.createAdmin(this.adminForm.value);
     } else {
       console.log('Form is not valid');
     }
