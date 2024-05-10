@@ -64,6 +64,13 @@ public class KernelController {
     }
 
     @GetMapping(
+            value = "/countriesGet",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Country>> countryGet() {
+        return new ResponseEntity<>(countryService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(
             value = "/countryGet/{code}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Country> countriesGet(@PathVariable String code) {

@@ -1,9 +1,9 @@
 import { Country } from "./Country";
 
 export class City {
-    id: Number;
-    code: String;
-    name: String;
-    rank: Number;
+    id: number;
+    code: string;
+    name: string;
+    rank: number;
     country: Country;
 }

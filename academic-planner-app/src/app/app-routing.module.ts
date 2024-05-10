@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent,
     data: {
-      title: "Anas BOUKHLIJA",
+      title: "academic planner",
       description: "Hello there! I'm Anas BOUKHLIJA, a passionate and innovative Full Stack Developer with expertise in a range of technologies. I specialize in Java JEE, Spring Framework, Express.js, Nest.js, Angular, Next.js and more... crafting dynamic and efficient web and mobile applications that deliver a seamless user experience."
     }
   },

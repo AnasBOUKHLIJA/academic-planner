@@ -11,6 +11,7 @@ import { Profile } from '../models/Profile';
 import { LegalIdType } from '../models/LegalIdType';
 import { Country } from '../models/Country';
 import { KernelServiceService } from '../services/kernel-service.service';
+import { Univesity } from '../models/Univesity';
 
 @Component({
   selector: 'app-home',
@@ -22,10 +23,10 @@ export class HomeComponent  implements OnInit {
   studentForm : FormGroup;
   baseSize    : number = 4;
   global      : GlobalConfig;
-  cities      : City[];
+  countries   : Country[];
   profiles    : Profile[];
   legalIdTypes : LegalIdType[];
-  countries  : Country[];
+  univesity   : Univesity;
 
   constructor(
     private utilsService: UtilsService,
@@ -36,47 +37,37 @@ export class HomeComponent  implements OnInit {
     private kernelServiceService: KernelServiceService,
   ) {}
 
-  ngOnInit(): void {
-
-    this.kernelServiceService.countryGet();
-    this.kernelServiceService.legalIdTypesGet();
-    this.kernelServiceService.profilesGet();
-    this.kernelServiceService.universityGet();
-
+  async ngOnInit() {
     this.studentForm = this.formBuilder.group({
-      id: [''],
-      username: ['', Validators.required],
+      // id: [''],
+      // username: ['', Validators.required],
       //password: ['', [Validators.required, Validators.minLength(6)]],
       gender: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       birthDate: ['', Validators.required],
-      legalIdNumber: [''],
-      legalIdType: this.formBuilder.group({
-        id: [''],
-        type: ['']
-      }),
-      citizenship: this.formBuilder.group({
-        id: [''],
-        code: [''],
-        name: [''],
-        rank: ['']
-      }),
-      profile: this.formBuilder.group({
-        id: [''],
-        code: [''],
-        name: ['']
-      }),
+      legalIdNumber: ['', Validators.required],
+      legalIdType: ['', Validators.required],
+      citizenship: ['', Validators.required],
+      profile: ['', Validators.required],
       city: ['', Validators.required],
       apogeeCode: ['', Validators.required],
       studentNationalCode: ['', Validators.required]
     });
 
-    
+    this.countries = await this.kernelServiceService.countriesGet();
+    this.legalIdTypes = await this.kernelServiceService.legalIdTypesGet();
+    this.profiles = await this.kernelServiceService.profilesGet();
+    this.univesity = await this.kernelServiceService.universityGet();
+
+    console.log(this.countries);
+    console.log(this.legalIdTypes);
+    console.log(this.profiles);
+    console.log(this.univesity);
   }
 
-  onSubmit(): void {
+  async submitForm() {
     if (this.studentForm.valid) {
       console.log('Student data:', this.studentForm.value);
       // Submit data
@@ -84,5 +75,5 @@ export class HomeComponent  implements OnInit {
       console.log('Form is not valid');
     }
   }
-  
+
 }

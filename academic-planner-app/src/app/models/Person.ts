@@ -3,15 +3,16 @@ import { LegalIdType } from "./LegalIdType";
 import { Profile } from "./Profile";
 
 export class Person {
-    id: Number;
-    username: String;
-    password: String;
-    gender: String;
-    email: String;
-    firstName: String;
-    lastName: String;
-    birthDate: String;
-    legalIdNumber: String;
+    id: number;
+    username: string;
+    password: string;
+    gender: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    birthDate: string;
+    legalIdNumber: string;
+    thumbnail: string;
     legalIdType: LegalIdType;
     citizenship: Country;
     profile: Profile;
