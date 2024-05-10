@@ -1,3 +1,17 @@
+INSERT INTO profile(code, name)
+VALUES	('etu', 'etudiant');
+INSERT INTO profile(code, name)
+VALUES	('ro', 'professeur');
+INSERT INTO profile(code, name)
+VALUES	('adm', 'admin');
+
+INSERT INTO legal_id_type(code, name)
+VALUES	('C', 'CIN');
+INSERT INTO legal_id_type(code, name)
+VALUES	('P', 'Passeport');
+INSERT INTO legal_id_type(code, name)
+VALUES	('S', 'Carte de séjour');
+
 ALTER TABLE UNIVERSITY DROP COLUMN description;
 ALTER TABLE UNIVERSITY ADD (description CLOB);
 
