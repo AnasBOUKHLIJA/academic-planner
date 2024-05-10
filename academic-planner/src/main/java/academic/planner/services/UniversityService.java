@@ -49,7 +49,7 @@ public class UniversityService {
         return universitiesList;
     }
 
-    public void delete(University university) {
-        universityRepository.delete(university);
+    public void delete(Long id) {
+        universityRepository.delete(getById(id));
     }
 }

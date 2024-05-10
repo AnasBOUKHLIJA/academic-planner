@@ -61,6 +61,28 @@ public class AdminController {
     }
 
     @PostMapping(
+            value = "/universitySave",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<University> universitySave(@RequestBody University university) {
+        return new ResponseEntity<>(universityService.save(university), HttpStatus.OK);
+    }
+
+    @PostMapping(
+            value = "/universitiesSave",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<University>> universitiesSave(@RequestBody List<University> universities) {
+        return new ResponseEntity<>(universityService.save(universities), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/universityDelete/{id}")
+    public ResponseEntity universityDelete(@PathVariable Long id) {
+        universityService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(
             value = "/countrySave",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
