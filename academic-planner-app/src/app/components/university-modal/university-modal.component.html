@@ -1,0 +1,45 @@
+<div class="card-modal-body">
+  <div class="form-enrollment">
+    <div class="form-header">
+      <h1>Enregistrement</h1>
+      <p>description</p>
+    </div>
+    <form [formGroup]="universityForm" (ngSubmit)="submitForm()" novalidate>
+      
+      <img [alt]="university.name" [src]="university.thumbnail" />
+
+      <ion-item lines="full">
+        <ion-label position="stacked">Code</ion-label>
+        <ion-input formControlName="code" placeholder="Entrez le code" type="text"
+          ngDefaultControl></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="stacked">Nom</ion-label>
+        <ion-input formControlName="name" placeholder="Entrez le nom" type="text"
+          ngDefaultControl></ion-input>
+      </ion-item>
+      
+      <ion-item lines="full">
+        <ion-label position="stacked">Description</ion-label>
+        <ion-textarea [counter]="true" maxlength="20" formControlName="description" placeholder="Entrez la description" type="text"
+          ngDefaultControl></ion-textarea>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="stacked">Ville</ion-label>
+        <ion-select formControlName="city" label="Sélectionnez la ville">
+          <ion-select-option *ngFor="let city of cities" [value]="city">{{ city.name }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="form-buttons">
+        <ion-button type="submit">
+          <ion-icon name="send-outline" slot="end"></ion-icon>
+          Enregistrer &nbsp;
+        </ion-button>
+      </div>
+
+    </form>
+  </div>
+</div>

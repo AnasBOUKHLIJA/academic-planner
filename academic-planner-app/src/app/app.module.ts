@@ -18,6 +18,13 @@ import { PortalModule } from '@angular/cdk/portal';
 import { SkeletonItemComponent } from './components/skeleton-item/skeleton-item.component';
 import { SkeletonImageComponent } from './components/skeleton-image/skeleton-image.component';
 import { ClipboardDirective } from './directives/clipboard.directive';
+import { UsersManagementComponent } from './users-management/users-management.component';
+import { UniversityManagementComponent } from './university-management/university-management.component';
+import { SchedulesManagementComponent } from './schedules-management/schedules-management.component';
+import { AbsencesManagementComponent } from './absences-management/absences-management.component';
+import { EstablishmentModalComponent } from './components/establishment-modal/establishment-modal.component';
+import { UniversityModalComponent } from './components/university-modal/university-modal.component';
+import { DepartmentModalComponent } from './components/department-modal/department-modal.component';
 
 export function ConfigLoader(configurationService: ConfigurationService) {
   return () => configurationService.load(environment.configFile);
@@ -33,7 +40,14 @@ export function ConfigLoader(configurationService: ConfigurationService) {
     SkeletonItemComponent,
     SkeletonImageComponent,
     ClipboardDirective,
-    HomeComponent
+    HomeComponent,
+    UsersManagementComponent,
+    UniversityManagementComponent,
+    SchedulesManagementComponent,
+    AbsencesManagementComponent,
+    UniversityModalComponent,
+    EstablishmentModalComponent,
+    DepartmentModalComponent,
     ],
   imports: [
     BrowserModule, 

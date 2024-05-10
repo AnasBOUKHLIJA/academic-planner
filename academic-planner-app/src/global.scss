@@ -84,6 +84,25 @@ ion-footer {
 
 }
 
+
+.card-modal {
+  width: 100%;
+
+  &::part(content){
+    width: 80%;
+    height: 70%; 
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  app-university-modal{
+      position: relative;
+      border-radius: 20px;
+      padding: 10px;
+  }
+}
+
+
 .paggination {
   background-color: var(--white-color);
   width: 100%;
