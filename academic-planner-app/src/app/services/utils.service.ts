@@ -13,10 +13,11 @@ export class UtilsService {
   global: GlobalConfig;
   public pages = {
     admin: [
-      { code: 'dashboard', title: 'Dashboard', url: '/dashboard', icon: 'home' },
-      { code: 'establishment-management', title: 'Establishment Management', url: '/establishment-management', icon: 'business' },
-      { code: 'user-management', title: 'User Management', url: '/user-management', icon: 'people' },
-      { code: 'course-management', title: 'Course Management', url: '/course-management', icon: 'book' },
+      { code: 'dashboard', title: 'Dashboard', url: '/', icon: 'home' },
+      { code: 'university-management', title: 'Gestion de l\'Université', url: '/university-management', icon: 'business' },
+      { code: 'users-management', title: 'Gestion des Utilisateurs', url: '/users-management', icon: 'people' },
+      { code: 'schedules-management', title: 'Gestion des Emplois du Temps', url: '/schedules-management', icon: 'time' },
+      { code: 'absences-management', title: 'Gestion des Absences', url: '/absences-management', icon: 'calendar' },
     ],
     teacher: [
       { code: 'dashboard', title: 'Dashboard', url: '/dashboard', icon: 'home' },

@@ -28,6 +28,8 @@ public class AdminController {
     private final CourseService               courseService;
     private final LegalIdTypeService          legalIdTypeService;
     private final StudentService              studentService;
+
+    private final TeacherService                teacherService;
     private final RegistrationService registrationService;
     private final GradeService                gradeService;
     private final ScheduleService             scheduleService;
@@ -36,8 +38,8 @@ public class AdminController {
     public AdminController(CountryService countryService, CityService cityService, UniversityService universityService,
                            EstablishmentService establishmentService, DepartmentService departmentService, ClassRoomService classRoomService,
                            DegreeService degreeService, AcademicProgramService academicProgramService, PromotionService promotionService,
-                           SemesterService semesterService, CourseService courseService, LegalIdTypeService legalIdTypeService, StudentService studentService,
-                           RegistrationService registrationService, GradeService gradeService, ScheduleService scheduleService) {
+                           SemesterService semesterService, CourseService courseService, LegalIdTypeService legalIdTypeService, TeacherService teacherService,
+                           StudentService studentService, RegistrationService registrationService, GradeService gradeService, ScheduleService scheduleService) {
         this.countryService = countryService;
         this.cityService = cityService;
         this.universityService = universityService;
@@ -51,6 +53,7 @@ public class AdminController {
         this.semesterService = semesterService;
         this.courseService = courseService;
         this.legalIdTypeService = legalIdTypeService;
+        this.teacherService = teacherService;
         this.studentService = studentService;
         this.registrationService = registrationService;
         this.gradeService = gradeService;
@@ -321,6 +324,27 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping(
+            value = "/teacherSave",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Teacher> teacherSave(@RequestBody Teacher teacher) {
+        return new ResponseEntity<>(teacherService.save(teacher), HttpStatus.OK);
+    }
+
+    @PostMapping(
+            value = "/teachersSave",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Teacher>> teachersSave(@RequestBody List<Teacher> teachers) {
+        return new ResponseEntity<>(teacherService.save(teachers), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/teacherDelete/{id}")
+    public ResponseEntity teacherDelete(@PathVariable Long id) {
+        teacherService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     /*
         this.promotionStudentService = promotionStudentService;
         this.gradeService = gradeService;

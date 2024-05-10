@@ -10,6 +10,26 @@ public class Teacher extends Person{
     private String qualification;
 
     @ManyToOne
-    @JoinColumn(name="department_id", foreignKey=@ForeignKey(name="fk_teacher_department"), nullable=false)
+    @JoinColumn(name="department_id", foreignKey=@ForeignKey(name="fk_teacher_department"), nullable=true)
     public Department department;
+
+    //--------------------------------------------------------------------------------
+    // GETTER AND SETTERS
+    //--------------------------------------------------------------------------------
+
+    public String getQualification() {
+        return qualification;
+    }
+
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 }

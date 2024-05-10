@@ -11,7 +11,7 @@ import { Profile } from '../models/Profile';
 import { LegalIdType } from '../models/LegalIdType';
 import { Country } from '../models/Country';
 import { KernelServiceService } from '../services/kernel-service.service';
-import { Univesity } from '../models/Univesity';
+import { University } from '../models/University';
 import { AdminServiceService } from '../services/admin-service.service';
 import { SpinnerService } from '../services/spinner.service';
 
@@ -30,7 +30,7 @@ export class HomeComponent  implements OnInit {
   countries   : Country[];
   profiles    : Profile[];
   legalIdTypes : LegalIdType[];
-  univesity   : Univesity;
+  university   : University;
   selectedStudentCountry: Country;
   selectedTeacherCountry: Country;
   selectedAdminCountry: Country;
@@ -94,7 +94,7 @@ export class HomeComponent  implements OnInit {
     this.countries = await this.kernelServiceService.countriesGet();
     this.legalIdTypes = await this.kernelServiceService.legalIdTypesGet();
     this.profiles = await this.kernelServiceService.profilesGet();
-    this.univesity = await this.kernelServiceService.universityGet();
+    this.university = await this.kernelServiceService.universityGet();
 
     this.studentForm.get('citizenship')?.valueChanges.subscribe((selectedCountry: Country) => {
       this.selectedStudentCountry = selectedCountry;

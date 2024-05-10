@@ -42,6 +42,9 @@
     <ng-content></ng-content>
   </div>
   <ion-footer>
-
+    <ion-skeleton-text *ngIf="!university" [animated]="true"></ion-skeleton-text>
+    <span></span>
+    <span *ngIf="university?.name && university?.description">Copyright © {{currentYear}} {{ university.name }}</span>
+    <span></span>
   </ion-footer>
 </ion-content>

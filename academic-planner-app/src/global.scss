@@ -60,6 +60,7 @@ ion-footer {
   align-items: center;
   overflow: hidden;
   background-color: var(--ion-color-primary);
+  color: var(--white-color);
 
   span {
     a {
@@ -188,4 +189,88 @@ app-spinner {
     }
   }
   
+}
+
+
+// **********************************************************************************
+// ********************************** SIZE DEFINITION ********************************
+// **********************************************************************************
+
+:root {
+  --base-font-size: 16px;
+}
+
+/* Define breakpoints for different devices */
+@media only screen and (max-width: 600px) {
+  :root {
+    --h1-font-size: 18px;
+    --h2-font-size: 16px;
+    --h3-font-size: 14px;
+    --h4-font-size: 12px;
+    --h5-font-size: 10px;
+    --h6-font-size: 8px;
+    --text-font-size: 14px;
+    --text-small-font-size: 12px;
+    --text-big-font-size: 20px;
+    --text-large-font-size: 24px;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  :root {
+    --h1-font-size: 20px;
+    --h2-font-size: 18px;
+    --h3-font-size: 16px;
+    --h4-font-size: 14px;
+    --h5-font-size: 12px;
+    --h6-font-size: 10px;
+    --text-font-size: 16px;
+    --text-small-font-size: 14px;
+    --text-big-font-size: 22px;
+    --text-large-font-size: 26px;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  :root {
+    --h1-font-size: 22px;
+    --h2-font-size: 20px;
+    --h3-font-size: 18px;
+    --h4-font-size: 16px;
+    --h5-font-size: 14px;
+    --h6-font-size: 12px;
+    --text-font-size: 16px;
+    --text-small-font-size: 14px;
+    --text-big-font-size: 24px;
+    --text-large-font-size: 28px;
+  }
+}
+
+/* Apply styles using variables */
+h1 {
+  font-size: var(--h1-font-size);
+}
+
+h2 {
+  font-size: var(--h2-font-size);
+}
+
+h3 {
+  font-size: var(--h3-font-size);
+}
+
+h4 {
+  font-size: var(--h4-font-size);
+}
+
+h5 {
+  font-size: var(--h5-font-size);
+}
+
+h6 {
+  font-size: var(--h6-font-size);
+}
+
+p {
+  font-size: var(--text-font-size);
 }
