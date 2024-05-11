@@ -15,6 +15,7 @@ export class BaseComponent implements OnInit {
   pages: any[];
   global: GlobalConfig;
   university : University;
+  selectedLanguage: string;
   @Input() title: string;
   @Input() introduction: string;
 
@@ -27,7 +28,8 @@ export class BaseComponent implements OnInit {
     private utilsService: UtilsService
   ) { }
 
-  async ngOnInit() {   
+  async ngOnInit() {
+    this.selectedLanguage = this.utilsService.getDefaultLanguage();   
     this.pages  = this.utilsService.pagesConfigGet();
     this.global = this.utilsService.globalGet();
     this.university = await this.kernelService.universityGet();
@@ -36,4 +38,9 @@ export class BaseComponent implements OnInit {
   async openContactMeModal() {
     
   }
+
+  switchLanguage(language: string) {
+    this.utilsService.switchLanguage(language)
+  }
 }
+

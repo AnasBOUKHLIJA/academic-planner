@@ -4,6 +4,7 @@ import { ConfigurationService } from './configuration.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { GlobalConfig } from '../models/GlobalConfig';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,8 @@ export class UtilsService {
     private networkService: NetworkServiceService,
     private configuration: ConfigurationService,
     private clipboard: Clipboard,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private translate: TranslateService
   ) { }
 
   imageGet(path: string, toBeLoaded: boolean): Promise<string> {
@@ -88,5 +90,15 @@ export class UtilsService {
     return this.global;
   }
 
+  switchLanguage(language: string) {
+    this.translate.use(language);
+  }
 
+  setDefaultLanguage() {
+    this.switchLanguage(this.configuration.configuration.defaultLanguage);
+  }
+
+  getDefaultLanguage() {
+    return this.configuration.configuration.defaultLanguage;
+  }
 }

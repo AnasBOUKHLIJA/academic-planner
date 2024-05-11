@@ -5,6 +5,7 @@ export class Configuration {
 
     serverUrl       : string;
     applicationUrl  : string;
+    defaultLanguage : string;
     universityCode  : string;
     countryCode     : string;
     toastDuration   : string;

@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -25,11 +25,16 @@ import { AbsencesManagementComponent } from './absences-management/absences-mana
 import { EstablishmentModalComponent } from './components/establishment-modal/establishment-modal.component';
 import { UniversityModalComponent } from './components/university-modal/university-modal.component';
 import { DepartmentModalComponent } from './components/department-modal/department-modal.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 export function ConfigLoader(configurationService: ConfigurationService) {
   return () => configurationService.load(environment.configFile);
 }
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 
 @NgModule({
@@ -61,6 +66,14 @@ export function ConfigLoader(configurationService: ConfigurationService) {
     CommonModule,
     HttpClientModule,
     PortalModule,
+    HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
   ],
   providers: [
     ClipboardDirective,
