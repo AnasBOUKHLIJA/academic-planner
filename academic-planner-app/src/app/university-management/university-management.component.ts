@@ -21,6 +21,7 @@ export class UniversityManagementComponent  implements OnInit {
 
   async ngOnInit() {   
     this.university = await this.kernelService.universityGet();
+    this.openUniversityModal();
   }
 
   async openUniversityModal() {

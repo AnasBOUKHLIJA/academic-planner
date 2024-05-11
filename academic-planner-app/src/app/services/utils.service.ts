@@ -12,12 +12,19 @@ export class UtilsService {
 
   global: GlobalConfig;
   public pages = {
+    // admin: [
+    //   { code: 'dashboard', title: 'Dashboard', url: '/', icon: 'home' },
+    //   { code: 'university-management', title: 'Gestion de l\'Université', url: '/university-management', icon: 'business' },
+    //   { code: 'users-management', title: 'Gestion des Utilisateurs', url: '/users-management', icon: 'people' },
+    //   { code: 'schedules-management', title: 'Gestion des Emplois du Temps', url: '/schedules-management', icon: 'time' },
+    //   { code: 'absences-management', title: 'Gestion des Absences', url: '/absences-management', icon: 'calendar' },
+    // ],
     admin: [
       { code: 'dashboard', title: 'Dashboard', url: '/', icon: 'home' },
-      { code: 'university-management', title: 'Gestion de l\'Université', url: '/university-management', icon: 'business' },
-      { code: 'users-management', title: 'Gestion des Utilisateurs', url: '/users-management', icon: 'people' },
-      { code: 'schedules-management', title: 'Gestion des Emplois du Temps', url: '/schedules-management', icon: 'time' },
-      { code: 'absences-management', title: 'Gestion des Absences', url: '/absences-management', icon: 'calendar' },
+      { code: 'university-management', title: 'Université', url: '/university-management', icon: 'business' },
+      { code: 'users-management', title: 'Utilisateurs', url: '/users-management', icon: 'people' },
+      { code: 'schedules-management', title: 'Emplois du Temps', url: '/schedules-management', icon: 'time' },
+      { code: 'absences-management', title: 'Absences', url: '/absences-management', icon: 'calendar' },
     ],
     teacher: [
       { code: 'dashboard', title: 'Dashboard', url: '/dashboard', icon: 'home' },
