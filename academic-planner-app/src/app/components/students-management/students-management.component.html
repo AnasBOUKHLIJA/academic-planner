@@ -1,0 +1,160 @@
+<ion-header>
+    <ion-toolbar>
+        <div>
+            <span><ion-icon name="people-outline"></ion-icon> </span>
+            <h1>{{ 'students_management' | translate }}</h1>
+        </div>
+        <ion-buttons slot="end">
+            <ion-button fill="clear">
+                <ion-icon name="refresh-outline"></ion-icon> &nbsp; {{ 'reload' | translate }}
+            </ion-button>
+            &nbsp;
+            <ion-button fill="clear" (click)="toggleForm()">
+                <ng-container *ngIf="!showForm">
+                    <ion-icon name="person-add-outline"></ion-icon> &nbsp; {{ 'add_student' | translate }}
+                </ng-container>
+                <ng-container *ngIf="showForm">
+                    <ion-icon name="eye-off-outline"></ion-icon> &nbsp; {{ 'hide_form' | translate }}
+                </ng-container>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<div class="form-enrollment" *ngIf="showForm">
+    <div class="form-header">
+        <h1>Ajout d'un étudiant</h1>
+        <p>Entrez les informations nécessaires pour ajouter un étudiant</p>
+    </div>
+    <form [formGroup]="studentForm" (ngSubmit)="submitStudentForm()" novalidate>
+        <app-profile-picture [fileBase64]="studentForm.get('thumbnail')?.value"
+            (fileBase64Selected)="handleFileSelected($event)"></app-profile-picture>
+
+        <div class="form-row">
+            <ion-item lines="full">
+                <ion-label position="stacked">Prénom</ion-label>
+                <ion-input formControlName="firstName" placeholder="Entrez le prénom" type="text"
+                    ngDefaultControl></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+                <ion-label position="stacked">Nom de famille</ion-label>
+                <ion-input formControlName="lastName" placeholder="Entrez le nom de famille" type="text"
+                    ngDefaultControl></ion-input>
+            </ion-item>
+        </div>
+
+        <div class="form-row">
+            <ion-item lines="full">
+                <ion-label position="stacked">Code Apogée</ion-label>
+                <ion-input formControlName="apogeeCode" placeholder="Entrez le code Apogée" type="text"
+                    ngDefaultControl></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+                <ion-label position="stacked">Code national étudiant</ion-label>
+                <ion-input formControlName="studentNationalCode" placeholder="Entrez le code national étudiant"
+                    type="text" ngDefaultControl></ion-input>
+            </ion-item>
+        </div>
+
+        <div class="form-row">
+            <ion-item lines="full">
+                <ion-label position="stacked">Email</ion-label>
+                <ion-input formControlName="email" placeholder="Entrez le email" type="email"
+                    ngDefaultControl></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+                <ion-label position="stacked">Date de naissance</ion-label>
+                <ion-input formControlName="birthDate" placeholder="Sélectionnez la date de naissance" type="date"
+                    ngDefaultControl></ion-input>
+            </ion-item>
+        </div>
+
+        <div class="form-row">
+            <ion-item lines="full">
+                <ion-label position="stacked">Numéro d'identification légal</ion-label>
+                <ion-input formControlName="legalIdNumber" placeholder="Entrez le numéro pièce d'identité" type="text"
+                    ngDefaultControl></ion-input>
+            </ion-item>
+        </div>
+
+        <ion-item lines="full">
+            <ion-select formControlName="gender" label="Genre" placeholder="Sélectionnez le genre">
+                <ion-select-option value="true">Homme</ion-select-option>
+                <ion-select-option value="false">Femme</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item lines="full">
+            <ion-select formControlName="legalIdType" label="Type pièce d'identité"
+                placeholder="Sélectionnez le type pièce d'identité">
+                <ion-select-option *ngFor="let legalIdType of legalIdTypes" [value]="legalIdType">{{
+                    legalIdType.name
+                    }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item lines="full">
+            <ion-select formControlName="profile" label="Profil" placeholder="Sélectionnez le profil">
+                <ion-select-option *ngFor="let profile of profiles" [value]="profile">{{ profile.name
+                    }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item lines="full">
+            <ion-select formControlName="citizenship" label="Nationalité" placeholder="Sélectionnez la nationalité">
+                <ion-select-option *ngFor="let country of countries" [value]="country">{{ country.name
+                    }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item lines="full" *ngIf="selectedCountry && selectedCountry.cities">
+            <ion-select formControlName="city" label="Ville" placeholder="Sélectionnez la ville">
+                <ion-select-option *ngFor="let city of selectedCountry.cities" [value]="city">{{ city.name
+                    }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <div class="form-buttons">
+            <ion-button fill="outline" (click)="toggleForm()">
+                <ion-icon name="arrow-back-outline" slot="start"></ion-icon>                
+                &nbsp; cancel
+            </ion-button>
+            <ion-button type="submit">
+                <ion-icon name="send-outline" slot="end"></ion-icon>
+                Enregistrer &nbsp;
+            </ion-button>
+        </div>
+
+    </form>
+</div>
+
+
+<div class="table-container">
+    <div class="table-row header-row">
+        <div></div>
+        <div>CNE</div>
+        <div>apogeeCode</div>
+        <div>First Name</div>
+        <div>Last Name</div>
+        <div>Username</div>
+        <div>birthDate</div>
+        <div></div>
+    </div>
+    <div class="table-row" *ngFor="let student of students">
+        <div>
+            <ion-avatar aria-hidden="true" slot="start">
+                <img alt="" [src]="student.thumbnail" />
+            </ion-avatar>
+        </div>
+        <div>{{ student.studentNationalCode }}</div>
+        <div>{{ student.apogeeCode }}</div>
+        <div>{{ student.firstName }}</div>
+        <div>{{ student.lastName }}</div>
+        <div>{{ student.username }}</div>
+        <div>{{ student.birthDate }}</div>
+        <div>
+            <ion-button color="success" fill="clear" ><ion-icon name="create-outline" slot="icon-only"></ion-icon></ion-button>
+            <ion-button color="danger" fill="clear"><ion-icon name="trash-outline" slot="icon-only"></ion-icon></ion-button>
+        </div>
+    </div>
+</div>

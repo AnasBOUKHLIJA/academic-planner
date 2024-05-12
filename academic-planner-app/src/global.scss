@@ -52,6 +52,16 @@ ion-content.content-md:not([padding]) .scroll-content {
   padding-bottom: 0 !important;
 }
 
+.page-content {
+  width: 70%;
+  margin: 40px auto;
+
+  @media screen and (max-width: 999px) {
+    width: 95%;
+    margin: 20px auto;
+  }
+}
+
 ion-footer {
   padding: 15px;
   height: 60px;
@@ -228,9 +238,9 @@ app-spinner {
 
 
 .form-enrollment {
-  width: 60%;
-  padding: 40px;
-  margin: 20px auto;
+  width: 100%;
+  padding: 20px;
+  margin: 20px 0;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 15px;
 
@@ -276,11 +286,11 @@ app-spinner {
 
   .form-buttons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    margin: 30px 0 0 0;
 
     ion-button {
-      width: 30%;
-      margin: 30px 0 0 0;
+      min-width: 15%;
     }
   }
 

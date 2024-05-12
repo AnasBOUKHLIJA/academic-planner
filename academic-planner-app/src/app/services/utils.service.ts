@@ -13,33 +13,27 @@ export class UtilsService {
 
   global: GlobalConfig;
   public pages = {
-    // admin: [
-    //   { code: 'dashboard', title: 'Dashboard', url: '/', icon: 'home' },
-    //   { code: 'university-management', title: 'Gestion de l\'Université', url: '/university-management', icon: 'business' },
-    //   { code: 'users-management', title: 'Gestion des Utilisateurs', url: '/users-management', icon: 'people' },
-    //   { code: 'schedules-management', title: 'Gestion des Emplois du Temps', url: '/schedules-management', icon: 'time' },
-    //   { code: 'absences-management', title: 'Gestion des Absences', url: '/absences-management', icon: 'calendar' },
-    // ],
+
     admin: [
-      { code: 'dashboard', title: 'Dashboard', url: '/', icon: 'home' },
-      { code: 'university-management', title: 'Université', url: '/university-management', icon: 'business' },
-      { code: 'users-management', title: 'Utilisateurs', url: '/users-management', icon: 'people' },
-      { code: 'schedules-management', title: 'Emplois du Temps', url: '/schedules-management', icon: 'time' },
-      { code: 'absences-management', title: 'Absences', url: '/absences-management', icon: 'calendar' },
+      { code: 'dashboard',  url: '/', icon: 'home' },
+      { code: 'university', url: '/university-management', icon: 'business' },
+      { code: 'users',      url: '/users-management', icon: 'people' },
+      { code: 'schedules',  url: '/schedules-management', icon: 'time' },
+      { code: 'absences',   url: '/absences-management', icon: 'calendar' },
     ],
     teacher: [
-      { code: 'dashboard', title: 'Dashboard', url: '/dashboard', icon: 'home' },
-      { code: 'course', title: 'Courses Management', url: '/courses', icon: 'book' },
-      { code: 'absence', title: 'Absences Management', url: '/absences', icon: 'calendar' },
-      { code: 'grade', title: 'Grades Management', url: '/grades', icon: 'school' },
-      { code: 'student', title: 'Students', url: '/students', icon: 'people' },
+      { code: 'dashboard',  url: '/dashboard', icon: 'home' },
+      { code: 'course',     url: '/courses', icon: 'book' },
+      { code: 'absence',    url: '/absences', icon: 'calendar' },
+      { code: 'grade',      url: '/grades', icon: 'school' },
+      { code: 'student',    url: '/students', icon: 'people' },
     ],
     student: [
-      { code: 'dashboard', title: 'Dashboard', url: '/dashboard', icon: 'home' },
-      { code: 'course', title: 'My Courses', url: '/courses', icon: 'book' },
-      { code: 'absence', title: 'My Absences', url: '/absences', icon: 'calendar' },
-      { code: 'grade', title: 'My Grades', url: '/grades', icon: 'school' },
-      { code: 'student', title: 'Students', url: '/students', icon: 'people' },
+      { code: 'dashboard',  url: '/dashboard', icon: 'home' },
+      { code: 'course',     url: '/courses', icon: 'book' },
+      { code: 'absence',    url: '/absences', icon: 'calendar' },
+      { code: 'grade',      url: '/grades', icon: 'school' },
+      { code: 'student',    url: '/students', icon: 'people' },
     ]
 
   };
@@ -100,5 +94,9 @@ export class UtilsService {
 
   getDefaultLanguage() {
     return this.configuration.configuration.defaultLanguage;
+  }
+
+  getCurrentLanguage(): string {
+    return this.translate.currentLang;
   }
 }

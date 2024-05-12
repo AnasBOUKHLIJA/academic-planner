@@ -38,15 +38,13 @@
       </ion-item>
 
       <ion-item lines="full">
-        <!-- <ion-label position="stacked">{{ 'countryLabel' | translate }}</ion-label> -->
-        <ion-select formControlName="citizenship" label="{{ 'selectCountryLabel' | translate }}">
+        <ion-select formControlName="citizenship" label="{{ 'countryLabel' | translate }}" placeholder="{{ 'selectCountryLabel' | translate }}">
           <ion-select-option *ngFor="let country of countries" [value]="country">{{ country.name }}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item lines="full">
-        <!-- <ion-label position="stacked">{{ 'cityLabel' | translate }}</ion-label> -->
-        <ion-select formControlName="city" label="{{ 'selectCityLabel' | translate }}">
+        <ion-select formControlName="city" label="{{ 'cityLabel' | translate }}" placeholder="{{ 'selectCityLabel' | translate }}">
           <ng-container *ngIf="selectedCountry">
             <ion-select-option *ngFor="let city of selectedCountry.cities" [value]="city">{{ city.name }}</ion-select-option>
           </ng-container>

@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { UtilsService } from '../services/utils.service';
 import { GlobalConfig } from '../models/GlobalConfig';
 import { University } from '../models/University';
 import { KernelServiceService } from '../services/kernel-service.service';
+import { UserPopoverComponent } from './user-popover/user-popover.component';
 
 @Component({
   selector: 'app-base',
@@ -15,7 +16,6 @@ export class BaseComponent implements OnInit {
   pages: any[];
   global: GlobalConfig;
   university : University;
-  selectedLanguage: string;
   @Input() title: string;
   @Input() introduction: string;
 
@@ -25,11 +25,11 @@ export class BaseComponent implements OnInit {
   constructor(
     private kernelService: KernelServiceService,
     private modalCtrl: ModalController,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private popoverController: PopoverController,
   ) { }
 
   async ngOnInit() {
-    this.selectedLanguage = this.utilsService.getDefaultLanguage();   
     this.pages  = this.utilsService.pagesConfigGet();
     this.global = this.utilsService.globalGet();
     this.university = await this.kernelService.universityGet();
@@ -39,8 +39,17 @@ export class BaseComponent implements OnInit {
     
   }
 
-  switchLanguage(language: string) {
-    this.utilsService.switchLanguage(language)
+
+  async presentPopover(e: Event) {
+    const popover = await this.popoverController.create({
+      component: UserPopoverComponent,
+      event: e,
+    });
+
+    await popover.present();
+
+    const { role } = await popover.onDidDismiss();
+    console.log(`Popover dismissed with role: ${role}`);
   }
 }
 

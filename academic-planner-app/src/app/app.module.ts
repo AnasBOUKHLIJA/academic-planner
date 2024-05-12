@@ -27,6 +27,11 @@ import { UniversityModalComponent } from './components/university-modal/universi
 import { DepartmentModalComponent } from './components/department-modal/department-modal.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ProfilePictureComponent } from './components/profile-picture/profile-picture.component';
+import { StudentsManagementComponent } from './components/students-management/students-management.component';
+import { TeachersManagementComponent } from './components/teachers-management/teachers-management.component';
+import { AdminsManagementComponent } from './components/admins-management/admins-management.component';
+import { UserPopoverComponent } from './base/user-popover/user-popover.component';
 
 export function ConfigLoader(configurationService: ConfigurationService) {
   return () => configurationService.load(environment.configFile);
@@ -53,6 +58,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     UniversityModalComponent,
     EstablishmentModalComponent,
     DepartmentModalComponent,
+    ProfilePictureComponent,
+    StudentsManagementComponent,
+    TeachersManagementComponent,
+    AdminsManagementComponent,
+    UserPopoverComponent,
     ],
   imports: [
     BrowserModule, 
