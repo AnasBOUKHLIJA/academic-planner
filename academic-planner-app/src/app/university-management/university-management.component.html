@@ -22,6 +22,19 @@
       </div>
     </div>
   </section>
+  <section class="page-section-conatiner">
+
+    <div class="section-header">
+      <h1 class="title">{{ 'course' | translate}}</h1>
+    </div>
+
+    <div class="section-body">
+      <div class="section-buttons">
+        <ion-button fill="solid"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_course' | translate}}</ion-button>
+        <ion-button fill="outline" (click)="openCourseModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{ 'add_new_Course' | translate}}</ion-button>
+      </div>
+    </div>
+  </section>
 
   <!-- <ion-card>
     <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />

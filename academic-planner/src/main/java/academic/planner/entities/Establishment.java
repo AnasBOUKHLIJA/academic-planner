@@ -20,7 +20,7 @@ public class Establishment {
     @Column(name = "description", nullable=false)
     private String description;
 
-    @Column(name = "rank", nullable=false)
+    @Column(name = "rank")
     private Integer rank;
 
     @Lob

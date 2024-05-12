@@ -4,6 +4,7 @@ import { University } from '../models/University';
 import { UniversityModalComponent } from '../components/university-modal/university-modal.component';
 import { ModalController } from '@ionic/angular';
 import { EstablishmentModalComponent } from '../components/establishment-modal/establishment-modal.component';
+import { CourseModalComponent } from '../components/course-modal/course-modal.component';
 
 @Component({
   selector: 'app-university-management',
@@ -38,6 +39,14 @@ export class UniversityManagementComponent  implements OnInit {
   async openEstablishmentModal() {
     const modal = await this.modalCtrl.create({
       component: EstablishmentModalComponent,
+      cssClass: 'card-modal',
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+  }
+  async openCourseModal() {
+    const modal = await this.modalCtrl.create({
+      component: CourseModalComponent,
       cssClass: 'card-modal',
     });
     await modal.present();
