@@ -15,26 +15,24 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final CountryService countryService;
-    private final CityService cityService;
-    private final UniversityService universityService;
-    private final EstablishmentService establishmentService;
-    private final DepartmentService departmentService;
-    private final ClassRoomService            classRoomService;
-    private final DegreeService               degreeService;
-    private final AcademicProgramService      academicProgramService;
-    private final PromotionService            promotionService;
-    private final SemesterService             semesterService;
-    private final CourseService               courseService;
-    private final LegalIdTypeService          legalIdTypeService;
-    private final StudentService              studentService;
-
-    private final TeacherService                teacherService;
-    private final RegistrationService registrationService;
-    private final GradeService                gradeService;
-    private final ScheduleService             scheduleService;
-
-    private final PersonService                 personService;
+    private final CountryService            countryService;
+    private final CityService               cityService;
+    private final UniversityService         universityService;
+    private final EstablishmentService      establishmentService;
+    private final DepartmentService         departmentService;
+    private final ClassRoomService          classRoomService;
+    private final DegreeService             degreeService;
+    private final AcademicProgramService    academicProgramService;
+    private final PromotionService          promotionService;
+    private final SemesterService           semesterService;
+    private final CourseService             courseService;
+    private final LegalIdTypeService        legalIdTypeService;
+    private final StudentService            studentService;
+    private final TeacherService            teacherService;
+    private final RegistrationService       registrationService;
+    private final GradeService              gradeService;
+    private final ScheduleService           scheduleService;
+    private final PersonService             personService;
 
     @Autowired
     public AdminController(CountryService countryService, CityService cityService, UniversityService universityService,
@@ -43,25 +41,26 @@ public class AdminController {
                            SemesterService semesterService, CourseService courseService, LegalIdTypeService legalIdTypeService, TeacherService teacherService,
                            StudentService studentService, RegistrationService registrationService, GradeService gradeService, ScheduleService scheduleService,
                            PersonService personService) {
-        this.countryService = countryService;
-        this.cityService = cityService;
-        this.universityService = universityService;
-        this.establishmentService = establishmentService;
-        this.departmentService = departmentService;
-        this.classRoomService = classRoomService;
-        this.degreeService = degreeService;
-        this.academicProgramService = academicProgramService;
 
-        this.promotionService = promotionService;
-        this.semesterService = semesterService;
-        this.courseService = courseService;
-        this.legalIdTypeService = legalIdTypeService;
-        this.teacherService = teacherService;
-        this.studentService = studentService;
-        this.registrationService = registrationService;
-        this.gradeService = gradeService;
-        this.scheduleService = scheduleService;
-        this.personService = personService;
+        this.countryService         = countryService;
+        this.cityService            = cityService;
+        this.universityService      = universityService;
+        this.establishmentService   = establishmentService;
+        this.departmentService      = departmentService;
+        this.classRoomService       = classRoomService;
+        this.degreeService          = degreeService;
+        this.academicProgramService = academicProgramService;
+        this.promotionService       = promotionService;
+        this.semesterService        = semesterService;
+        this.courseService          = courseService;
+        this.legalIdTypeService     = legalIdTypeService;
+        this.teacherService         = teacherService;
+        this.studentService         = studentService;
+        this.registrationService    = registrationService;
+        this.gradeService           = gradeService;
+        this.scheduleService        = scheduleService;
+        this.personService          = personService;
+
     }
 
     @PostMapping(
@@ -392,6 +391,7 @@ public class AdminController {
     public ResponseEntity<List<Person>> personsGet(@PathVariable String profileCode) {
         return new ResponseEntity<>(personService.getAllByProfileCode(profileCode), HttpStatus.OK);
     }
+
     /*
         this.promotionStudentService = promotionStudentService;
         this.gradeService = gradeService;
