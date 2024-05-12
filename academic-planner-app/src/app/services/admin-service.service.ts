@@ -19,7 +19,7 @@ export class AdminServiceService {
     private spinnerService        : SpinnerService,
   ) {}
 
-  createStudent(student: Student) : Promise<Student[]>{
+  createStudent(student: Student) : Promise<Student>{
     return new Promise((resolve, reject) => {
         student.citizenship.cities = [];
         this.networkService.post(this.MODULE_GET_URL + "studentSave", student, true).then((response: any) => {
@@ -31,7 +31,18 @@ export class AdminServiceService {
     });
   }
 
-  createTeacher(teacher: Teacher) : Promise<Teacher[]>{
+  getAllStudents() : Promise<Student[]>{
+    return new Promise((resolve, reject) => {
+        this.networkService.get(this.MODULE_GET_URL + "studentsGet", true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  createTeacher(teacher: Teacher) : Promise<Teacher>{
     return new Promise((resolve, reject) => {
         teacher.citizenship.cities = [];
         this.networkService.post(this.MODULE_GET_URL + "teacherSave", teacher, true).then((response: any) => {
@@ -43,10 +54,32 @@ export class AdminServiceService {
     });
   }
 
-  createAdmin(admin: Admin) : Promise<Admin[]>{
+  getAllTeachers() : Promise<Teacher[]>{
+    return new Promise((resolve, reject) => {
+        this.networkService.get(this.MODULE_GET_URL + "teachersGet", true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  createAdmin(admin: Admin) : Promise<Admin>{
     return new Promise((resolve, reject) => {
         admin.citizenship.cities = [];
         this.networkService.post(this.MODULE_GET_URL + "adminSave", admin, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  getAllAdmins() : Promise<Admin[]>{
+    return new Promise((resolve, reject) => {
+        this.networkService.get(this.MODULE_GET_URL + "personsGet/adm", true).then((response: any) => {
             resolve(response);
         }, error => {
             reject(error);

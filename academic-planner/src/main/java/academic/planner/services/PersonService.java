@@ -20,6 +20,10 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
+    public List<Person> getAllByProfileCode(String profileCode) {
+        return personRepository.findByProfileCode(profileCode);
+    }
+
     public List<Person> getAll() {
         return personRepository.findAll();
     }
@@ -52,10 +56,14 @@ public class PersonService {
 
         StringBuilder usernameBuilder = new StringBuilder();
         for (String part : firstNameParts) {
-            usernameBuilder.append(part.charAt(0)).append(".");
+            usernameBuilder.append(part).append(".");
         }
         for (String part : lastNameParts) {
-            usernameBuilder.append(part.charAt(0)).append(".");
+            usernameBuilder.append(part).append(".");
+        }
+
+        if (usernameBuilder.length() > 0) {
+            usernameBuilder.deleteCharAt(usernameBuilder.length() - 1);
         }
 
         // Check if this combination firstName and lastName already exists

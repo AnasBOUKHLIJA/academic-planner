@@ -4,5 +4,6 @@
     "applicationVersion": "v.1.0.0.dev",
     "universityCode"    : "uit",
     "countryCode"       : "MA",
+    "defaultLanguage"   : "fr",
     "toastDuration"     : 5000
 }

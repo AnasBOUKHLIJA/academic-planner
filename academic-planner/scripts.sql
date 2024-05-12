@@ -1655,7 +1655,7 @@ VALUES((SELECT id FROM country WHERE code = 'MA'), N'858', N'ASSAKI', 0);
 INSERT INTO profile(code, name)
 VALUES	('etu', 'etudiant');
 INSERT INTO profile(code, name)
-VALUES	('ro', 'professeur');
+VALUES	('pro', 'professeur');
 INSERT INTO profile(code, name)
 VALUES	('adm', 'admin');
 

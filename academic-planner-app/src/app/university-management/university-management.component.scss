@@ -1,7 +1,5 @@
 .university-container {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    width: 90%;
-    margin: 40px auto;
     position: relative;
     text-align: center;
     padding: 40px;
@@ -43,6 +41,7 @@
 
 .page-section-conatiner {
 
+    margin: 40px 0;
     .section-header {
         width: 100%;
         display: flex;
@@ -66,9 +65,7 @@
     }
     .section-body {
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        width: 90%;
         padding: 40px;
-        margin: 40px auto;
         border-radius: 15px;
         position: relative;
         margin-top: 80px;

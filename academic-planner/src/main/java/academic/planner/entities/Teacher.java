@@ -6,11 +6,11 @@ import jakarta.persistence.*;
 @DiscriminatorValue(value = "teacher")
 public class Teacher extends Person{
 
-    @Column(name = "qualification", nullable=false)
+    @Column(name = "qualification")
     private String qualification;
 
     @ManyToOne
-    @JoinColumn(name="department_id", foreignKey=@ForeignKey(name="fk_teacher_department"), nullable=true)
+    @JoinColumn(name="department_id", foreignKey=@ForeignKey(name="fk_teacher_department"))
     public Department department;
 
     //--------------------------------------------------------------------------------

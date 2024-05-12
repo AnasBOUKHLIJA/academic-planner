@@ -11,4 +11,6 @@ import java.util.List;
 public interface PersonRepository extends JpaRepository<Person, Long> {
     List<Person> findByUsernameContaining(String username);
 
+    List<Person> findByProfileCode(String code);
+
 }

@@ -4,36 +4,25 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <div class="titles">
-      <ion-item
-        *ngFor="let p of pages"
-        routerDirection="root"
-        [routerLink]="[p.url]"
-        lines="none"
-        detail="false"
-        routerLinkActive="selected"
-      >
+      <ion-item *ngFor="let p of pages" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+        routerLinkActive="selected">
         <div class="item-content">
-          <ion-icon
-            class="icon"
-            aria-hidden="true"
-            slot="start"
-            [ios]="p.icon + '-outline'"
-            [md]="p.icon + '-outline'"
-          ></ion-icon>
-          <p class="label">{{ p.title }}</p>
+          <ion-icon class="icon" aria-hidden="true" slot="start" [ios]="p.icon + '-outline'"
+            [md]="p.icon + '-outline'"></ion-icon>
+          <p class="label">{{ 'menu.' + p.code | translate }} </p>
         </div>
       </ion-item>
     </div>
     <ion-buttons class="user">
-      <ion-avatar style="display: flex; justify-content: center; align-items: center;">
-        <ion-icon name="person-circle-outline" style="width: 100%; height: 100%;"></ion-icon>
-    </ion-avatar>
+      <ion-button class="user-avatar" (click)="presentPopover($event)">
+            <ion-icon name="person-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ng-container>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="page-content container">
+  <div class="page-content">
     <div *ngIf="title && introduction" class="introduction">
       <h1>{{ title }}</h1>
       <div class="gradient"></div>

@@ -34,12 +34,15 @@ public class AdminController {
     private final GradeService                gradeService;
     private final ScheduleService             scheduleService;
 
+    private final PersonService                 personService;
+
     @Autowired
     public AdminController(CountryService countryService, CityService cityService, UniversityService universityService,
                            EstablishmentService establishmentService, DepartmentService departmentService, ClassRoomService classRoomService,
                            DegreeService degreeService, AcademicProgramService academicProgramService, PromotionService promotionService,
                            SemesterService semesterService, CourseService courseService, LegalIdTypeService legalIdTypeService, TeacherService teacherService,
-                           StudentService studentService, RegistrationService registrationService, GradeService gradeService, ScheduleService scheduleService) {
+                           StudentService studentService, RegistrationService registrationService, GradeService gradeService, ScheduleService scheduleService,
+                           PersonService personService) {
         this.countryService = countryService;
         this.cityService = cityService;
         this.universityService = universityService;
@@ -58,6 +61,7 @@ public class AdminController {
         this.registrationService = registrationService;
         this.gradeService = gradeService;
         this.scheduleService = scheduleService;
+        this.personService = personService;
     }
 
     @PostMapping(
@@ -340,6 +344,13 @@ public class AdminController {
         return new ResponseEntity<>(studentService.save(students), HttpStatus.OK);
     }
 
+    @GetMapping(
+            value = "/studentsGet",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> studentsGet() {
+        return new ResponseEntity<>(studentService.getAll(), HttpStatus.OK);
+    }
+
     @DeleteMapping(value = "/studentDelete/{id}")
     public ResponseEntity studentDelete(@PathVariable Long id) {
         studentService.delete(id);
@@ -362,10 +373,24 @@ public class AdminController {
         return new ResponseEntity<>(teacherService.save(teachers), HttpStatus.OK);
     }
 
+    @GetMapping(
+            value = "/teachersGet",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Teacher>> teachersGet() {
+        return new ResponseEntity<>(teacherService.getAll(), HttpStatus.OK);
+    }
+
     @DeleteMapping(value = "/teacherDelete/{id}")
     public ResponseEntity teacherDelete(@PathVariable Long id) {
         teacherService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/personsGet/{profileCode}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Person>> personsGet(@PathVariable String profileCode) {
+        return new ResponseEntity<>(personService.getAllByProfileCode(profileCode), HttpStatus.OK);
     }
     /*
         this.promotionStudentService = promotionStudentService;

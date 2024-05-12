@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.utilsService.setDefaultLanguage();
     this.pages = this.utilsService.pagesConfigGet();
     this.global = this.utilsService.globalGet();
 
