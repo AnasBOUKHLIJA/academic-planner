@@ -31,7 +31,7 @@
     <div class="section-body">
       <div class="section-buttons">
         <ion-button fill="solid"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_course' | translate}}</ion-button>
-        <ion-button fill="outline" ><ion-icon name="add-outline"></ion-icon> &nbsp; {{ 'add_new_Course' | translate}}</ion-button>
+        <ion-button fill="outline" (click)="openCourseModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{ 'add_new_Course' | translate}}</ion-button>
       </div>
     </div>
   </section>

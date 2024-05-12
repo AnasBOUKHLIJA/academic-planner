@@ -5,6 +5,8 @@ import { NetworkServiceService } from './network-service.service';
 import { SpinnerService } from './spinner.service';
 import { Teacher } from '../models/Teacher';
 import { Admin } from '../models/Admin';
+import { Establishment } from '../models/Establishment';
+import { KernelServiceService } from './kernel-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,7 @@ export class AdminServiceService {
     private configurationService  : ConfigurationService,
     private networkService        : NetworkServiceService,
     private spinnerService        : SpinnerService,
+    private kernelServiceService : KernelServiceService
   ) {}
 
   createStudent(student: Student) : Promise<Student>{
@@ -80,6 +83,18 @@ export class AdminServiceService {
   getAllAdmins() : Promise<Admin[]>{
     return new Promise((resolve, reject) => {
         this.networkService.get(this.MODULE_GET_URL + "personsGet/adm", true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+  createEstablishment(establishment: Establishment) : Promise<Establishment>{
+    return new Promise( async (resolve, reject) => {
+      establishment.rank = 1; //a changer aprés
+      establishment.university = await this.kernelServiceService.universityGet();//a changer aprés
+      this.networkService.post(this.MODULE_GET_URL + "establishmentSave", establishment, true).then((response: any) => {
             resolve(response);
         }, error => {
             reject(error);

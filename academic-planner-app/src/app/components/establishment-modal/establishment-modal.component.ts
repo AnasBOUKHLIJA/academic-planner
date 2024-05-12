@@ -6,6 +6,7 @@ import { KernelServiceService } from '../../services/kernel-service.service';
 import { Country } from 'src/app/models/Country';
 import { City } from 'src/app/models/City';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { AdminServiceService } from 'src/app/services/admin-service.service';
 
 
 
@@ -25,14 +26,14 @@ export class EstablishmentModalComponent  implements OnInit {
     private modalCtrl: ModalController,
     private formBuilder: FormBuilder,
     private kernelServiceService: KernelServiceService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private adminServiceService: AdminServiceService
   ) { }
   
 
 
   async ngOnInit() {
     this.establishmentForm = this.formBuilder.group({
-      id: ['', [Validators.required]],
       code: ['', [Validators.required]],
       name: ['', [Validators.required]],
       description: ['', Validators.required],
@@ -63,7 +64,7 @@ export class EstablishmentModalComponent  implements OnInit {
   }
   async submitForm() {
     if (this.establishmentForm.valid) {
-      console.log(this.establishmentForm)
+      this.adminServiceService.createEstablishment(this.establishmentForm.value);
     } else {
       this.spinnerService.presentAlert('error','Form is not valid')
     }
