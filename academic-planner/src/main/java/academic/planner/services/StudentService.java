@@ -14,10 +14,12 @@ import java.util.Optional;
 @Service
 public class StudentService {
     protected final StudentRepository studentRepository;
+    protected final PersonService   personService;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, PersonService   personService) {
         this.studentRepository = studentRepository;
+        this.personService = personService;
     }
 
     public List<Student> getAll() {
@@ -31,6 +33,9 @@ public class StudentService {
     }
 
     public Student save(Student student) {
+        String login = personService.generateUsername(student.getFirstName(), student.getLastName());
+        student.setPassword(login);
+        student.setUsername(login);
         return studentRepository.save(student);
     }
 
@@ -45,4 +50,6 @@ public class StudentService {
     public void delete(Long id) {
         studentRepository.delete(getById(id));
     }
+
+
 }

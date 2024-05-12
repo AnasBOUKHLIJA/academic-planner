@@ -1,7 +1,0 @@
-{
-    "serverUrl"         : "http://localhost:8080/academic-planner/api/v1",
-    "applicationUrl"    : "http://localhost:8100/",
-    "applicationVersion": "v.1.0.0.dev",
-    "universityCode"    : "uit",
-    "toastDuration"     : 5000
-}

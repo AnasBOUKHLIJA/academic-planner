@@ -6,10 +6,10 @@ import jakarta.persistence.*;
 @DiscriminatorValue(value = "student")
 public class Student extends Person {
 
-    @Column(name = "student_national_code", nullable=false, unique = true)
+    @Column(name = "student_national_code", unique = true)
     private String studentNationalCode;
 
-    @Column(name = "apogee_code", nullable=false, unique = true)
+    @Column(name = "apogee_code", unique = true)
     private String apogeeCode;
 
     //--------------------------------------------------------------------------------
