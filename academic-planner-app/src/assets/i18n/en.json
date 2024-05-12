@@ -13,7 +13,9 @@
     "fr": "Frensh",
     "establishments": "Establishments",
     "reload_establishments": "Reload establishments",
+    "reload_course" : "Reload establishments",
     "add_new_establishment": "Add a new establishment",
+    "add_new_Course" : "Add a new Course",
     "language": "Language",
     "log_out": "Log Out",
     "students_management": "Students Management",
@@ -37,5 +39,9 @@
     "selectCountryLabel": "Select the country",
     "cityLabel": "City",
     "selectCityLabel": "Select the city",
-    "saveButtonLabel": "Save"
+    "saveButtonLabel": "Save",
+    "establishmentRegistrationTitle" : "test",
+    "establishmentRegistrationDescription" : "test2",
+    "changeEstablishmentImage" : "image",
+    "course" : "Course"
 }

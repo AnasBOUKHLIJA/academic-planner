@@ -13,7 +13,9 @@
     "fr": "Francais",
     "establishments": "Les Etablissements",
     "reload_establishments": "Recharger les établissements",
+    "reload_course" : "Recharger les Course",
     "add_new_establishment": "Ajouter une nouvelle établissement",
+    "add_new_Course" : "Ajouter une nouvelle Cours",
     "language": "Langue",
     "log_out": "Déconnexion",
     "students_management": "Gestion des étudiants",
@@ -37,5 +39,11 @@
     "selectCountryLabel": "Sélectionnez le pays",
     "cityLabel": "Ville",
     "selectCityLabel": "Sélectionnez la ville",
-    "saveButtonLabel": "Enregistrer"
+    "saveButtonLabel": "Enregistrer",
+    "establishmentRegistrationTitle" : "test",
+    "establishmentRegistrationDescription" : "test2",
+    "changeEstablishmentImage" : "picture",
+    "course" : "Les Cours"
+
+
 }
