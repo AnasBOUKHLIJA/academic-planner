@@ -36,6 +36,10 @@ public class Person {
     @Column(name = "legal_id_number", nullable=false)
     private String legalIdNumber;
 
+    @Lob
+    @Column(name = "thumbnail", nullable=true)
+    private String thumbnail;
+
     @ManyToOne
     @JoinColumn(name="legal_id_type_id", foreignKey=@ForeignKey(name="fk_user_legal_id_type"), nullable=false)
     private LegalIdType legalIdType;
@@ -130,6 +134,14 @@ public class Person {
 
     public void setLegalIdNumber(String legalIdNumber) {
         this.legalIdNumber = legalIdNumber;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public LegalIdType getLegalIdType() {

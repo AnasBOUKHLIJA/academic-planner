@@ -20,6 +20,10 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
+    public List<Person> getAllByProfileCode(String profileCode) {
+        return personRepository.findByProfileCode(profileCode);
+    }
+
     public List<Person> getAll() {
         return personRepository.findAll();
     }
@@ -44,5 +48,29 @@ public class PersonService {
 
     public void delete(Person person) {
         personRepository.delete(person);
+    }
+
+    public String generateUsername(String firstName, String lastName){
+        String[] firstNameParts = firstName.toLowerCase().split(" ");
+        String[] lastNameParts = lastName.toLowerCase().split(" ");
+
+        StringBuilder usernameBuilder = new StringBuilder();
+        for (String part : firstNameParts) {
+            usernameBuilder.append(part).append(".");
+        }
+        for (String part : lastNameParts) {
+            usernameBuilder.append(part).append(".");
+        }
+
+        if (usernameBuilder.length() > 0) {
+            usernameBuilder.deleteCharAt(usernameBuilder.length() - 1);
+        }
+
+        // Check if this combination firstName and lastName already exists
+        String username = usernameBuilder.toString();
+        List<Person> persons = personRepository.findByUsernameContaining(username);
+        if(persons.size() > 0) username += "."+ persons.size();
+
+        return username;
     }
 }

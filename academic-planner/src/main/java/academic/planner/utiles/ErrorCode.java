@@ -18,6 +18,6 @@ public enum ErrorCode {
     promotion_not_found,
     promotion_student_not_found,
     schedule_not_found,
-    student_not_found, registration_not_found, profile_not_found,
+    student_not_found, registration_not_found, profile_not_found, teacher_not_found,
 
 }

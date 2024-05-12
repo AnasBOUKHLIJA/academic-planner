@@ -1,0 +1,94 @@
+.university-container {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    position: relative;
+    text-align: center;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.university-container img {
+    width: 150px;
+    height: 150px;
+}
+
+.university-container h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.university-container p {
+    font-size: 16px;
+    color: #666;
+    text-align: left;
+}
+
+.edit-button {
+    cursor: pointer;
+    position: absolute !important;
+    background: var(--ion-color-primary);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white-color);
+    right: -10px;
+    top: -10px;
+    transition: 0.5 ease-in-out;
+    z-index: 10;
+}
+
+.page-section-conatiner {
+
+    margin: 40px 0;
+    .section-header {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        gap: 5px;
+
+        .title {
+            font-size: var(--text-large-font-size);
+            margin: 0;
+            padding-top: 0;
+            font-weight: bolder;
+        }
+
+        .subtitle {
+            color: var(--gray-color);
+            text-align: center;
+        }
+    }
+    .section-body {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        padding: 40px;
+        border-radius: 15px;
+        position: relative;
+        margin-top: 80px;
+    
+        .section-buttons {
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            width: auto;
+            min-width: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            gap: 5px;
+            // background: var(--ion-color-primary);
+            color: var(--white-color);
+            padding: 20px 40px;
+            border-radius: 15px;
+            height: 80px;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--white-color);
+        }
+    }
+}
