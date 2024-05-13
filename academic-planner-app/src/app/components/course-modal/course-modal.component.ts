@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-course-modal',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseModalComponent  implements OnInit {
 
-  constructor() { }
+  constructor(
+  ) { }
 
-  ngOnInit() {}
- 
+  async ngOnInit() {}
+  
+  
+   
+
 
 }
+

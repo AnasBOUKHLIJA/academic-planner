@@ -13,9 +13,9 @@
     "fr": "Francais",
     "establishments": "Les Etablissements",
     "reload_establishments": "Recharger les établissements",
-    "reload_course": "Recharger les Course",
+    "reload_course": "Recharger les Cours",
     "add_new_establishment": "Ajouter une nouvelle établissement",
-    "add_new_Course": "Ajouter une nouvelle Cours",
+    "add_new_Course": "Ajouter un nouveau cours",
     "language": "Langue",
     "log_out": "Déconnexion",
     "students_management": "Gestion des étudiants",
@@ -89,5 +89,12 @@
     "moreDetailsLabel": "Plus de détails",
     "showFilterButtonLabel": "Afficher le filtre",
     "hideFilterButtonLabel": "Masquer le filtre",
-    "clearFilter": "Effacer le filtre"
+    "clearFilter": "Effacer le filtre",
+    "establishmentRegistrationTitle" : "Enregistrement Institutionnel de l'Université",
+    "establishmentRegistrationDescription": "Veuillez fournir des informations détaillées concernant l'enregistrement institutionnel de l'université, y compris l'accréditation officielle, la conformité réglementaire et les affiliations institutionnelles.",
+    "changeEstablishmentImage" : "picture",
+    "course" : "Les Cours",
+    "universityLabel": "Université",
+    "selectUniversityLabel" : "Sélectionnez l'Université"
+
 }

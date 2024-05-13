@@ -96,11 +96,10 @@ export class AdminServiceService {
         );
     });
   }
-  
+
   createEstablishment(establishment: Establishment) : Promise<Establishment>{
     return new Promise( async (resolve, reject) => {
       establishment.rank = 1; //a changer aprés
-      establishment.university = await this.kernelServiceService.universityGet();//a changer aprés
       this.networkService.post(this.MODULE_GET_URL + "establishmentSave", establishment, true).then((response: any) => {
             resolve(response);
         }, error => {

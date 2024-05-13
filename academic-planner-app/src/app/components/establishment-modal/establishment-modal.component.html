@@ -1,9 +1,6 @@
 TODO : Mahedi => add course 
-
-
-
-TODO : Mohammed => 
-add establishment
+// TODO : Mohammed => 
+//add establishment
 add department
 add academicProgram
 
@@ -50,6 +47,15 @@ ng server -o => ng s -o
           <ion-textarea rows="4" formControlName="description" placeholder="{{ 'enterDescriptionPlaceholder' | translate }}" type="text"
             ngDefaultControl></ion-textarea>
         </ion-item>
+        
+        <ion-item lines="full">
+          <ion-select formControlName="university" label="{{ 'universityLabel' | translate }}" placeholder="{{ 'selectUniversityLabel' | translate }}">
+            <ion-select-option *ngFor="let university of universities" [value]="university.id">{{ university.name }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        
+
+       
   
         <ion-item lines="full">
           <ion-select formControlName="citizenship" label="{{ 'countryLabel' | translate }}" placeholder="{{ 'selectCountryLabel' | translate }}">

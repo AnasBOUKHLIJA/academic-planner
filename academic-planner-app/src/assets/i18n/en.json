@@ -13,7 +13,7 @@
     "fr": "Frensh",
     "establishments": "Establishments",
     "reload_establishments": "Reload establishments",
-    "reload_course": "Reload establishments",
+    "reload_course": "Reload courses",
     "add_new_establishment": "Add a new establishment",
     "add_new_Course": "Add a new Course",
     "language": "Language",
@@ -79,7 +79,7 @@
     "addTeacherTitle": "Add Teacher",
     "addTeacherDescription": "Enter the necessary information to add a teacher",
     "addAdminTitle": "Add Administrator",
-    "addAdminDescription": "Enter the necessary information to add an administrator",  
+    "addAdminDescription": "Enter the necessary information to add an administrator",
     "cancelButtonLabel": "Cancel",
     "filterStudentsTitle": "Students Filter",
     "filterTeachersTitle": "Teachers Filter",
@@ -89,5 +89,11 @@
     "moreDetailsLabel": "More details",
     "showFilterButtonLabel": "Show filter",
     "hideFilterButtonLabel": "Hide filter",
-    "clearFilter": "Clear filter"
+    "clearFilter": "Clear filter",
+    "establishmentRegistrationTitle" : "University Institutional Registration",
+    "establishmentRegistrationDescription": "Please provide detailed information about the university's institutional registration, including official accreditation, regulatory compliance, and institutional affiliations.",    "changeEstablishmentImage" : "image",
+    "course" : "Course",
+    "universityLabel": "University",
+    "selectUniversityLabel" : "Select the University"
+
 }

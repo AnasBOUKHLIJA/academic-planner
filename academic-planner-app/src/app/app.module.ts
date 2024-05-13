@@ -34,6 +34,7 @@ import { AdminsManagementComponent } from './components/admins-management/admins
 import { UserPopoverComponent } from './base/user-popover/user-popover.component';
 import { LoginComponent } from './login/login.component';
 import { CustomDatePipe } from './pipes/custom-date-pipe.pipe';
+import { CourseModalComponent } from './components/course-modal/course-modal.component';
 
 export function ConfigLoader(configurationService: ConfigurationService) {
   return () => configurationService.load(environment.configFile);
@@ -67,15 +68,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserPopoverComponent,
     LoginComponent,
     CustomDatePipe,
-    ],
+    CourseModalComponent
+  ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot({
       mode: 'md',
-    }), 
-    AppRoutingModule, 
-    ReactiveFormsModule, 
+    }),
+    AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
     CommonModule,
     HttpClientModule,
@@ -97,7 +99,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     useFactory: ConfigLoader,
     deps: [ConfigurationService],
     multi: true
-    }, 
+    },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
