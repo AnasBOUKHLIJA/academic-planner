@@ -7,6 +7,7 @@ import { Country } from 'src/app/models/Country';
 import { City } from 'src/app/models/City';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
+import { University } from 'src/app/models/University';
 
 
 
@@ -21,6 +22,10 @@ export class EstablishmentModalComponent  implements OnInit {
   countries: Country[];
   selectedCountry: Country;
   selectedFile: File;
+  universities: University[] = [];
+  selectedUniversity: University;
+
+
 
   constructor(
     private modalCtrl: ModalController,
@@ -40,11 +45,17 @@ export class EstablishmentModalComponent  implements OnInit {
       thumbnail: ['', Validators.required],
       citizenship: ['', Validators.required],
       city: ['', Validators.required],
+      university: ['', Validators.required] // Added university form control
+
     });
     this.countries = await this.kernelServiceService.countriesGet();
 
     this.establishmentForm.get('citizenship')?.valueChanges.subscribe((selectedCountry: Country) => {
       this.selectedCountry = selectedCountry;
+    });
+      this.kernelServiceService.universityGet().then((university: University) => {
+        this.universities = [university];
+    
     });
 
   }

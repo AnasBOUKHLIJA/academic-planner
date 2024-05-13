@@ -40,8 +40,9 @@
     "cityLabel": "City",
     "selectCityLabel": "Select the city",
     "saveButtonLabel": "Save",
-    "establishmentRegistrationTitle" : "test",
-    "establishmentRegistrationDescription" : "test2",
-    "changeEstablishmentImage" : "image",
-    "course" : "Course"
+    "establishmentRegistrationTitle" : "University Institutional Registration",
+    "establishmentRegistrationDescription": "Please provide detailed information about the university's institutional registration, including official accreditation, regulatory compliance, and institutional affiliations.",    "changeEstablishmentImage" : "image",
+    "course" : "Course",
+    "universityLabel": "University",
+    "selectUniversityLabel" : "Select the University"
 }

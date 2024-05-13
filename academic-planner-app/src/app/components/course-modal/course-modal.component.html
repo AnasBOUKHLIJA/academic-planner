@@ -1,3 +1,10 @@
-<p>
-  course-modal works!
-</p>
+<div class="form-controls">
+  <ion-item lines="full">
+    <ion-label position="stacked">{{ 'codeLabel' | translate }}</ion-label>
+    <ion-input formControlName="code" placeholder="{{ 'enterCodePlaceholder' | translate }}" type="text" ngDefaultControl></ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label position="stacked">{{ 'nameLabel' | translate }}</ion-label>
+    <ion-input formControlName="name" placeholder="{{ 'enterNamePlaceholder' | translate }}" type="text" ngDefaultControl></ion-input>
+  </ion-item>
