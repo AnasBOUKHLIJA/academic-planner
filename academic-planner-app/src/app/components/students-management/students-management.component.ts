@@ -12,6 +12,8 @@ import { University } from 'src/app/models/University';
 import { AdminServiceService } from '../../services/admin-service.service';
 import { SpinnerService } from '../../services/spinner.service';
 import { Student } from 'src/app/models/Student';
+import { Filter } from 'src/app/models/Filter';
+import { StudentsResponse } from 'src/app/models/msg/StudentsResponse';
 
 @Component({
   selector: 'app-students-management',
@@ -20,16 +22,21 @@ import { Student } from 'src/app/models/Student';
 })
 export class StudentsManagementComponent  implements OnInit {
 
-  studentForm : FormGroup;
-  baseSize    : number = 4;
-  global      : GlobalConfig;
-  students   : Student[];
-  countries   : Country[];
-  profiles    : Profile[];
-  legalIdTypes : LegalIdType[];
-  university   : University;
-  selectedCountry: Country;
-  showForm: boolean = false;
+  studentForm     : FormGroup;
+  filterForm      : FormGroup;
+  pageSize        : number = 1;
+  page            : number = 0;
+  global          : GlobalConfig;
+  studentsResponse: StudentsResponse;
+  countries       : Country[];
+  profiles        : Profile[];
+  legalIdTypes    : LegalIdType[];
+  university      : University;
+  selectedCountry : Country;
+  showForm        : boolean = false;
+  showFilterForm  : boolean = false;
+  filter          : Filter = new Filter();
+  defaultProfile  : Profile | undefined;
 
   constructor(
     private utilsService            : UtilsService,
@@ -55,28 +62,56 @@ export class StudentsManagementComponent  implements OnInit {
       legalIdNumber: ['', Validators.required],
       legalIdType: ['', Validators.required],
       citizenship: ['', Validators.required],
-      profile: ['', Validators.required],
+      profile: [{value: "", disabled: true}, Validators.required],
       city: ['', Validators.required],
       apogeeCode: ['', Validators.required],
       studentNationalCode: ['', Validators.required]
     });
+
+    this.filterForm = this.formBuilder.group({
+      page: [this.page],
+      pageSize: [this.pageSize],
+      firstName: [this.filter.firstName],
+      lastName: [this.filter.lastName],
+      apogeeCode: [this.filter.apogeeCode],
+      studentNationalCode: [this.filter.studentNationalCode],
+      // username: ['', Validators.required],
+      // legalIdNumber: ['', Validators.required]
+    });
+
 
     this.countries = await this.kernelServiceService.countriesGet();
     this.legalIdTypes = await this.kernelServiceService.legalIdTypesGet();
     this.profiles = await this.kernelServiceService.profilesGet();
     this.university = await this.kernelServiceService.universityGet();
 
+    this.defaultProfile = this.profiles.find(profile => profile.code === 'student');
+    this.studentForm.patchValue({
+      profile: this.defaultProfile
+    });
+
     this.studentForm.get('citizenship')?.valueChanges.subscribe((selectedCountry: Country) => {
       this.selectedCountry = selectedCountry;
     });
-
-    this.students = await this.adminServiceService.getAllStudents();
-    console.log(this.students);
+    
+    this.filter.page = this.page;
+    this.filter.pageSize = this.pageSize;
+    this.studentsResponse = await this.adminServiceService.getStudents(this.filterForm.value);
   }
 
   async submitStudentForm() {
     if (this.studentForm.valid) {
       this.adminServiceService.createStudent(this.studentForm.value);
+      this.clearForm();
+    } else {
+      console.log('Form is not valid');
+    }
+  }
+
+  async submitFilterForm() {
+    if (this.filterForm.valid) {
+      this.filter = this.filterForm.value;
+      this.studentsResponse = await this.adminServiceService.getStudents(this.filter);
     } else {
       console.log('Form is not valid');
     }
@@ -90,6 +125,65 @@ export class StudentsManagementComponent  implements OnInit {
 
   toggleForm() {
     this.showForm = !this.showForm;
+  }
+
+  toggleFilterForm() {
+    this.showFilterForm = !this.showFilterForm;
+  }
+
+  async paginate(action: string) {
+    if (action === 'next' && ! this.studentsResponse.last) {
+      this.filter.page = this.studentsResponse.number+1;
+    } else if (action === 'prev' && ! this.studentsResponse.first) {
+      this.filter.page = this.studentsResponse.number-1;
+    }
+    if ((action === 'next' && ! this.studentsResponse.last) 
+      || (action === 'prev' && ! this.studentsResponse.first)) {
+        this.filter.pageSize = this.pageSize;
+        this.studentsResponse = await this.adminServiceService.getStudents(this.filter);
+    }
+  }
+
+  async clearFilter() {
+    this.filterForm.reset({
+      page: this.page,
+      pageSize: this.pageSize,
+      firstName: null,
+      lastName: null,
+      apogeeCode: null,
+      studentNationalCode: null
+    });
+    this.showFilterForm = false;
+    this.filter = this.filterForm.value;
+    this.studentsResponse = await this.adminServiceService.getStudents(this.filterForm.value);
+  }
+
+  async refresh() {
+    this.studentsResponse = await this.adminServiceService.getStudents(this.filter);
+  }
+
+  async clearForm() {
+    this.studentForm = this.formBuilder.group({
+      gender: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      thumbnail: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      legalIdNumber: ['', Validators.required],
+      legalIdType: ['', Validators.required],
+      citizenship: ['', Validators.required],
+      profile: [{value: "", disabled: true}, Validators.required],
+      city: ['', Validators.required],
+      apogeeCode: ['', Validators.required],
+      studentNationalCode: ['', Validators.required]
+    });
+
+    this.defaultProfile = this.profiles.find(profile => profile.code === 'student');
+    this.studentForm.patchValue({
+      profile: this.defaultProfile
+    });
+
   }
 
 }

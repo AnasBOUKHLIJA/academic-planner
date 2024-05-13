@@ -1,10 +1,14 @@
 package academic.planner.services;
 
 import academic.planner.entities.Teacher;
+import academic.planner.msg.Filter;
 import academic.planner.repositories.TeacherRepository;
-import academic.planner.utiles.AcademicPlannerException;
-import academic.planner.utiles.ErrorCode;
+import academic.planner.utils.AcademicPlannerException;
+import academic.planner.utils.ErrorCode;
+import academic.planner.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,15 +19,22 @@ import java.util.Optional;
 public class TeacherService {
     protected final TeacherRepository teacherRepository;
     protected final PersonService   personService;
+    protected final ObjectUtils objectUtils;
 
     @Autowired
-    public TeacherService(TeacherRepository teacherRepository, PersonService   personService) {
+    public TeacherService(TeacherRepository teacherRepository, PersonService personService, ObjectUtils objectUtils) {
         this.teacherRepository = teacherRepository;
         this.personService = personService;
+        this.objectUtils = objectUtils;
     }
 
     public List<Teacher> getAll() {
         return teacherRepository.findAll();
+    }
+
+    public Page<Teacher> getTeachers(Filter filter) {
+       Pageable pageable   = objectUtils.constructPageable(filter);
+        return teacherRepository.findByFilter(filter.getUsername(), filter.getFirstName(), filter.getLastName(), filter.getLegalIdNumber(), pageable);
     }
 
     public Teacher getById(Long id) {

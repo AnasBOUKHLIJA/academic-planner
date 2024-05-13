@@ -36,42 +36,50 @@ ion-header {
 }
 
 .table-container {
+    margin: 20px 0;
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 5px;
+
+    .table-row {
+        display: flex;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+
+        div {
+            flex: 1;
+            width: calc(100% / 7);
+        }
+
+        div:last-child {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        ion-avatar img {
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        }
+    }
+
+    .header-row {
+        background-color: #f0f0f0;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        text-transform: uppercase;
+        color: #5c5c5c;
+        padding: 5px;
+        min-height: 50px;
+        border-radius: 5px;
+
+        div {
+            width: calc(100% / 7);
+        }
+    }
+
 }
 
-.table-row {
-    display: flex;
-    border-bottom: 1px solid #ccc;
-}
-
-.header-row {
-    background-color: #f0f0f0;
-    font-weight: bold;
-}
-
-.table-row > div {
-    padding: 10px;
-    flex: 1;
-}
-
-.table-row > div:last-child {
-    display: flex;
-    justify-content: space-around;
-}
-
-button {
-    padding: 5px 10px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 3px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}

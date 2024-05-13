@@ -1,4 +1,4 @@
-package academic.planner.utiles;
+package academic.planner.utils;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

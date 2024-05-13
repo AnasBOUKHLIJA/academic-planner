@@ -1,4 +1,4 @@
-package academic.planner.utiles;
+package academic.planner.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
