@@ -10,7 +10,7 @@ export class Person {
     email: string;
     firstName: string;
     lastName: string;
-    birthDate: string;
+    birthDate: Date;
     legalIdNumber: string;
     thumbnail: string;
     legalIdType: LegalIdType;
