@@ -33,6 +33,8 @@ import { TeachersManagementComponent } from './components/teachers-management/te
 import { AdminsManagementComponent } from './components/admins-management/admins-management.component';
 import { UserPopoverComponent } from './base/user-popover/user-popover.component';
 import { CourseModalComponent } from './components/course-modal/course-modal.component';
+import { LoginComponent } from './login/login.component';
+import { CustomDatePipe } from './pipes/custom-date-pipe.pipe';
 
 
 export function ConfigLoader(configurationService: ConfigurationService) {
@@ -65,7 +67,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     TeachersManagementComponent,
     AdminsManagementComponent,
     UserPopoverComponent,
-    CourseModalComponent
+    CourseModalComponent,
+    LoginComponent,
+    CustomDatePipe,
     ],
   imports: [
     BrowserModule, 
