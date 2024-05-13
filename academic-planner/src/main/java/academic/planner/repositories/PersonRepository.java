@@ -11,10 +11,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
     List<Person> findByUsernameContaining(String username);
+    Optional<Person> findByUsername(String username);
 
     @Query("SELECT p FROM Person p " +
             "INNER JOIN p.profile pr " +

@@ -92,13 +92,13 @@
             </ion-select>
         </ion-item>
 
-        <ion-item lines="full">
+        <!-- <ion-item lines="full">
             <ion-label>{{ 'profileLabel' | translate }}</ion-label>
-            <ion-select formControlName="profile" placeholder="{{ 'selectProfilePlaceholder' | translate }}" [value]="defaultProfile">
+            <ion-select formControlName="profile" placeholder="{{ 'selectProfilePlaceholder' | translate }}">
                 <ion-select-option *ngFor="let profile of profiles" [value]="profile">{{ profile.name | translate
                     }}</ion-select-option>
             </ion-select>
-        </ion-item>
+        </ion-item> -->
 
         <ion-item lines="full">
             <ion-label>{{ 'citizenshipLabel' | translate }}</ion-label>
@@ -205,7 +205,7 @@
         <div>{{ teacher.firstName }}</div>
         <div>{{ teacher.lastName }}</div>
         <div>{{ teacher.username }}</div>
-        <div>{{ teacher.birthDate }}</div>
+        <div>{{ teacher.birthDate | customDate }}</div>
         <div>
             <ion-button color="primary" fill="clear"> {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon
                     name="arrow-forward-outline"></ion-icon></ion-button>

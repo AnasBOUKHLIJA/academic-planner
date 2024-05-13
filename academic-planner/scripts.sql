@@ -1650,7 +1650,6 @@ VALUES((SELECT id FROM country WHERE code = 'MA'), N'857', N'TIZOUGHRANE', 0);
 INSERT INTO city(COUNTRY_ID, code, NAME, RANK)
 VALUES((SELECT id FROM country WHERE code = 'MA'), N'858', N'ASSAKI', 0);
 
-
 update profile set code = 'student' where code = 'etu';
 update profile set code = 'teacher' where code = 'ro';
 update profile set code = 'admin' where code = 'adm';

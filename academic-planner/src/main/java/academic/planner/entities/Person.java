@@ -2,6 +2,8 @@ package academic.planner.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type",discriminatorType = DiscriminatorType.STRING)
@@ -31,7 +33,7 @@ public class Person {
     private String lastName;
 
     @Column(name = "birth_date", nullable=false)
-    private String birthDate;
+    private Date birthDate;
 
     @Column(name = "legal_id_number", nullable=false)
     private String legalIdNumber;
@@ -52,6 +54,11 @@ public class Person {
     @JoinColumn(name="profile_id", foreignKey=@ForeignKey(name="fk_user_profile"), nullable=false)
     private Profile profile;
 
+    @Transient
+    private String token;
+
+    @Transient
+    private String otp;
     //--------------------------------------------------------------------------------
     // GETTER AND SETTERS
     //--------------------------------------------------------------------------------
@@ -120,11 +127,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -158,5 +165,21 @@ public class Person {
 
     public void setCitizenship(Country citizenship) {
         this.citizenship = citizenship;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
     }
 }

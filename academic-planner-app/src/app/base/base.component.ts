@@ -5,6 +5,8 @@ import { GlobalConfig } from '../models/GlobalConfig';
 import { University } from '../models/University';
 import { KernelServiceService } from '../services/kernel-service.service';
 import { UserPopoverComponent } from './user-popover/user-popover.component';
+import { SecurityServiceService } from '../services/security-service.service';
+import { SecurityDTO } from '../models/msg/SecurityDTO';
 
 @Component({
   selector: 'app-base',
@@ -13,30 +15,29 @@ import { UserPopoverComponent } from './user-popover/user-popover.component';
 })
 export class BaseComponent implements OnInit {
 
-  pages: any[];
-  global: GlobalConfig;
-  university : University;
-  @Input() title: string;
-  @Input() introduction: string;
+  pages                 : any[];
+  global                : GlobalConfig;
+  university            : University;
+  securityDTO           : SecurityDTO;
+  @Input() title        : string;
+  @Input() introduction : string;
 
 
   currentYear: number = new Date().getFullYear();
 
   constructor(
-    private kernelService: KernelServiceService,
-    private modalCtrl: ModalController,
-    private utilsService: UtilsService,
-    private popoverController: PopoverController,
+    private kernelService         : KernelServiceService,
+    private modalCtrl             : ModalController,
+    private utilsService          : UtilsService,
+    private popoverController     : PopoverController,
+    private securityService       : SecurityServiceService,
   ) { }
 
   async ngOnInit() {
-    this.pages  = this.utilsService.pagesConfigGet();
-    this.global = this.utilsService.globalGet();
-    this.university = await this.kernelService.universityGet();
-  }
-
-  async openContactMeModal() {
-    
+    this.securityDTO  = this.securityService.getSecurityInfo();
+    this.pages        = this.utilsService.pagesConfigGet();
+    this.global       = this.utilsService.globalGet();
+    this.university   = await this.kernelService.universityGet();
   }
 
 
@@ -48,8 +49,7 @@ export class BaseComponent implements OnInit {
 
     await popover.present();
 
-    const { role } = await popover.onDidDismiss();
-    console.log(`Popover dismissed with role: ${role}`);
+    const { data } = await popover.onDidDismiss();
   }
 }
 

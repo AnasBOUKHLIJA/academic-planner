@@ -59,8 +59,8 @@ export class AdminsManagementComponent  implements OnInit {
       legalIdNumber: ['', Validators.required],
       legalIdType: ['', Validators.required],
       citizenship: ['', Validators.required],
-      profile: [{value: "", disabled: true}, Validators.required],
       city: ['', Validators.required],
+      profile: ['', Validators.required]
     });
 
     this.filterForm = this.formBuilder.group({
@@ -78,6 +78,7 @@ export class AdminsManagementComponent  implements OnInit {
     this.university = await this.kernelServiceService.universityGet();
 
     this.defaultProfile = this.profiles.find(profile => profile.code === 'admin');
+    console.log(this.defaultProfile);
     this.adminForm.patchValue({
       profile: this.defaultProfile
     });
@@ -92,6 +93,7 @@ export class AdminsManagementComponent  implements OnInit {
   }
 
   async submitAdminForm() {
+    console.log(this.adminForm.value);
     if (this.adminForm.valid) {
       this.adminServiceService.createAdmin(this.adminForm.value);
     } else {
@@ -164,7 +166,7 @@ export class AdminsManagementComponent  implements OnInit {
       legalIdNumber: ['', Validators.required],
       legalIdType: ['', Validators.required],
       citizenship: ['', Validators.required],
-      profile: [{value: "", disabled: true}, Validators.required],
+      profile: ['', Validators.required],
       city: ['', Validators.required],
     });
 

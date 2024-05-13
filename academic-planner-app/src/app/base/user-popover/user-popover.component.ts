@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
+import { SecurityDTO } from 'src/app/models/msg/SecurityDTO';
+import { SecurityServiceService } from 'src/app/services/security-service.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -9,14 +11,18 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class UserPopoverComponent  implements OnInit {
 
-  selectedLanguage: string;
+  selectedLanguage    : string;
+  securityDTO         : SecurityDTO;
 
   constructor(
-    private utilsService: UtilsService,
+    private utilsService      : UtilsService,
+    private securityService   : SecurityServiceService,
+    private popoverController: PopoverController
   ) {}
 
   async ngOnInit() {
-    this.selectedLanguage = this.utilsService.getCurrentLanguage();   
+    this.selectedLanguage = this.utilsService.getCurrentLanguage();
+    this.securityDTO      = this.securityService.getSecurityInfo();  
   }
 
   switchLanguage(language: string) {
@@ -25,7 +31,12 @@ export class UserPopoverComponent  implements OnInit {
     this.utilsService.switchLanguage(language)
   }
 
-  logoutAction() {
-    
+  async logoutAction() {
+    this.closePopover();
+    await this.securityService.logout(this.securityDTO.username, this.securityDTO.token);
+  }
+
+  closePopover() {
+    this.popoverController.dismiss();
   }
 }

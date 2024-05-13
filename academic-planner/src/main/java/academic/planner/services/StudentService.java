@@ -4,6 +4,7 @@ import academic.planner.entities.Student;
 import academic.planner.msg.Filter;
 import academic.planner.repositories.StudentRepository;
 import academic.planner.utils.AcademicPlannerException;
+import academic.planner.utils.EncryptionManager;
 import academic.planner.utils.ErrorCode;
 import academic.planner.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,15 @@ import java.util.Optional;
 public class StudentService {
     protected final StudentRepository studentRepository;
     protected final PersonService   personService;
-
     protected final ObjectUtils objectUtils;
+    protected final EncryptionManager encryptionManager;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository, PersonService personService, ObjectUtils objectUtils) {
+    public StudentService(StudentRepository studentRepository, PersonService personService, ObjectUtils objectUtils, EncryptionManager encryptionManager) {
         this.studentRepository = studentRepository;
         this.personService = personService;
         this.objectUtils = objectUtils;
+        this.encryptionManager = encryptionManager;
     }
 
     public List<Student> getAll() {
@@ -45,9 +47,9 @@ public class StudentService {
     }
 
     public Student save(Student student) {
-        String login = personService.generateUsername(student.getFirstName(), student.getLastName());
-        student.setPassword(login);
-        student.setUsername(login);
+        String username = personService.generateUsername(student.getFirstName(), student.getLastName());
+        student.setUsername(username);
+        student.setPassword(encryptionManager.digest(student.getUsername(), student.getUsername()));
         return studentRepository.save(student);
     }
 
