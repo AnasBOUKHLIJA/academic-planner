@@ -106,13 +106,13 @@
             </ion-select>
         </ion-item>
 
-        <ion-item lines="full">
+        <!-- <ion-item lines="full">
             <ion-label>{{ 'profileLabel' | translate }}</ion-label>
-            <ion-select formControlName="profile" placeholder="{{ 'selectProfilePlaceholder' | translate }}" [value]="defaultProfile">
+            <ion-select formControlName="profile" placeholder="{{ 'selectProfilePlaceholder' | translate }}">
                 <ion-select-option *ngFor="let profile of profiles" [value]="profile">{{ profile.name | translate
                     }}</ion-select-option>
             </ion-select>
-        </ion-item>
+        </ion-item> -->
 
         <ion-item lines="full">
             <ion-label>{{ 'citizenshipLabel' | translate }}</ion-label>
@@ -148,7 +148,7 @@
 <div class="form-enrollment" *ngIf="showFilterForm">
 
     <div class="form-header">
-        <h1>{{ 'filterTitle' | translate }}</h1>
+        <h1>{{ 'filterStudentsTitle' | translate }}</h1>
         <p>{{ 'filterDescription' | translate }}</p>
     </div>
 
@@ -190,7 +190,7 @@
                 &nbsp;
                 <ion-button fill="outline"  (click)="clearFilter()">
                     <ion-icon name="sync-circle-outline" slot="start"></ion-icon>
-                    &nbsp; {{ 'Clear Filter' | translate }}
+                    &nbsp; {{ 'clearFilter' | translate }}
                 </ion-button>
             </div>
             

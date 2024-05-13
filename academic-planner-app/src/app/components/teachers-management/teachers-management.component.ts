@@ -59,7 +59,7 @@ export class TeachersManagementComponent  implements OnInit {
       legalIdNumber: ['', Validators.required],
       legalIdType: ['', Validators.required],
       citizenship: ['', Validators.required],
-      profile: [{value: "", disabled: true}, Validators.required],
+      profile: ['', Validators.required],
       city: ['', Validators.required],
     });
 
@@ -165,7 +165,7 @@ export class TeachersManagementComponent  implements OnInit {
       legalIdNumber: ['', Validators.required],
       legalIdType: ['', Validators.required],
       citizenship: ['', Validators.required],
-      profile: [{value: "", disabled: true}, Validators.required],
+      profile: ['', Validators.required],
       city: ['', Validators.required],
     });
 

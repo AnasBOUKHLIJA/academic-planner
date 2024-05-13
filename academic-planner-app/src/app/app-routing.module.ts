@@ -6,6 +6,7 @@ import { UniversityManagementComponent } from './university-management/universit
 import { UsersManagementComponent } from './users-management/users-management.component';
 import { SchedulesManagementComponent } from './schedules-management/schedules-management.component';
 import { AbsencesManagementComponent } from './absences-management/absences-management.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,13 @@ const routes: Routes = [
     data: {
       title: "Tableau de bord",
       description: "Bienvenue sur le tableau de bord du planificateur académique. Obtenez un aperçu de vos activités académiques et gérez vos tâches efficacement."
+    }
+  },
+  {
+    path: 'login', component: LoginComponent,
+    data: {
+      title: "",
+      description: "" 
     }
   },
   {

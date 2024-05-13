@@ -62,7 +62,7 @@ export class StudentsManagementComponent  implements OnInit {
       legalIdNumber: ['', Validators.required],
       legalIdType: ['', Validators.required],
       citizenship: ['', Validators.required],
-      profile: [{value: "", disabled: true}, Validators.required],
+      profile: ['', Validators.required],
       city: ['', Validators.required],
       apogeeCode: ['', Validators.required],
       studentNationalCode: ['', Validators.required]
@@ -173,7 +173,7 @@ export class StudentsManagementComponent  implements OnInit {
       legalIdNumber: ['', Validators.required],
       legalIdType: ['', Validators.required],
       citizenship: ['', Validators.required],
-      profile: [{value: "", disabled: true}, Validators.required],
+      profile: ['', Validators.required],
       city: ['', Validators.required],
       apogeeCode: ['', Validators.required],
       studentNationalCode: ['', Validators.required]

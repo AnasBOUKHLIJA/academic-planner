@@ -5,15 +5,19 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { GlobalConfig } from '../models/GlobalConfig';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { SecurityServiceService } from './security-service.service';
+import { SecurityDTO } from '../models/msg/SecurityDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
 
-  global: GlobalConfig;
-  public pages = {
+  private readonly PREFERRED_LANGUAGE_LOCAL_STORAGE_KEY: string = 'preferredLanguage';
 
+  securityDTO     : SecurityDTO;
+  global          : GlobalConfig;
+  public pages = {
     admin: [
       { code: 'dashboard',  url: '/', icon: 'home' },
       { code: 'university', url: '/university-management', icon: 'business' },
@@ -22,28 +26,27 @@ export class UtilsService {
       { code: 'absences',   url: '/absences-management', icon: 'calendar' },
     ],
     teacher: [
-      { code: 'dashboard',  url: '/dashboard', icon: 'home' },
-      { code: 'course',     url: '/courses', icon: 'book' },
-      { code: 'absence',    url: '/absences', icon: 'calendar' },
-      { code: 'grade',      url: '/grades', icon: 'school' },
-      { code: 'student',    url: '/students', icon: 'people' },
+      { code: 'dashboard',   url: '/dashboard', icon: 'home' },
+      { code: 'courses',     url: '/courses', icon: 'book' },
+      { code: 'absences',    url: '/absences', icon: 'calendar' },
+      { code: 'grades',      url: '/grades', icon: 'school' },
+      { code: 'students',    url: '/students', icon: 'people' },
     ],
     student: [
-      { code: 'dashboard',  url: '/dashboard', icon: 'home' },
-      { code: 'course',     url: '/courses', icon: 'book' },
-      { code: 'absence',    url: '/absences', icon: 'calendar' },
-      { code: 'grade',      url: '/grades', icon: 'school' },
-      { code: 'student',    url: '/students', icon: 'people' },
+      { code: 'dashboard',   url: '/dashboard', icon: 'home' },
+      { code: 'courses',     url: '/courses', icon: 'book' },
+      { code: 'absences',    url: '/absences', icon: 'calendar' },
+      { code: 'grades',      url: '/grades', icon: 'school' },
     ]
-
   };
 
   constructor(
-    private networkService: NetworkServiceService,
-    private configuration: ConfigurationService,
-    private clipboard: Clipboard,
-    private modalCtrl: ModalController,
-    private translate: TranslateService
+    private networkService        : NetworkServiceService,
+    private configuration         : ConfigurationService,
+    private clipboard             : Clipboard,
+    private modalCtrl             : ModalController,
+    private translate             : TranslateService,
+    private securityService       : SecurityServiceService,
   ) { }
 
   imageGet(path: string, toBeLoaded: boolean): Promise<string> {
@@ -61,7 +64,19 @@ export class UtilsService {
   }
 
   pagesConfigGet() {
-    return this.pages.admin;
+    const securityDTO: SecurityDTO = this.securityService.getSecurityInfo();
+    const userProfileCode = securityDTO?.profile?.code.toLowerCase();
+
+    switch (userProfileCode) {
+      case 'admin':
+        return this.pages.admin;
+      case 'teacher':
+        return this.pages.teacher;
+      case 'student':
+        return this.pages.student;
+      default:
+        return this.pages.admin;
+    }
   }
 
   copyToClipBoard(text: string, needApplicationUrl: boolean) {
@@ -85,15 +100,20 @@ export class UtilsService {
   }
 
   switchLanguage(language: string) {
+    localStorage.setItem(this.PREFERRED_LANGUAGE_LOCAL_STORAGE_KEY, JSON.stringify(language));
     this.translate.use(language);
   }
 
   setDefaultLanguage() {
-    this.switchLanguage(this.configuration.configuration.defaultLanguage);
+    let language = localStorage.getItem(this.PREFERRED_LANGUAGE_LOCAL_STORAGE_KEY);
+    language = language ? JSON.parse(language) : null;
+    this.switchLanguage(language ? language : this.configuration.configuration.defaultLanguage);
   }
 
   getDefaultLanguage() {
-    return this.configuration.configuration.defaultLanguage;
+    let language = localStorage.getItem(this.PREFERRED_LANGUAGE_LOCAL_STORAGE_KEY);
+    language = language ? JSON.parse(language) : null;
+    return language ? language : this.configuration.configuration.defaultLanguage;
   }
 
   getCurrentLanguage(): string {
