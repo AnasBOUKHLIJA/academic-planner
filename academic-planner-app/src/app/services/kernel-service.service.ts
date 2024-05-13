@@ -34,6 +34,7 @@ export class KernelServiceService {
       }
 
       this.networkService.get(this.MODULE_GET_URL + "countriesGet", false).then((response: any) => {
+          this.countries = response;
           resolve(response);
       }, error => {
           reject(error);
@@ -61,6 +62,7 @@ export class KernelServiceService {
         return;
       }
       this.networkService.get(this.MODULE_GET_URL + "universityGet/" + this.configurationService.configuration.universityCode , false).then((response: any) => {
+        this.university = response;
           resolve(response);
       }, error => {
           reject(error);
@@ -77,6 +79,7 @@ export class KernelServiceService {
         return;
       }
         this.networkService.get(this.MODULE_GET_URL + "legalIdTypesGet" , false).then((response: any) => {
+            this.legalIdTypes = response;
             resolve(response);
         }, error => {
             reject(error);
@@ -93,6 +96,7 @@ export class KernelServiceService {
         return;
       }
         this.networkService.get(this.MODULE_GET_URL + "profilesGet" , false).then((response: any) => {
+            this.profiles = response;
             resolve(response);
         }, error => {
             reject(error);
