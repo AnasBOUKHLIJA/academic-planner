@@ -35,12 +35,14 @@ export class NetworkServiceService {
       this.http.post(endPointUrL, query, httpOptions).subscribe({
         next: (response: any) => {
           this.spinner.hide();
-          if (response.response.code === ServerCode.ACCEPTED) {
-            resolve(response);
-          } else {
-            this.presentAlert('Oops!', response.error.reason);
-            reject(response.response.reason);
-          }
+          resolve(response);
+
+          // if (response.response.code === ServerCode.ACCEPTED) {
+          //   resolve(response);
+          // } else {
+          //   this.presentAlert('Oops!', response.error.reason);
+          //   reject(response.response.reason);
+          // }
         },
         error: (error) => {
           if (toBeLoaded) this.spinner.hide();

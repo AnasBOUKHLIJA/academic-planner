@@ -7,6 +7,11 @@ import { Teacher } from '../models/Teacher';
 import { Admin } from '../models/Admin';
 import { Establishment } from '../models/Establishment';
 import { KernelServiceService } from './kernel-service.service';
+import { Filter } from '../models/Filter';
+import { filter } from 'rxjs/operators';
+import { PersonsResponse } from '../models/msg/PersonsResponse';
+import { TeachersResponse } from '../models/msg/TeachersResponse';
+import { StudentsResponse } from '../models/msg/StudentsResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +39,9 @@ export class AdminServiceService {
     });
   }
 
-  getAllStudents() : Promise<Student[]>{
+  getStudents(filter : Filter) : Promise<StudentsResponse>{
     return new Promise((resolve, reject) => {
-        this.networkService.get(this.MODULE_GET_URL + "studentsGet", true).then((response: any) => {
+        this.networkService.post(this.MODULE_GET_URL + "studentsGet", filter, true).then((response: any) => {
             resolve(response);
         }, error => {
             reject(error);
@@ -57,9 +62,9 @@ export class AdminServiceService {
     });
   }
 
-  getAllTeachers() : Promise<Teacher[]>{
+  getTeachers(filter : Filter) : Promise<TeachersResponse>{
     return new Promise((resolve, reject) => {
-        this.networkService.get(this.MODULE_GET_URL + "teachersGet", true).then((response: any) => {
+        this.networkService.post(this.MODULE_GET_URL + "teachersGet", filter, true).then((response: any) => {
             resolve(response);
         }, error => {
             reject(error);
@@ -71,7 +76,7 @@ export class AdminServiceService {
   createAdmin(admin: Admin) : Promise<Admin>{
     return new Promise((resolve, reject) => {
         admin.citizenship.cities = [];
-        this.networkService.post(this.MODULE_GET_URL + "adminSave", admin, true).then((response: any) => {
+        this.networkService.post(this.MODULE_GET_URL + "personSave", admin, true).then((response: any) => {
             resolve(response);
         }, error => {
             reject(error);
@@ -80,9 +85,10 @@ export class AdminServiceService {
     });
   }
 
-  getAllAdmins() : Promise<Admin[]>{
+  getAdmins(filter : Filter) : Promise<PersonsResponse>{
     return new Promise((resolve, reject) => {
-        this.networkService.get(this.MODULE_GET_URL + "personsGet/adm", true).then((response: any) => {
+      filter.profileCode = 'admin';
+        this.networkService.post(this.MODULE_GET_URL + "personsGet", filter, true).then((response: any) => {
             resolve(response);
         }, error => {
             reject(error);
