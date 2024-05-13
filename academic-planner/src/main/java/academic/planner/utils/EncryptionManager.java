@@ -1,4 +1,4 @@
-package academic.planner.utiles;
+package academic.planner.utils;
 
 import org.springframework.stereotype.Component;
 

@@ -3,8 +3,8 @@ package academic.planner.services;
 
 import academic.planner.entities.Promotion;
 import academic.planner.repositories.PromotionRepository;
-import academic.planner.utiles.AcademicPlannerException;
-import academic.planner.utiles.ErrorCode;
+import academic.planner.utils.AcademicPlannerException;
+import academic.planner.utils.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

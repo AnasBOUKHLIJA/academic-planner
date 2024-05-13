@@ -1,4 +1,4 @@
-package academic.planner.utiles;
+package academic.planner.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

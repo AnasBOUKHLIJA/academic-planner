@@ -1651,13 +1651,16 @@ INSERT INTO city(COUNTRY_ID, code, NAME, RANK)
 VALUES((SELECT id FROM country WHERE code = 'MA'), N'858', N'ASSAKI', 0);
 
 
+update profile set code = 'student' where code = 'etu';
+update profile set code = 'teacher' where code = 'ro';
+update profile set code = 'admin' where code = 'adm';
 
 INSERT INTO profile(code, name)
-VALUES	('etu', 'etudiant');
+VALUES	('student', 'etudiant');
 INSERT INTO profile(code, name)
-VALUES	('pro', 'professeur');
+VALUES	('teacher', 'professeur');
 INSERT INTO profile(code, name)
-VALUES	('adm', 'admin');
+VALUES	('admin', 'admin');
 
 INSERT INTO legal_id_type(code, name)
 VALUES	('C', 'CIN');

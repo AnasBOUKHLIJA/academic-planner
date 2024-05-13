@@ -1,10 +1,14 @@
 package academic.planner.services;
 
 import academic.planner.entities.Person;
+import academic.planner.msg.Filter;
 import academic.planner.repositories.PersonRepository;
-import academic.planner.utiles.AcademicPlannerException;
-import academic.planner.utiles.ErrorCode;
+import academic.planner.utils.AcademicPlannerException;
+import academic.planner.utils.ErrorCode;
+import academic.planner.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,18 +18,21 @@ import java.util.Optional;
 @Service
 public class PersonService {
     protected final PersonRepository personRepository;
+    protected final ObjectUtils objectUtils;
 
     @Autowired
-    public PersonService(PersonRepository personRepository) {
+    public PersonService(PersonRepository personRepository, ObjectUtils objectUtils) {
         this.personRepository = personRepository;
-    }
-
-    public List<Person> getAllByProfileCode(String profileCode) {
-        return personRepository.findByProfileCode(profileCode);
+        this.objectUtils = objectUtils;
     }
 
     public List<Person> getAll() {
         return personRepository.findAll();
+    }
+
+    public Page<Person> getPersons(Filter filter) {
+        Pageable pageable   = objectUtils.constructPageable(filter);
+        return personRepository.findByFilter(filter.getUsername(), filter.getFirstName(), filter.getLastName(), filter.getLegalIdNumber(), filter.getProfileCode(), pageable);
     }
 
     public Person getById(Long id) {
@@ -35,6 +42,9 @@ public class PersonService {
     }
 
     public Person save(Person person) {
+        String login = generateUsername(person.getFirstName(), person.getLastName());
+        person.setPassword(login);
+        person.setUsername(login);
         return personRepository.save(person);
     }
 
@@ -46,8 +56,8 @@ public class PersonService {
         return personsList;
     }
 
-    public void delete(Person person) {
-        personRepository.delete(person);
+    public void delete(Long id) {
+        personRepository.delete(getById(id));
     }
 
     public String generateUsername(String firstName, String lastName){

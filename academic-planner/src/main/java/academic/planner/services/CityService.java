@@ -1,10 +1,9 @@
 package academic.planner.services;
 
 import academic.planner.entities.City;
-import academic.planner.entities.Country;
 import academic.planner.repositories.CityRepository;
-import academic.planner.utiles.AcademicPlannerException;
-import academic.planner.utiles.ErrorCode;
+import academic.planner.utils.AcademicPlannerException;
+import academic.planner.utils.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

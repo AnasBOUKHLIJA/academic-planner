@@ -1,8 +1,10 @@
 package academic.planner.controllers;
 
 import academic.planner.entities.*;
+import academic.planner.msg.Filter;
 import academic.planner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -343,11 +345,11 @@ public class AdminController {
         return new ResponseEntity<>(studentService.save(students), HttpStatus.OK);
     }
 
-    @GetMapping(
+    @PostMapping(
             value = "/studentsGet",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Student>> studentsGet() {
-        return new ResponseEntity<>(studentService.getAll(), HttpStatus.OK);
+    public ResponseEntity<Page<Student>> studentsGet(@RequestBody Filter filter) {
+        return new ResponseEntity<>(studentService.getStudents(filter), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/studentDelete/{id}")
@@ -372,11 +374,11 @@ public class AdminController {
         return new ResponseEntity<>(teacherService.save(teachers), HttpStatus.OK);
     }
 
-    @GetMapping(
+    @PostMapping(
             value = "/teachersGet",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Teacher>> teachersGet() {
-        return new ResponseEntity<>(teacherService.getAll(), HttpStatus.OK);
+    public ResponseEntity<Page<Teacher>> teachersGet(@RequestBody Filter filter) {
+        return new ResponseEntity<>(teacherService.getTeachers(filter), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/teacherDelete/{id}")
@@ -385,11 +387,34 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(
-            value = "/personsGet/{profileCode}",
+    @PostMapping(
+            value = "/personsGet",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Person>> personsGet(@PathVariable String profileCode) {
-        return new ResponseEntity<>(personService.getAllByProfileCode(profileCode), HttpStatus.OK);
+    public ResponseEntity<Page<Person>> personsGet(@RequestBody Filter filter) {
+        return new ResponseEntity<>(personService.getPersons(filter), HttpStatus.OK);
+    }
+
+    @PostMapping(
+            value = "/personSave",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Person> personSave(@RequestBody Person person) {
+        return new ResponseEntity<>(personService.save(person), HttpStatus.OK);
+    }
+
+    @PostMapping(
+            value = "/personsSave",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Person>> personsSave(@RequestBody List<Person> persons) {
+        return new ResponseEntity<>(personService.save(persons), HttpStatus.OK);
+    }
+
+
+    @DeleteMapping(value = "/personDelete/{id}")
+    public ResponseEntity personDelete(@PathVariable Long id) {
+        personService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /*
