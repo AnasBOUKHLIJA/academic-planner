@@ -84,7 +84,49 @@ export class NetworkServiceService {
           } else {
             resolve(response);
           }
-          
+
+        },
+        error: (error) => {
+          if (toBeLoaded) this.spinner.hide();
+          let errorMessage = error.error.message ? error.error.message : "Something went wrong. Please try again";
+          this.presentAlert('Oops!', errorMessage);
+          reject(error);
+        }
+      });
+    });
+  }
+
+  public delete(module: string, toBeLoaded: boolean): Promise<any> {
+    if (toBeLoaded) this.spinner.show();
+    const endPointUrL = this.configuration.configuration.serverUrl + module;
+
+    let httpHeaders: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+    });
+    let httpOptions = {
+      headers: httpHeaders,
+      params: undefined,
+      reportProgress: false,
+      withCredentials: true
+    }
+
+    return new Promise((resolve, reject) => {
+      this.http.delete(endPointUrL, httpOptions).subscribe({
+        next: (response: any) => {
+          this.spinner.hide();
+          if (response?.response?.code) {
+            if (response.response.code === ServerCode.ACCEPTED) {
+              resolve(response);
+            } else {
+              this.presentAlert('Oops!', response.error.message);
+              reject(response.error.message);
+            }
+          } else {
+            resolve(response);
+          }
+
         },
         error: (error) => {
           if (toBeLoaded) this.spinner.hide();

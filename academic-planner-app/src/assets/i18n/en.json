@@ -117,5 +117,11 @@
     "teacherLabel": "Teacher",
     "selectTeacherPlaceholder": "Select the teacher",
     "degreeLabel": "Degree",
-    "selectDegreePlaceholder": "Select the degree"
+    "selectDegreePlaceholder": "Select the degree",
+    "classRooms": "Classrooms",
+    "reload_classRooms": "Reload classrooms",
+    "add_new_classRoom": "Add a new classroom",
+    "classroomRegistrationTitle": "Classroom Registration",
+    "classroomRegistrationDescription": "Register detailed information of the classroom",
+    "actionsLabel": "Actions"
 }

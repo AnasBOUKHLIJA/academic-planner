@@ -25,6 +25,9 @@ public class ClassRoomService {
         return classRoomRepository.findAll();
     }
 
+    public List<ClassRoom> getByEstablishmentCode(String establishmentCode) {
+        return classRoomRepository.findByEstablishmentCode(establishmentCode);
+    }
     public ClassRoom getById(Long id) {
         Optional<ClassRoom> optionalClassRoom = classRoomRepository.findById(id);
         if(! optionalClassRoom.isPresent()) throw new AcademicPlannerException(ErrorCode.classRoom_not_found, "ClassRoom not found with id => " + id);
