@@ -474,7 +474,11 @@ app-spinner {
     // --padding-bottom: 5px;
     --inner-padding-end: 0;
     width: 100%;
-    
+
+    &::part(native) {
+      background: var(--white-color) !important;
+    }
+
     ion-input,
     ion-select,
     ion-textarea {
