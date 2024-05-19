@@ -34,7 +34,9 @@ export class AppComponent implements OnInit {
     this.global = this.utilsService.globalGet();
 
     this.securityDTO = this.securityService.getSecurityInfo();
-    if (! this.securityDTO) {
+    if (this.securityDTO) {
+      this.router.navigateByUrl('/');
+    } else {
       this.router.navigateByUrl('/login');
     }
 

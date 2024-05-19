@@ -2,10 +2,9 @@ import { Degree } from "./Degree";
 import { Department } from "./Department";
 
 export class AcademicProgram {
-    id:number;
-    code:string;   
-    name:string ;
-    description: string;
+    id:Number;
+    code:String;   
+    name:String ;
     department:Department ;
     degree :Degree;
 }

@@ -7,10 +7,6 @@ import { UsersManagementComponent } from './users-management/users-management.co
 import { SchedulesManagementComponent } from './schedules-management/schedules-management.component';
 import { AbsencesManagementComponent } from './absences-management/absences-management.component';
 import { LoginComponent } from './login/login.component';
-import { EstablishmentManagementComponent } from './establishment-management/establishment-management.component';
-import { DepartmentManagementComponent } from './department-management/department-management.component';
-import { AcademicProgramManagementComponent } from './academic-program-management/academic-program-management.component';
-import { CourseManagementComponent } from './course-management/course-management.component';
 
 
 const routes: Routes = [
@@ -29,38 +25,10 @@ const routes: Routes = [
     }
   },
   {
-    path: 'university', component: UniversityManagementComponent,
+    path: 'university-management', component: UniversityManagementComponent,
     data: {
-      title: "Université",
+      title: "Gestion de l'Université",
       description: "Gérez efficacement les programmes académiques, les cours, le corps professoral et les étudiants de votre université avec le module de gestion de l'université du planificateur académique."
-    }
-  },
-  {
-    path: 'establishment/:code', component: EstablishmentManagementComponent,
-    data: {
-      title: "",
-      description: ""
-    }
-  },
-  {
-    path: 'department/:code', component: DepartmentManagementComponent,
-    data: {
-      title: "",
-      description: ""
-    }
-  },
-  {
-    path: 'academic-program/:code', component: AcademicProgramManagementComponent,
-    data: {
-      title: "",
-      description: ""
-    }
-  },
-  {
-    path: 'course/:code', component: CourseManagementComponent,
-    data: {
-      title: "",
-      description: ""
     }
   },
   {
@@ -71,16 +39,16 @@ const routes: Routes = [
     }
   },
   {
-    path: 'schedules', component: SchedulesManagementComponent,
+    path: 'schedules-management', component: SchedulesManagementComponent,
     data: {
-      title: "Emplois du Temps",
+      title: "Gestion des Emplois du Temps",
       description: "Gérez les emplois du temps des cours, des examens et d'autres activités académiques avec efficacité à l'aide du module de gestion des emplois du temps du planificateur académique."
     }
   },
   {
-    path: 'absences', component: AbsencesManagementComponent,
+    path: 'absences-management', component: AbsencesManagementComponent,
     data: {
-      title: "Absences",
+      title: "Gestion des Absences",
       description: "Gérez les absences des étudiants et du personnel académique de manière organisée et efficace grâce au module de gestion des absences du planificateur académique."
     }
   },

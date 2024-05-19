@@ -381,13 +381,6 @@ public class AdminController {
         return new ResponseEntity<>(teacherService.getTeachers(filter), HttpStatus.OK);
     }
 
-    @PostMapping(
-            value = "/teachersDepartmentGet/{departmentCode}",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Teacher>> teachersDepartmentGet(@PathVariable String departmentCode) {
-        return new ResponseEntity<>(teacherService.getTeachersByDepartmentCode(departmentCode), HttpStatus.OK);
-    }
-
     @DeleteMapping(value = "/teacherDelete/{id}")
     public ResponseEntity teacherDelete(@PathVariable Long id) {
         teacherService.delete(id);

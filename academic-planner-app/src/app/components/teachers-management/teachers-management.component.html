@@ -188,36 +188,28 @@
 
 
 <div class="table-container" *ngIf="teachersResponse && teachersResponse.content">
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>{{ 'firstNameLabel' | translate }}</th>
-                    <th>{{ 'lastNameLabel' | translate }}</th>
-                    <th>{{ 'usernameLabel' | translate }}</th>
-                    <th>{{ 'birthDateLabel' | translate }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let teacher of teachersResponse.content">
-                    <td>
-                        <img alt="" [src]="teacher.thumbnail" />
-                    </td>
-                    <td>{{ teacher.firstName }}</td>
-                    <td>{{ teacher.lastName }}</td>
-                    <td>{{ teacher.username }}</td>
-                    <td>{{ teacher.birthDate }}</td>
-                    <td>
-                        <ion-button color="primary" fill="clear"> 
-                            {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon name="arrow-forward-outline"></ion-icon>
-                        </ion-button>
-                    </td>
-                    
-                </tr>
-            </tbody>
-        </table>
+    <div class="table-row header-row">
+        <div></div>
+        <div>{{ 'firstNameLabel' | translate }}</div>
+        <div>{{ 'lastNameLabel' | translate }}</div>
+        <div>{{ 'usernameLabel' | translate }}</div>
+        <div>{{ 'birthDateLabel' | translate }}</div>
+        <div></div>
+    </div>
+    <div class="table-row"  *ngFor="let teacher of teachersResponse.content">
+        <div>
+            <ion-avatar aria-hidden="true" slot="start">
+                <img alt="" [src]="teacher.thumbnail" />
+            </ion-avatar>
+        </div>
+        <div>{{ teacher.firstName }}</div>
+        <div>{{ teacher.lastName }}</div>
+        <div>{{ teacher.username }}</div>
+        <div>{{ teacher.birthDate | customDate }}</div>
+        <div>
+            <ion-button color="primary" fill="clear"> {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon
+                    name="arrow-forward-outline"></ion-icon></ion-button>
+        </div>
     </div>
 
     <div class="paggination">
