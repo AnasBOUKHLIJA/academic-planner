@@ -12,6 +12,7 @@ import { AcademicProgram } from '../models/AcademicProgram';
 import { Degree } from '../models/Degree';
 import { Course } from '../models/Course';
 import { Semester } from '../models/Semester';
+import { ClassRoom } from '../models/ClassRoom';
 
 @Injectable({
   providedIn: 'root'
@@ -245,6 +246,17 @@ export class KernelServiceService {
   courseByCodeGet(code : string): Promise<Course>{
     return new Promise((resolve, reject) => {
       this.networkService.get(this.MODULE_GET_URL + "courseByCodeGet/" + code , false).then((response: any) => {
+          resolve(response);
+      }, error => {
+          reject(error);
+      }
+      );
+    });
+  }
+
+  classRoomsByEstablishmentCodeGet(establishmentCode : string): Promise<ClassRoom[]>{
+    return new Promise((resolve, reject) => {
+      this.networkService.get(this.MODULE_GET_URL + "classRoomsGet/" + establishmentCode , false).then((response: any) => {
           resolve(response);
       }, error => {
           reject(error);

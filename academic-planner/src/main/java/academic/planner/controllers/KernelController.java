@@ -161,4 +161,11 @@ public class KernelController {
         return new ResponseEntity<>(courseService.getByAcademicProgramCode(academicProgramCode), HttpStatus.OK);
     }
 
+    @GetMapping(
+            value = "/classRoomsGet/{establishmentCode}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ClassRoom>> classRoomsGet(@PathVariable String establishmentCode) {
+        return new ResponseEntity<>(classRoomService.getByEstablishmentCode(establishmentCode), HttpStatus.OK);
+    }
+
 }

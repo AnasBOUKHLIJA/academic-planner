@@ -117,6 +117,11 @@
     "teacherLabel": "Enseignant",
     "selectTeacherPlaceholder": "Sélectionnez l'enseignant",
     "degreeLabel": "Diplôme",
-    "selectDegreePlaceholder": "Sélectionnez le diplôme"
-    
+    "selectDegreePlaceholder": "Sélectionnez le diplôme",
+    "classRooms" : "Salles de classe",
+    "reload_classRooms" : "Recharger les salles de classe",
+    "add_new_classRoom" : "Ajouter une nouvelle salle de classe",
+    "classroomRegistrationTitle" : "Enregistrement de la salle de classe",
+    "classroomRegistrationDescription" : "Enregistrez les informations détaillées de la salle de classe",
+    "actionsLabel" : "Actions"
 }

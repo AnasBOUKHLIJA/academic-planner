@@ -1,6 +1,7 @@
 package academic.planner.services;
 
 import academic.planner.entities.ClassRoom;
+import academic.planner.entities.Department;
 import academic.planner.repositories.ClassRoomRepository;
 import academic.planner.utils.AcademicPlannerException;
 import academic.planner.utils.ErrorCode;
@@ -25,6 +26,9 @@ public class ClassRoomService {
         return classRoomRepository.findAll();
     }
 
+    public List<ClassRoom> getByEstablishmentCode(String establishmentCode) {
+        return classRoomRepository.findByEstablishmentCode(establishmentCode);
+    }
     public ClassRoom getById(Long id) {
         Optional<ClassRoom> optionalClassRoom = classRoomRepository.findById(id);
         if(! optionalClassRoom.isPresent()) throw new AcademicPlannerException(ErrorCode.classRoom_not_found, "ClassRoom not found with id => " + id);

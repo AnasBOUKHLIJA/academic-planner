@@ -16,6 +16,7 @@ import { University } from '../models/University';
 import { Department } from '../models/Department';
 import { AcademicProgram } from '../models/AcademicProgram';
 import { Course } from '../models/Course';
+import { ClassRoom } from '../models/ClassRoom';
 
 @Injectable({
   providedIn: 'root'
@@ -168,4 +169,27 @@ export class AdminServiceService {
         );
     });
   }
+  
+  saveClassRoom(classRoom: ClassRoom) : Promise<ClassRoom>{
+    return new Promise( async (resolve, reject) => {
+      this.networkService.post(this.MODULE_GET_URL + "classRoomSave", classRoom, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  deleteClassRoom(classRoom: ClassRoom) : Promise<ClassRoom>{
+    return new Promise( async (resolve, reject) => {
+      this.networkService.delete(this.MODULE_GET_URL + "classRoomDelete/" + classRoom.id, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+  
 }
