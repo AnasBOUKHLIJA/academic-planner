@@ -18,7 +18,7 @@
                     <ion-icon name="eye-off-outline"></ion-icon> &nbsp; {{ 'hideFilterButtonLabel' | translate }}
                 </ng-container>
             </ion-button>
-
+            
             &nbsp;
             <ion-button fill="clear" (click)="toggleForm()">
                 <ng-container *ngIf="!showForm">
@@ -67,26 +67,20 @@
             </ion-item>
         </div>
 
+        <div class="form-row">
+            <ion-item lines="full">
+                <ion-label position="stacked">{{ 'legalIdNumberLabel' | translate }}</ion-label>
+                <ion-input formControlName="legalIdNumber"
+                    placeholder="{{ 'enterLegalIdNumberPlaceholder' | translate }}" type="text"
+                    ngDefaultControl></ion-input>
+            </ion-item>
+        </div>
+
         <ion-item lines="full">
             <ion-label>{{ 'genderLabel' | translate }}</ion-label>
             <ion-select formControlName="gender" placeholder="{{ 'selectGenderPlaceholder' | translate }}">
                 <ion-select-option value="true">{{ 'maleOption' | translate }}</ion-select-option>
                 <ion-select-option value="false">{{ 'femaleOption' | translate }}</ion-select-option>
-            </ion-select>
-        </ion-item>
-
-        <ion-item lines="full">
-            <ion-select formControlName="establishment" label="{{ 'establishmentLabel' | translate }}"
-                placeholder="{{ 'selectEstablishmentPlaceholder' | translate }}">
-                <ion-select-option *ngFor="let establishment of establishments" [value]="establishment">{{ establishment.name | translate }}</ion-select-option>
-            </ion-select>
-        </ion-item>
-
-        <ion-item lines="full">
-            <ion-select formControlName="department" label="{{ 'departmentLabel' | translate }}"
-                placeholder="{{ 'selectDepartmentPlaceholder' | translate }}">
-                <ion-select-option *ngFor="let department of departments" [value]="department">{{ department.name |
-                    translate }}</ion-select-option>
             </ion-select>
         </ion-item>
 
@@ -98,14 +92,13 @@
             </ion-select>
         </ion-item>
 
-        <div class="form-row">
-            <ion-item lines="full">
-                <ion-label position="stacked">{{ 'legalIdNumberLabel' | translate }}</ion-label>
-                <ion-input formControlName="legalIdNumber"
-                    placeholder="{{ 'enterLegalIdNumberPlaceholder' | translate }}" type="text"
-                    ngDefaultControl></ion-input>
-            </ion-item>
-        </div> 
+        <!-- <ion-item lines="full">
+            <ion-label>{{ 'profileLabel' | translate }}</ion-label>
+            <ion-select formControlName="profile" placeholder="{{ 'selectProfilePlaceholder' | translate }}">
+                <ion-select-option *ngFor="let profile of profiles" [value]="profile">{{ profile.name | translate
+                    }}</ion-select-option>
+            </ion-select>
+        </ion-item> -->
 
         <ion-item lines="full">
             <ion-label>{{ 'citizenshipLabel' | translate }}</ion-label>
@@ -167,8 +160,7 @@
             </ion-item>
             <ion-item lines="full">
                 <ion-label position="stacked">{{ 'legalIdNumberLabel' | translate }}</ion-label>
-                <ion-input formControlName="legalIdNumber"
-                    placeholder="{{ 'enterLegalIdNumberPlaceholder' | translate }}" type="text"
+                <ion-input formControlName="legalIdNumber" placeholder="{{ 'enterLegalIdNumberPlaceholder' | translate }}" type="text"
                     ngDefaultControl></ion-input>
             </ion-item>
         </div>
@@ -180,12 +172,12 @@
                     &nbsp; {{ 'cancelButtonLabel' | translate }}
                 </ion-button>
                 &nbsp;
-                <ion-button fill="outline" (click)="clearFilter()">
+                <ion-button fill="outline"  (click)="clearFilter()">
                     <ion-icon name="sync-circle-outline" slot="start"></ion-icon>
                     &nbsp; {{ 'clearFilter' | translate }}
                 </ion-button>
             </div>
-
+            
             <ion-button type="submit">
                 <ion-icon name="send-outline" slot="end"></ion-icon>
                 {{ 'submitFilterLabel' | translate }} &nbsp;
@@ -195,45 +187,36 @@
 </div>
 
 
-<div class="table-container" *ngIf="teachersResponse && teachersResponse.content && teachersResponse.content.length !== 0">
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>{{ 'firstNameLabel' | translate }}</th>
-                    <th>{{ 'lastNameLabel' | translate }}</th>
-                    <th>{{ 'usernameLabel' | translate }}</th>
-                    <th>{{ 'birthDateLabel' | translate }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let teacher of teachersResponse.content">
-                    <td>
-                        <img alt="" [src]="teacher.thumbnail" />
-                    </td>
-                    <td>{{ teacher.firstName }}</td>
-                    <td>{{ teacher.lastName }}</td>
-                    <td>{{ teacher.username }}</td>
-                    <td>{{ teacher.birthDate }}</td>
-                    <td>
-                        <ion-button color="primary" fill="clear">
-                            {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon
-                                name="arrow-forward-outline"></ion-icon>
-                        </ion-button>
-                    </td>
-
-                </tr>
-            </tbody>
-        </table>
+<div class="table-container" *ngIf="teachersResponse && teachersResponse.content">
+    <div class="table-row header-row">
+        <div></div>
+        <div>{{ 'firstNameLabel' | translate }}</div>
+        <div>{{ 'lastNameLabel' | translate }}</div>
+        <div>{{ 'usernameLabel' | translate }}</div>
+        <div>{{ 'birthDateLabel' | translate }}</div>
+        <div></div>
+    </div>
+    <div class="table-row"  *ngFor="let teacher of teachersResponse.content">
+        <div>
+            <ion-avatar aria-hidden="true" slot="start">
+                <img alt="" [src]="teacher.thumbnail" />
+            </ion-avatar>
+        </div>
+        <div>{{ teacher.firstName }}</div>
+        <div>{{ teacher.lastName }}</div>
+        <div>{{ teacher.username }}</div>
+        <div>{{ teacher.birthDate | customDate }}</div>
+        <div>
+            <ion-button color="primary" fill="clear"> {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon
+                    name="arrow-forward-outline"></ion-icon></ion-button>
+        </div>
     </div>
 
     <div class="paggination">
-        <ion-button fill="solid" (click)="paginate('prev')"> <ion-icon name="chevron-back-outline"></ion-icon>
-        </ion-button>
+        <ion-button fill="solid" (click)="paginate('prev')"> <ion-icon name="chevron-back-outline"></ion-icon> </ion-button>
         <p>Page {{ teachersResponse.number+1 }} of {{ teachersResponse.totalPages }}</p>
-        <ion-button fill="solid" (click)="paginate('next')"> <ion-icon name="chevron-forward-outline"></ion-icon>
-        </ion-button>
+        <ion-button fill="solid" (click)="paginate('next')"> <ion-icon name="chevron-forward-outline"></ion-icon> </ion-button>
     </div>
 </div>
+
+

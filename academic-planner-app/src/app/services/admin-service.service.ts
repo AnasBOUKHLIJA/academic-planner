@@ -78,17 +78,6 @@ export class AdminServiceService {
     });
   }
 
-  getTeachersDepartment(departmentCode : string) : Promise<Teacher[]>{
-    return new Promise((resolve, reject) => {
-        this.networkService.post(this.MODULE_GET_URL + "teachersDepartmentGet/" + departmentCode, filter, true).then((response: any) => {
-            resolve(response);
-        }, error => {
-            reject(error);
-        }
-        );
-    });
-  }
-
   createAdmin(admin: Admin) : Promise<Admin>{
     return new Promise((resolve, reject) => {
         admin.citizenship.cities = [];
@@ -169,7 +158,7 @@ export class AdminServiceService {
         );
     });
   }
-
+  
   saveClassRoom(classRoom: ClassRoom) : Promise<ClassRoom>{
     return new Promise( async (resolve, reject) => {
       this.networkService.post(this.MODULE_GET_URL + "classRoomSave", classRoom, true).then((response: any) => {
@@ -191,5 +180,5 @@ export class AdminServiceService {
         );
     });
   }
-
+  
 }

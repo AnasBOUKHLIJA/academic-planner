@@ -32,15 +32,10 @@ import { StudentsManagementComponent } from './components/students-management/st
 import { TeachersManagementComponent } from './components/teachers-management/teachers-management.component';
 import { AdminsManagementComponent } from './components/admins-management/admins-management.component';
 import { UserPopoverComponent } from './base/user-popover/user-popover.component';
+import { CourseModalComponent } from './components/course-modal/course-modal.component';
 import { LoginComponent } from './login/login.component';
 import { CustomDatePipe } from './pipes/custom-date-pipe.pipe';
-import { CourseModalComponent } from './components/course-modal/course-modal.component';
-import { EstablishmentManagementComponent } from './establishment-management/establishment-management.component';
-import { DepartmentManagementComponent } from './department-management/department-management.component';
-import { AcademicProgramModalComponent } from './components/academic-program-modal/academic-program-modal.component';
-import { AcademicProgramManagementComponent } from './academic-program-management/academic-program-management.component';
-import { CourseManagementComponent } from './course-management/course-management.component';
-import { ClassRoomModalComponent } from './components/class-room-modal/class-room-modal.component';
+
 
 export function ConfigLoader(configurationService: ConfigurationService) {
   return () => configurationService.load(environment.configFile);
@@ -72,24 +67,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     TeachersManagementComponent,
     AdminsManagementComponent,
     UserPopoverComponent,
+    CourseModalComponent,
     LoginComponent,
     CustomDatePipe,
-    CourseModalComponent,
-    EstablishmentManagementComponent,
-    DepartmentManagementComponent,
-    AcademicProgramModalComponent,
-    AcademicProgramManagementComponent,
-    CourseManagementComponent,
-    ClassRoomModalComponent
-  ],
+    ],
   imports: [
-    BrowserModule,
+    BrowserModule, 
     BrowserAnimationsModule,
     IonicModule.forRoot({
       mode: 'md',
-    }),
-    AppRoutingModule,
-    ReactiveFormsModule,
+    }), 
+    AppRoutingModule, 
+    ReactiveFormsModule, 
     FormsModule,
     CommonModule,
     HttpClientModule,
@@ -111,7 +100,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     useFactory: ConfigLoader,
     deps: [ConfigurationService],
     multi: true
-    },
+    }, 
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

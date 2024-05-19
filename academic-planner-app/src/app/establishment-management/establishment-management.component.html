@@ -5,7 +5,7 @@
       <ion-icon name="create-outline"></ion-icon>
     </span>
     <img *ngIf="establishment.thumbnail" [alt]="establishment.name" [src]="establishment.thumbnail" />
-    <h1 *ngIf="establishment.name">{{establishment.name}}
+    <h1 *ngIf="establishment.name">{{establishment.name}} 
      <ng-container *ngIf="establishment.city && establishment.city.name">
       (<ion-icon name="location-outline"></ion-icon> {{establishment.city.name}})
     </ng-container>
@@ -13,27 +13,14 @@
     <p *ngIf="establishment.description">{{establishment.description}}</p>
   </div>
 
-  <!-- <section class="page-shaped-section-conatiner">
-    <div class="section-header">
-      <h1 class="title">{{ 'course' | translate}}</h1>
-    </div>
 
-    <div class="section-body">
-      <div class="section-buttons">
-        <ion-button fill="solid"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_course' |
-          translate}}</ion-button>
-        <ion-button fill="outline" (click)="openCourseModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{
-          'add_new_Course' | translate}}</ion-button>
-      </div>
-    </div>
-  </section> -->
 
   <section class="page-shaped-section-conatiner">
 
     <div class="section-header">
       <h1 class="title">{{ 'departments' | translate}}</h1>
     </div>
-
+  
     <div class="section-body">
       <div class="section-buttons">
         <ion-button fill="solid"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_departments' |
@@ -41,7 +28,7 @@
         <ion-button fill="outline" (click)="openAddDepartmentModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{
           'add_new_department' | translate}}</ion-button>
       </div>
-
+  
       <div class="grid-container">
         <div class="card" *ngFor="let department of departments">
           <span class="float-card-button" (click)="openDepartmentModal(department)">
@@ -99,17 +86,17 @@
                   <td>{{ classRoom.name }}</td>
                   <td>{{ classRoom.establishment.name }}</td>
                   <td>
-                      <ion-button color="danger" fill="clear" (click)="deleteClassRoom(classRoom)">
-                        <ion-icon name="trash-outline"></ion-icon>
+                      <ion-button color="danger" fill="clear" (click)="deleteClassRoom(classRoom)"> 
+                        <ion-icon name="trash-outline"></ion-icon>           
                       </ion-button>
                   </td>
-
+                  
               </tr>
           </tbody>
       </table>
   </div>
   </div>
-
+  
 </section>
 
 
