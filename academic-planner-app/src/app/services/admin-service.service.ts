@@ -12,6 +12,10 @@ import { filter } from 'rxjs/operators';
 import { PersonsResponse } from '../models/msg/PersonsResponse';
 import { TeachersResponse } from '../models/msg/TeachersResponse';
 import { StudentsResponse } from '../models/msg/StudentsResponse';
+import { University } from '../models/University';
+import { Department } from '../models/Department';
+import { AcademicProgram } from '../models/AcademicProgram';
+import { Course } from '../models/Course';
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +77,17 @@ export class AdminServiceService {
     });
   }
 
+  getTeachersDepartment(departmentCode : string) : Promise<Teacher[]>{
+    return new Promise((resolve, reject) => {
+        this.networkService.post(this.MODULE_GET_URL + "teachersDepartmentGet/" + departmentCode, filter, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
   createAdmin(admin: Admin) : Promise<Admin>{
     return new Promise((resolve, reject) => {
         admin.citizenship.cities = [];
@@ -97,9 +112,20 @@ export class AdminServiceService {
     });
   }
 
-  createEstablishment(establishment: Establishment) : Promise<Establishment>{
+  saveUniversity(university: University) : Promise<University>{
+    return new Promise((resolve, reject) => {
+        this.networkService.post(this.MODULE_GET_URL + "universitySave", university, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  saveEstablishment(establishment: Establishment) : Promise<Establishment>{
     return new Promise( async (resolve, reject) => {
-      establishment.rank = 1; //a changer aprés
+      establishment.rank = 1;
       this.networkService.post(this.MODULE_GET_URL + "establishmentSave", establishment, true).then((response: any) => {
             resolve(response);
         }, error => {
@@ -109,4 +135,37 @@ export class AdminServiceService {
     });
   }
 
+  saveDepartment(department: Department) : Promise<Department>{
+    return new Promise( async (resolve, reject) => {
+      department.rank = 1;
+      this.networkService.post(this.MODULE_GET_URL + "departmentSave", department, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  saveAcademicProgram(academicProgram: AcademicProgram) : Promise<AcademicProgram>{
+    return new Promise( async (resolve, reject) => {
+      this.networkService.post(this.MODULE_GET_URL + "academicProgramSave", academicProgram, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  saveCourse(course: Course) : Promise<Course>{
+    return new Promise( async (resolve, reject) => {
+      this.networkService.post(this.MODULE_GET_URL + "courseSave", course, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
 }

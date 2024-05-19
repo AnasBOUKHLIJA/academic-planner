@@ -16,6 +16,10 @@ public class Department {
     @Column(name = "name", nullable=false)
     private String name;
 
+    @Lob
+    @Column(name = "description", nullable=false)
+    private String description;
+
     @Column(name = "rank", nullable=false)
     private Integer rank;
 
@@ -57,6 +61,14 @@ public class Department {
 
     public void setRank(Integer rank) {
         this.rank = rank;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Establishment getEstablishment() {

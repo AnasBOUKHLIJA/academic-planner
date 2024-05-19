@@ -203,15 +203,15 @@
 </div>
 
 
-<div class="table-container" *ngIf="studentsResponse && studentsResponse.content">
-    <div class="table-row header-row">
+<div class="table-container" *ngIf="studentsResponse && studentsResponse.content && studentsResponse.content.length !== 0">
+    <!-- <div class="table-row header-row">
         <div></div>
         <div>{{ 'firstNameLabel' | translate }}</div>
         <div>{{ 'lastNameLabel' | translate }}</div>
         <div>{{ 'usernameLabel' | translate }}</div>
         <div>{{ 'apogeeCodeLabel' | translate }}</div>
         <div>{{ 'studentNationalCodeLabel' | translate }}</div>
-        <!-- <div>{{ 'birthDateLabel' | translate }}</div> -->
+        <div>{{ 'birthDateLabel' | translate }}</div>
         <div></div>
     </div>
     <div class="table-row"  *ngFor="let student of studentsResponse.content">
@@ -225,11 +225,46 @@
         <div>{{ student.username }}</div>
         <div>{{ student.apogeeCode }}</div>
         <div>{{ student.studentNationalCode }}</div>
-        <!-- <div>{{ student.birthDate }}</div> -->
+        <div>{{ student.birthDate }}</div>
         <div>
             <ion-button color="primary" fill="clear"> {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon
                     name="arrow-forward-outline"></ion-icon></ion-button>
         </div>
+    </div> -->
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>{{ 'firstNameLabel' | translate }}</th>
+                    <th>{{ 'lastNameLabel' | translate }}</th>
+                    <th>{{ 'usernameLabel' | translate }}</th>
+                    <th>{{ 'apogeeCodeLabel' | translate }}</th>
+                    <th>{{ 'studentNationalCodeLabel' | translate }}</th>
+                    <th>{{ 'birthDateLabel' | translate }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of studentsResponse.content">
+                    <td>
+                        <img alt="" [src]="student.thumbnail" />
+                    </td>
+                    <td>{{ student.firstName }}</td>
+                    <td>{{ student.lastName }}</td>
+                    <td>{{ student.username }}</td>
+                    <td>{{ student.apogeeCode }}</td>
+                    <td>{{ student.studentNationalCode }}</td>
+                    <td>{{ student.birthDate }}</td>
+                    <td>
+                        <ion-button color="primary" fill="clear"> {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon
+                                name="arrow-forward-outline"></ion-icon></ion-button>
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <div class="paggination">
@@ -239,5 +274,6 @@
         <!-- disabled="studentsResponse.last" -->
         <ion-button fill="solid" (click)="paginate('next')"> <ion-icon name="chevron-forward-outline"></ion-icon> </ion-button>
     </div>
+
 </div>
 

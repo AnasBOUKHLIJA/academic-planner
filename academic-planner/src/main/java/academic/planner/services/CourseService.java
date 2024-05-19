@@ -25,6 +25,13 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
+    public List<Course> getByAcademicProgramCode(String academicProgramCode) {
+        List<Course> courses = courseRepository.findByAcademicProgramCode(academicProgramCode);
+        for (Course course : courses) {
+            course.getTeacher().setCitizenship(null);
+        }
+        return courses;
+    }
     public Course getById(Long id) {
         Optional<Course> optionalCourse = courseRepository.findById(id);
         if(! optionalCourse.isPresent()) throw new AcademicPlannerException(ErrorCode.course_not_found, "Course not found with id => " + id);
@@ -34,7 +41,9 @@ public class CourseService {
     public Course getByCode(String code) {
         Optional<Course> optionalCourse = courseRepository.findByCode(code);
         if(! optionalCourse.isPresent()) throw new AcademicPlannerException(ErrorCode.course_not_found, "Course not found with code => " + code);
-        return optionalCourse.get();
+        Course course = optionalCourse.get();
+        course.getTeacher().setCitizenship(null);
+        return course;
     }
 
     public Course save(Course course) {
@@ -52,4 +61,5 @@ public class CourseService {
     public void delete(Long id) {
         courseRepository.delete(this.getById(id));
     }
+
 }

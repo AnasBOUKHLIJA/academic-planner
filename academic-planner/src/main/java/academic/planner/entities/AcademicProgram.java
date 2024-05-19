@@ -16,6 +16,10 @@ public class AcademicProgram {
     @Column(name = "name" ,nullable=false)
     private String name;
 
+    @Lob
+    @Column(name = "description", nullable=false)
+    private String description;
+
     @ManyToOne
     @JoinColumn(name="department_id", foreignKey=@ForeignKey(name="fk_academic_program_department"), nullable=false)
     public Department department;
@@ -54,6 +58,14 @@ public class AcademicProgram {
 
     public Department getDepartment() {
         return department;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setDepartment(Department department) {

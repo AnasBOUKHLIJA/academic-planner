@@ -5,6 +5,7 @@ import { City } from 'src/app/models/City';
 import { University } from 'src/app/models/University';
 import { KernelServiceService } from '../../services/kernel-service.service';
 import { Country } from 'src/app/models/Country';
+import { AdminServiceService } from 'src/app/services/admin-service.service';
 
 @Component({
   selector: 'app-university-modal',
@@ -23,6 +24,7 @@ export class UniversityModalComponent implements OnInit {
     private modalCtrl: ModalController,
     private formBuilder: FormBuilder,
     private kernelServiceService: KernelServiceService,
+    private adminServiceService: AdminServiceService,
   ) { }
 
   async ngOnInit() {
@@ -45,7 +47,9 @@ export class UniversityModalComponent implements OnInit {
   }
   async submitForm() {
     if (this.universityForm.valid) {
-      console.log(this.universityForm)
+      const university = await this.adminServiceService.saveUniversity(this.universityForm.value);
+      this.universityForm.reset();
+      this.modalCtrl.dismiss({ university : university });
     } else {
       console.log('Form is not valid');
     }

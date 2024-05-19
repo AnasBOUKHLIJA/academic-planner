@@ -40,6 +40,10 @@ public class TeacherService {
         return teacherRepository.findByFilter(filter.getUsername(), filter.getFirstName(), filter.getLastName(), filter.getLegalIdNumber(), pageable);
     }
 
+    public List<Teacher> getTeachersByDepartmentCode(String departmentCode) {
+        return teacherRepository.findByDepartmentCode(departmentCode);
+    }
+
     public Teacher getById(Long id) {
         Optional<Teacher> optionalTeacher = teacherRepository.findById(id);
         if(! optionalTeacher.isPresent()) throw new AcademicPlannerException(ErrorCode.teacher_not_found, "Teacher not found with id => " + id);
@@ -64,6 +68,5 @@ public class TeacherService {
     public void delete(Long id) {
         teacherRepository.delete(getById(id));
     }
-
 
 }

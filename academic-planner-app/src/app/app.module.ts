@@ -35,6 +35,11 @@ import { UserPopoverComponent } from './base/user-popover/user-popover.component
 import { LoginComponent } from './login/login.component';
 import { CustomDatePipe } from './pipes/custom-date-pipe.pipe';
 import { CourseModalComponent } from './components/course-modal/course-modal.component';
+import { EstablishmentManagementComponent } from './establishment-management/establishment-management.component';
+import { DepartmentManagementComponent } from './department-management/department-management.component';
+import { AcademicProgramModalComponent } from './components/academic-program-modal/academic-program-modal.component';
+import { AcademicProgramManagementComponent } from './academic-program-management/academic-program-management.component';
+import { CourseManagementComponent } from './course-management/course-management.component';
 
 export function ConfigLoader(configurationService: ConfigurationService) {
   return () => configurationService.load(environment.configFile);
@@ -68,7 +73,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserPopoverComponent,
     LoginComponent,
     CustomDatePipe,
-    CourseModalComponent
+    CourseModalComponent,
+    EstablishmentManagementComponent,
+    DepartmentManagementComponent,
+    AcademicProgramModalComponent,
+    AcademicProgramManagementComponent,
+    CourseManagementComponent,
   ],
   imports: [
     BrowserModule,

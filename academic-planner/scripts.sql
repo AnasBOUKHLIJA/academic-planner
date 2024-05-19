@@ -1670,3 +1670,39 @@ VALUES	('S', 'Carte de séjour');
 
 INSERT INTO UNIVERSITY(code, name, description, thumbnail, city_id)
 VALUES ('uit', 'Université Ibn Tofail', '', '', (SELECT id FROM city WHERE code = '330'));
+
+
+INSERT INTO DEGREE (code, name)
+VALUES ('ing', 'Diplôme Ingénieur d''État');
+
+INSERT INTO DEGREE (code, name)
+VALUES ('master-recherche', 'Master Recherche');
+
+INSERT INTO DEGREE (code, name)
+VALUES ('master-specialise', 'Master Spécialisé');
+
+INSERT INTO DEGREE (code, name)
+VALUES ('lf', 'Licence Fondamentale');
+
+INSERT INTO DEGREE (code, name)
+VALUES ('lp', 'Licence Professionnelle');
+
+
+
+insert into semester (RANK, CODE, NAME)
+values (1, 's1', 'semestre 1');
+
+insert into semester (RANK, CODE, NAME)
+values (1, 's2', 'semestre 2');
+
+insert into semester (RANK, CODE, NAME)
+values (1, 's3', 'semestre 3');
+
+insert into semester (RANK, CODE, NAME)
+values (1, 's4', 'semestre 4');
+
+insert into semester (RANK, CODE, NAME)
+values (1, 's5', 'semestre 5');
+
+insert into semester (RANK, CODE, NAME)
+values (1, 's6', 'semestre 6');

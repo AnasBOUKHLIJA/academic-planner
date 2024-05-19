@@ -16,14 +16,15 @@ public class Course {
     @Column(name = "title", nullable=false)
     private String title;
 
+    @Lob
     @Column(name = "description", nullable=false)
     private String description;
 
-    @Column(name = "thumbnail", nullable=true)
-    private String thumbnail;
-
     @Column(name = "credit_hours", nullable=false)
     private Integer creditHours;
+
+    @Column(name = "coefficient")
+    private Integer coefficient = 1;
 
     @Column(name = "hold", nullable=false)
     private Boolean hold = false;
@@ -84,14 +85,6 @@ public class Course {
         this.semester = semester;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
     public Integer getCreditHours() {
         return creditHours;
     }
@@ -102,6 +95,14 @@ public class Course {
 
     public Boolean getHold() {
         return hold;
+    }
+
+    public Integer getCoefficient() {
+        return coefficient;
+    }
+
+    public void setCoefficient(Integer coefficient) {
+        this.coefficient = coefficient;
     }
 
     public void setHold(Boolean hold) {

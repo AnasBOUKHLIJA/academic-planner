@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
@@ -24,4 +26,6 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
             @Param("legalIdNumber") String legalIdNumber,
             Pageable pageable
     );
+
+    List<Teacher> findByDepartmentCode(String departmentCode);
 }

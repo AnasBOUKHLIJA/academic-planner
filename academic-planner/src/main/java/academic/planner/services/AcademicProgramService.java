@@ -25,6 +25,9 @@ public class AcademicProgramService {
         return academicProgramRepository.findAll();
     }
 
+    public List<AcademicProgram> getByDepartmentCode(String departmentCode) {
+        return academicProgramRepository.findByDepartmentCode(departmentCode);
+    }
     public AcademicProgram getById(Long id) {
         Optional<AcademicProgram> optionalAcademicProgram = academicProgramRepository.findById(id);
         if(! optionalAcademicProgram.isPresent()) throw new AcademicPlannerException(ErrorCode.academic_program_not_found, "AcademicProgram not found with id => " + id);
@@ -52,4 +55,5 @@ public class AcademicProgramService {
     public void delete(Long id) {
         academicProgramRepository.delete(getById(id));
     }
+
 }

@@ -52,4 +52,5 @@ public class EstablishmentService {
     public void delete(Long id) {
         establishmentRepository.delete(getById(id));
     }
+
 }

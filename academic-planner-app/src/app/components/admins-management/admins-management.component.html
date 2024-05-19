@@ -190,28 +190,36 @@
 
 
 <div class="table-container" *ngIf="personsResponse && personsResponse.content">
-    <div class="table-row header-row">
-        <div></div>
-        <div>{{ 'firstNameLabel' | translate }}</div>
-        <div>{{ 'lastNameLabel' | translate }}</div>
-        <div>{{ 'usernameLabel' | translate }}</div>
-        <div>{{ 'birthDateLabel' | translate }}</div>
-        <div></div>
-    </div>
-    <div class="table-row"  *ngFor="let person of personsResponse.content">
-        <div>
-            <ion-avatar aria-hidden="true" slot="start">
-                <img alt="" [src]="person.thumbnail" />
-            </ion-avatar>
-        </div>
-        <div>{{ person.firstName }}</div>
-        <div>{{ person.lastName }}</div>
-        <div>{{ person.username }}</div>
-        <div>{{ person.birthDate | customDate: 'short' }}</div>
-        <div>
-            <ion-button color="primary" fill="clear"> {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon
-                    name="arrow-forward-outline"></ion-icon></ion-button>
-        </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>{{ 'firstNameLabel' | translate }}</th>
+                    <th>{{ 'lastNameLabel' | translate }}</th>
+                    <th>{{ 'usernameLabel' | translate }}</th>
+                    <th>{{ 'birthDateLabel' | translate }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let person of personsResponse.content">
+                    <td>
+                        <img alt="" [src]="person.thumbnail" />
+                    </td>
+                    <td>{{ person.firstName }}</td>
+                    <td>{{ person.lastName }}</td>
+                    <td>{{ person.username }}</td>
+                    <td>{{ person.birthDate }}</td>
+                    <td>
+                        <ion-button color="primary" fill="clear"> 
+                            {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon name="arrow-forward-outline"></ion-icon>
+                        </ion-button>
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <div class="paggination">

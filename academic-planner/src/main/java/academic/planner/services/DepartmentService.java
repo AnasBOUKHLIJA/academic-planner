@@ -25,6 +25,10 @@ public class DepartmentService {
         return departmentRepository.findAll();
     }
 
+    public List<Department> getByEstablishmentCode(String establishmentCode) {
+        return departmentRepository.findByEstablishmentCode(establishmentCode);
+    }
+
     public Department getById(Long id) {
         Optional<Department> optionalDepartment = departmentRepository.findById(id);
         if(! optionalDepartment.isPresent()) throw new AcademicPlannerException(ErrorCode.department_not_found, "department not found with id => " + id);
@@ -52,4 +56,5 @@ public class DepartmentService {
     public void delete(Long id) {
         departmentRepository.delete(getById(id));
     }
+
 }

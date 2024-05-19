@@ -24,14 +24,16 @@
   </ng-container>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="page-content">
-    <div *ngIf="title && introduction" class="introduction">
-      <h1>{{ title }}</h1>
-      <div class="gradient"></div>
-      <p>{{ introduction }}</p>
+<ion-content [fullscreen]="true" class="app-content">
+  <div class="app-content">
+    <div class="page-content">
+      <div *ngIf="title && introduction" class="introduction">
+        <h1>{{ title }}</h1>
+        <div class="gradient"></div>
+        <p>{{ introduction }}</p>
+      </div>
+      <ng-content></ng-content>
     </div>
-    <ng-content></ng-content>
   </div>
   <ion-footer>
     <ion-skeleton-text *ngIf="!university" [animated]="true"></ion-skeleton-text>

@@ -1,18 +1,13 @@
 package academic.planner.controllers;
 
-import academic.planner.entities.Country;
-import academic.planner.entities.LegalIdType;
-import academic.planner.entities.Profile;
-import academic.planner.entities.University;
+import academic.planner.entities.*;
 import academic.planner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -96,6 +91,74 @@ public class KernelController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Profile>> profilesGet() {
         return new ResponseEntity<>(profileService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/degreesGet",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Degree>> degreesGet() {
+        return new ResponseEntity<>(degreeService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/semestersGet",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Semester>> semestersGet() {
+        return new ResponseEntity<>(semesterService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/establishmentsGet",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Establishment>> establishmentSave() {
+        return new ResponseEntity<>(establishmentService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/establishmentByCodeGet/{code}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Establishment> establishmentByCodeGet(@PathVariable String code) {
+        return new ResponseEntity<>(establishmentService.getByCode(code), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/departmentByCodeGet/{code}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Department> departmentByCodeGet(@PathVariable String code) {
+        return new ResponseEntity<>(departmentService.getByCode(code), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/departmentsGet/{establishmentCode}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Department>> departmentsGet(@PathVariable String establishmentCode) {
+        return new ResponseEntity<>(departmentService.getByEstablishmentCode(establishmentCode), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/academicProgramByCodeGet/{code}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AcademicProgram> academicProgramByCodeGet(@PathVariable String code) {
+        return new ResponseEntity<>(academicProgramService.getByCode(code), HttpStatus.OK);
+    }
+    @GetMapping(
+            value = "/academicProgramsGet/{departmentCode}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<AcademicProgram>> academicProgramsGet(@PathVariable String departmentCode) {
+        return new ResponseEntity<>(academicProgramService.getByDepartmentCode(departmentCode), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/courseByCodeGet/{code}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Course> coursesByCodeGet(@PathVariable String code) {
+        return new ResponseEntity<>(courseService.getByCode(code), HttpStatus.OK);
+    }
+    @GetMapping(
+            value = "/coursesGet/{academicProgramCode}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Course>> coursesGet(@PathVariable String academicProgramCode) {
+        return new ResponseEntity<>(courseService.getByAcademicProgramCode(academicProgramCode), HttpStatus.OK);
     }
 
 }
