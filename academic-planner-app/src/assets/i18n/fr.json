@@ -67,7 +67,7 @@
     "enterEmailPlaceholder": "Entrez le email",
     "birthDateLabel": "Date de naissance",
     "selectBirthDatePlaceholder": "Sélectionnez la date de naissance",
-    "legalIdNumberLabel": "Numéro d'identification légal",
+    "legalIdNumberLabel": "Numéro pièce d'identité",
     "enterLegalIdNumberPlaceholder": "Entrez le numéro pièce d'identité",
     "genderLabel": "Genre",
     "selectGenderPlaceholder": "Sélectionnez le genre",
@@ -118,5 +118,6 @@
     "selectTeacherPlaceholder": "Sélectionnez l'enseignant",
     "degreeLabel": "Diplôme",
     "selectDegreePlaceholder": "Sélectionnez le diplôme"
+
     
 }

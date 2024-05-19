@@ -67,15 +67,6 @@
             </ion-item>
         </div>
 
-        <div class="form-row">
-            <ion-item lines="full">
-                <ion-label position="stacked">{{ 'legalIdNumberLabel' | translate }}</ion-label>
-                <ion-input formControlName="legalIdNumber"
-                    placeholder="{{ 'enterLegalIdNumberPlaceholder' | translate }}" type="text"
-                    ngDefaultControl></ion-input>
-            </ion-item>
-        </div>
-
         <ion-item lines="full">
             <ion-select formControlName="gender" label="{{ 'genderLabel' | translate }}"
                 placeholder="{{ 'selectGenderPlaceholder' | translate }}">
@@ -91,6 +82,15 @@
                     translate }}</ion-select-option>
             </ion-select>
         </ion-item>
+        
+        <div class="form-row">
+            <ion-item lines="full">
+                <ion-label position="stacked">{{ 'legalIdNumberLabel' | translate }}</ion-label>
+                <ion-input formControlName="legalIdNumber"
+                    placeholder="{{ 'enterLegalIdNumberPlaceholder' | translate }}" type="text"
+                    ngDefaultControl></ion-input>
+            </ion-item>
+        </div>
 
         <!-- <ion-item lines="full">
             <ion-select formControlName="profile" label="{{ 'profileLabel' | translate }}"
@@ -189,7 +189,7 @@
 </div>
 
 
-<div class="table-container" *ngIf="personsResponse && personsResponse.content">
+<div class="table-container" *ngIf="personsResponse && personsResponse.content && personsResponse.content.length !== 0">
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>

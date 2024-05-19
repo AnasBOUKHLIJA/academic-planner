@@ -14,6 +14,8 @@ import { AdminServiceService } from '../../services/admin-service.service';
 import { SpinnerService } from '../../services/spinner.service';
 import { Teacher } from 'src/app/models/Teacher';
 import { Filter } from 'src/app/models/Filter';
+import { Department } from 'src/app/models/Department';
+import { Establishment } from 'src/app/models/Establishment';
 
 @Component({
   selector: 'app-teachers-management',
@@ -22,21 +24,24 @@ import { Filter } from 'src/app/models/Filter';
 })
 export class TeachersManagementComponent  implements OnInit {
 
-  teacherForm     : FormGroup;
-  filterForm      : FormGroup;
-  pageSize        : number = 10;
-  page            : number = 0;
-  global          : GlobalConfig;
-  countries       : Country[];
-  profiles        : Profile[];
-  legalIdTypes    : LegalIdType[];
-  university      : University;
-  selectedCountry : Country;
-  teachersResponse: TeachersResponse;
-  showForm        : boolean = false;
-  showFilterForm  : boolean = false;
-  filter          : Filter = new Filter();
-  defaultProfile  : Profile | undefined;
+  teacherForm             : FormGroup;
+  filterForm              : FormGroup;
+  pageSize                : number = 10;
+  page                    : number = 0;
+  global                  : GlobalConfig;
+  countries               : Country[];
+  profiles                : Profile[];
+  legalIdTypes            : LegalIdType[];
+  establishments          : Establishment[];
+  departments             : Department[];
+  selectedEstablishment   : Establishment;
+  university              : University;
+  selectedCountry         : Country;
+  teachersResponse        : TeachersResponse;
+  showForm                : boolean = false;
+  showFilterForm          : boolean = false;
+  filter                  : Filter = new Filter();
+  defaultProfile          : Profile | undefined;
 
   constructor(
     private utilsService            : UtilsService,
@@ -61,6 +66,8 @@ export class TeachersManagementComponent  implements OnInit {
       citizenship: ['', Validators.required],
       profile: ['', Validators.required],
       city: ['', Validators.required],
+      establishment: [''],
+      department: ['', Validators.required],
     });
 
     this.filterForm = this.formBuilder.group({
@@ -82,8 +89,15 @@ export class TeachersManagementComponent  implements OnInit {
       profile: this.defaultProfile
     });
 
+    this.establishments = await this.kernelServiceService.establishmentsGet();
+
     this.teacherForm.get('citizenship')?.valueChanges.subscribe((selectedCountry: Country) => {
       this.selectedCountry = selectedCountry;
+    });
+
+    this.teacherForm.get('establishment')?.valueChanges.subscribe(async (selectedEstablishment: Establishment) => {
+      this.selectedEstablishment = selectedEstablishment;
+      this.departments = await this.kernelServiceService.departmentByEstablishmentCodeGet(selectedEstablishment.code);
     });
 
     this.filter.page = this.page;
