@@ -1,6 +1,7 @@
 package academic.planner.services;
 
 import academic.planner.entities.ClassRoom;
+import academic.planner.entities.Department;
 import academic.planner.repositories.ClassRoomRepository;
 import academic.planner.utils.AcademicPlannerException;
 import academic.planner.utils.ErrorCode;

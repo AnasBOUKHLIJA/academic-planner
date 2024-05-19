@@ -1,6 +1,7 @@
 package academic.planner.repositories;
 
 import academic.planner.entities.ClassRoom;
+import academic.planner.entities.Department;
 import academic.planner.entities.Establishment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

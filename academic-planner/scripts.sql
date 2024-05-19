@@ -1673,10 +1673,10 @@ VALUES ('uit', 'Université Ibn Tofail', '', '', (SELECT id FROM city WHERE code
 
 
 INSERT INTO DEGREE (code, name)
-VALUES ('ing', 'Diplôme Ingénieur d''État');
+VALUES ('master-recherche', 'Master Recherche');
 
 INSERT INTO DEGREE (code, name)
-VALUES ('master-recherche', 'Master Recherche');
+VALUES ('ing', 'Diplôme Ingénieur d''État');
 
 INSERT INTO DEGREE (code, name)
 VALUES ('master-specialise', 'Master Spécialisé');

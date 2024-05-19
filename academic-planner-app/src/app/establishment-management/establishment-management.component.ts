@@ -18,7 +18,7 @@ import { AdminServiceService } from '../services/admin-service.service';
   templateUrl: './establishment-management.component.html',
   styleUrls: ['./establishment-management.component.scss'],
 })
-export class EstablishmentManagementComponent  implements OnInit {
+export class EstablishmentManagementComponent implements OnInit {
 
   code: string | null;
   establishment: Establishment;
@@ -81,7 +81,7 @@ export class EstablishmentManagementComponent  implements OnInit {
     if (data) this.departments.push(data.department);
   }
 
-  async openDepartmentModal(department : Department) {
+  async openDepartmentModal(department: Department) {
     const modal = await this.modalCtrl.create({
       component: DepartmentModalComponent,
       cssClass: 'card-modal',
@@ -148,4 +148,5 @@ export class EstablishmentManagementComponent  implements OnInit {
   getBackground() {
     return this.utilsService.generateRandomSvgBackground();
   }
+
 }
