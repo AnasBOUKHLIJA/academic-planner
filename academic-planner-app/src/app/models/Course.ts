@@ -8,6 +8,7 @@ export class Course {
     description: string;
     thumbnail: string;
     creditHours: number;
+    coefficient: number;
     hold: boolean;
     teacher: Teacher;
     academicProgram: AcademicProgram;
