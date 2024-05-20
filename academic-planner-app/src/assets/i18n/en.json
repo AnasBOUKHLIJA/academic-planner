@@ -15,8 +15,8 @@
     "reload_establishments": "Reload establishments",
     "add_new_establishment": "Add a new establishment",
     "departments": "Departments",
-    "add_new_department": "Reload departments",
-    "reload_departments": "Add a new departments",
+    "reload_departments": "Reload departments",
+    "add_new_department": "Add a new departments",
     "academicPrograms": "Academic Programs",
     "reload_academicPrograms": "Reload academic programs",
     "add_new_academicProgram": "Add a new academic program",
@@ -123,5 +123,7 @@
     "add_new_classRoom": "Add a new classroom",
     "classroomRegistrationTitle": "Classroom Registration",
     "classroomRegistrationDescription": "Register detailed information of the classroom",
-    "actionsLabel": "Actions"
+    "actionsLabel": "Actions",
+    "dashboardTitleLabel": "Dashboard"
+
 }

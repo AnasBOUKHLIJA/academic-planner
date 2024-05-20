@@ -15,8 +15,8 @@
     "reload_establishments": "Recharger les établissements",
     "add_new_establishment": "Ajouter une nouvelle établissement",
     "departments": "Départements",
-    "add_new_department": "Recharger les départements",
-    "reload_departments": "Ajouter un nouveau département",
+    "add_new_department": "Ajouter un nouveau département",
+    "reload_departments": "Recharger les départements",
     "academicPrograms": "Programmes Académiques",
     "reload_academicPrograms": "Recharger les programmes académiques",
     "add_new_academicProgram": "Ajouter un nouveau programme académique",
@@ -123,6 +123,8 @@
     "add_new_classRoom" : "Ajouter une nouvelle salle de classe",
     "classroomRegistrationTitle" : "Enregistrement de la salle de classe",
     "classroomRegistrationDescription" : "Enregistrez les informations détaillées de la salle de classe",
-    "actionsLabel": "Actions"
+    "actionsLabel": "Actions",
+    "dashboardTitleLabel": "Tableau de bord"
+
 
 }

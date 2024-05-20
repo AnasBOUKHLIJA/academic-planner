@@ -49,8 +49,8 @@ export class AppComponent implements OnInit {
         }),
         filter((route) => route.outlet === 'primary'),
         mergeMap((route) => route.data),
-        tap(({ title, description }: Data) => {
-          this.metaService.setTitle(title);
+        tap(async ({ title, description }: Data) => {
+          this.metaService.setTitle(await this.utilsService.translateByKey(title));
           this.metaService.setDescription(description);
         })
       ).subscribe();

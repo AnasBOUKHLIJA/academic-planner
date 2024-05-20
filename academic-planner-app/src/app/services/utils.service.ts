@@ -145,4 +145,8 @@ export class UtilsService {
     const randomIndex = Math.floor(Math.random() * svgs.length);
     return `data:image/svg+xml;base64,${btoa(svgs[randomIndex])}`;
   }
+  async translateByKey(key: string): Promise<string> {
+    return await this.translate.get(key, this.getCurrentLanguage()).toPromise();
+  }
+  
 }

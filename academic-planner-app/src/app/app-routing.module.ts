@@ -12,12 +12,11 @@ import { DepartmentManagementComponent } from './department-management/departmen
 import { AcademicProgramManagementComponent } from './academic-program-management/academic-program-management.component';
 import { CourseManagementComponent } from './course-management/course-management.component';
 
-
 const routes: Routes = [
   {
     path: '', component: HomeComponent,
     data: {
-      title: "Tableau de bord",
+      title: 'dashboardTitleLabel',
       description: "Bienvenue sur le tableau de bord du planificateur académique. Obtenez un aperçu de vos activités académiques et gérez vos tâches efficacement."
     }
   },
