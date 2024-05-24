@@ -11,6 +11,7 @@ import { University } from 'src/app/models/University';
 import { Department } from 'src/app/models/Department';
 import { AcademicProgram } from 'src/app/models/AcademicProgram';
 import { Degree } from 'src/app/models/Degree';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-academic-program-modal',
@@ -30,7 +31,7 @@ export class AcademicProgramModalComponent  implements OnInit {
     private formBuilder: FormBuilder,
     private kernelServiceService: KernelServiceService,
     private spinnerService: SpinnerService,
-    private adminServiceService: AdminServiceService
+    private adminServiceService: AdminServiceService,
   ) { }
   
   async ngOnInit() {
@@ -63,4 +64,5 @@ export class AcademicProgramModalComponent  implements OnInit {
   closeModal() {
     this.modalCtrl.dismiss();
   }
+
 }

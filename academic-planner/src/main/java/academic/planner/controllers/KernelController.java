@@ -27,9 +27,10 @@ public class KernelController {
     private final SemesterService             semesterService;
     private final CourseService               courseService;
     private final LegalIdTypeService          legalIdTypeService;
-    private final ProfileService                profileService;
+    private final ProfileService              profileService;
+    private final PersonService               personService;
     private final StudentService              studentService;
-    private final RegistrationService registrationService;
+    private final RegistrationService         registrationService;
     private final GradeService                gradeService;
     private final ScheduleService             scheduleService;
 
@@ -38,7 +39,8 @@ public class KernelController {
                             EstablishmentService establishmentService, DepartmentService departmentService, ClassRoomService classRoomService,
                             DegreeService degreeService, AcademicProgramService academicProgramService, PromotionService promotionService,
                             SemesterService semesterService, CourseService courseService, LegalIdTypeService legalIdTypeService, ProfileService profileService,
-                            StudentService studentService, RegistrationService registrationService, GradeService gradeService, ScheduleService scheduleService) {
+                            StudentService studentService, RegistrationService registrationService, GradeService gradeService, ScheduleService scheduleService,
+                            PersonService personService) {
         this.countryService = countryService;
         this.cityService = cityService;
         this.universityService = universityService;
@@ -56,6 +58,7 @@ public class KernelController {
         this.registrationService = registrationService;
         this.gradeService = gradeService;
         this.scheduleService = scheduleService;
+        this.personService = personService;
     }
 
     @GetMapping(
@@ -141,6 +144,7 @@ public class KernelController {
     public ResponseEntity<AcademicProgram> academicProgramByCodeGet(@PathVariable String code) {
         return new ResponseEntity<>(academicProgramService.getByCode(code), HttpStatus.OK);
     }
+
     @GetMapping(
             value = "/academicProgramsGet/{departmentCode}",
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -154,6 +158,7 @@ public class KernelController {
     public ResponseEntity<Course> coursesByCodeGet(@PathVariable String code) {
         return new ResponseEntity<>(courseService.getByCode(code), HttpStatus.OK);
     }
+
     @GetMapping(
             value = "/coursesGet/{academicProgramCode}",
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -166,6 +171,13 @@ public class KernelController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClassRoom>> classRoomsGet(@PathVariable String establishmentCode) {
         return new ResponseEntity<>(classRoomService.getByEstablishmentCode(establishmentCode), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/personByUsernameGet/{username}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Person> personByUsernameGet(@PathVariable String username) {
+        return new ResponseEntity<>(personService.getByUsername(username), HttpStatus.OK);
     }
 
 }

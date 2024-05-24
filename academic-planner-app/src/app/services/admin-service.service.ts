@@ -89,7 +89,7 @@ export class AdminServiceService {
     });
   }
 
-  createAdmin(admin: Admin) : Promise<Admin>{
+  saveAdmin(admin: Admin) : Promise<Admin>{
     return new Promise((resolve, reject) => {
         admin.citizenship.cities = [];
         this.networkService.post(this.MODULE_GET_URL + "personSave", admin, true).then((response: any) => {

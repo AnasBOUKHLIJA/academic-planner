@@ -14,6 +14,7 @@ import { SpinnerService } from '../../services/spinner.service';
 import { Admin } from 'src/app/models/Admin';
 import { PersonsResponse } from 'src/app/models/msg/PersonsResponse';
 import { Filter } from 'src/app/models/Filter';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admins-management',
@@ -46,6 +47,7 @@ export class AdminsManagementComponent  implements OnInit {
     private kernelServiceService    : KernelServiceService,
     private adminServiceService     : AdminServiceService,
     private spinnerService          : SpinnerService,
+    private router                  : Router
   ) {}
 
   async ngOnInit() {
@@ -93,11 +95,11 @@ export class AdminsManagementComponent  implements OnInit {
   }
 
   async submitAdminForm() {
-    console.log(this.adminForm.value);
     if (this.adminForm.valid) {
-      this.adminServiceService.createAdmin(this.adminForm.value);
+      await this.adminServiceService.saveAdmin(this.adminForm.value);
+      this.clearForm();
     } else {
-      console.log('Form is not valid');
+      this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
 
@@ -106,7 +108,7 @@ export class AdminsManagementComponent  implements OnInit {
       this.filter = this.filterForm.value;
       this.personsResponse = await this.adminServiceService.getAdmins(this.filter);
     } else {
-      console.log('Form is not valid');
+      this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
 
@@ -175,4 +177,10 @@ export class AdminsManagementComponent  implements OnInit {
       profile: this.defaultProfile
     });
   }
+
+
+  openPersonPage(username: string) {
+    this.router.navigate([`/user/${username}`]);
+  }
+
 }

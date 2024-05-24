@@ -212,7 +212,7 @@
                     <td>{{ person.username }}</td>
                     <td>{{ person.birthDate }}</td>
                     <td>
-                        <ion-button color="primary" fill="clear"> 
+                        <ion-button color="primary" fill="clear" (click)="openPersonPage(person.username)"> 
                             {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon name="arrow-forward-outline"></ion-icon>
                         </ion-button>
                     </td>

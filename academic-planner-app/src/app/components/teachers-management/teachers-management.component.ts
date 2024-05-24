@@ -16,6 +16,7 @@ import { Teacher } from 'src/app/models/Teacher';
 import { Filter } from 'src/app/models/Filter';
 import { Department } from 'src/app/models/Department';
 import { Establishment } from 'src/app/models/Establishment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teachers-management',
@@ -51,6 +52,7 @@ export class TeachersManagementComponent  implements OnInit {
     private kernelServiceService    : KernelServiceService,
     private adminServiceService     : AdminServiceService,
     private spinnerService          : SpinnerService,
+    private router                  : Router
   ) {}
 
   async ngOnInit() {
@@ -107,10 +109,10 @@ export class TeachersManagementComponent  implements OnInit {
 
   async submitTeacherForm() {
     if (this.teacherForm.valid) {
-      this.adminServiceService.createTeacher(this.teacherForm.value);
+      await this.adminServiceService.createTeacher(this.teacherForm.value);
       this.clearForm();
     } else {
-      console.log('Form is not valid');
+      this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
 
@@ -119,7 +121,7 @@ export class TeachersManagementComponent  implements OnInit {
       this.filter = this.filterForm.value;
       this.teachersResponse = await this.adminServiceService.getTeachers(this.filter);
     } else {
-      console.log('Form is not valid');
+      this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
 
@@ -188,4 +190,9 @@ export class TeachersManagementComponent  implements OnInit {
       profile: this.defaultProfile
     });
   }
+
+  openPersonPage(username: string) {
+    this.router.navigate([`/user/${username}`]);
+  }
+  
 }

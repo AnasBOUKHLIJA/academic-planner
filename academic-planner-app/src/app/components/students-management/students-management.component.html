@@ -258,7 +258,7 @@
                     <td>{{ student.studentNationalCode }}</td>
                     <td>{{ student.birthDate }}</td>
                     <td>
-                        <ion-button color="primary" fill="clear"> {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon
+                        <ion-button color="primary" fill="clear" (click)="openPersonPage(student.username)"> {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon
                                 name="arrow-forward-outline"></ion-icon></ion-button>
                     </td>
                     

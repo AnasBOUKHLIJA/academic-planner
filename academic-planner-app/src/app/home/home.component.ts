@@ -128,7 +128,7 @@ export class HomeComponent  implements OnInit {
 
   async submitAdminForm() {
     if (this.adminForm.valid) {
-      this.adminServiceService.createAdmin(this.adminForm.value);
+      this.adminServiceService.saveAdmin(this.adminForm.value);
     } else {
       console.log('Form is not valid');
     }

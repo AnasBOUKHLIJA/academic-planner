@@ -1,3 +1,4 @@
+import { City } from "./City";
 import { Country } from "./Country";
 import { LegalIdType } from "./LegalIdType";
 import { Profile } from "./Profile";
@@ -15,5 +16,6 @@ export class Person {
     thumbnail: string;
     legalIdType: LegalIdType;
     citizenship: Country;
+    city: City;
     profile: Profile;
 }

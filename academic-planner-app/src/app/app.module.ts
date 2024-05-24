@@ -41,6 +41,10 @@ import { AcademicProgramModalComponent } from './components/academic-program-mod
 import { AcademicProgramManagementComponent } from './academic-program-management/academic-program-management.component';
 import { CourseManagementComponent } from './course-management/course-management.component';
 import { ClassRoomModalComponent } from './components/class-room-modal/class-room-modal.component';
+import { UserComponent } from './user/user.component';
+import { AdminModalComponent } from './components/admin-modal/admin-modal.component';
+import { StudentModalComponent } from './components/student-modal/student-modal.component';
+import { TeacherModalComponent } from './components/teacher-modal/teacher-modal.component';
 
 export function ConfigLoader(configurationService: ConfigurationService) {
   return () => configurationService.load(environment.configFile);
@@ -80,7 +84,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AcademicProgramModalComponent,
     AcademicProgramManagementComponent,
     CourseManagementComponent,
-    ClassRoomModalComponent
+    ClassRoomModalComponent,
+    UserComponent,
+    AdminModalComponent,
+    StudentModalComponent,
+    TeacherModalComponent,
   ],
   imports: [
     BrowserModule,

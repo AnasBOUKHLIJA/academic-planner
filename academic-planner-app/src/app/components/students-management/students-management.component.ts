@@ -14,6 +14,7 @@ import { SpinnerService } from '../../services/spinner.service';
 import { Student } from 'src/app/models/Student';
 import { Filter } from 'src/app/models/Filter';
 import { StudentsResponse } from 'src/app/models/msg/StudentsResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-students-management',
@@ -46,6 +47,8 @@ export class StudentsManagementComponent  implements OnInit {
     private kernelServiceService    : KernelServiceService,
     private adminServiceService     : AdminServiceService,
     private spinnerService          : SpinnerService,
+    private router                  : Router
+
   ) {}
 
   async ngOnInit() {
@@ -101,10 +104,10 @@ export class StudentsManagementComponent  implements OnInit {
 
   async submitStudentForm() {
     if (this.studentForm.valid) {
-      this.adminServiceService.createStudent(this.studentForm.value);
+      await this.adminServiceService.createStudent(this.studentForm.value);
       this.clearForm();
     } else {
-      console.log('Form is not valid');
+      this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
 
@@ -113,7 +116,7 @@ export class StudentsManagementComponent  implements OnInit {
       this.filter = this.filterForm.value;
       this.studentsResponse = await this.adminServiceService.getStudents(this.filter);
     } else {
-      console.log('Form is not valid');
+      this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
 
@@ -184,6 +187,10 @@ export class StudentsManagementComponent  implements OnInit {
       profile: this.defaultProfile
     });
 
+  }
+
+  openPersonPage(username: string) {
+    this.router.navigate([`/user/${username}`]);
   }
 
 }

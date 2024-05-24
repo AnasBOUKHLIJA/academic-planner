@@ -6,6 +6,7 @@ import { University } from 'src/app/models/University';
 import { KernelServiceService } from '../../services/kernel-service.service';
 import { Country } from 'src/app/models/Country';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-university-modal',
@@ -21,10 +22,11 @@ export class UniversityModalComponent implements OnInit {
   selectedFile: File;
 
   constructor(
-    private modalCtrl: ModalController,
-    private formBuilder: FormBuilder,
-    private kernelServiceService: KernelServiceService,
-    private adminServiceService: AdminServiceService,
+    private modalCtrl               : ModalController,
+    private formBuilder             : FormBuilder,
+    private kernelServiceService    : KernelServiceService,
+    private adminServiceService     : AdminServiceService,
+    private spinnerService          : SpinnerService,
   ) { }
 
   async ngOnInit() {
@@ -51,7 +53,7 @@ export class UniversityModalComponent implements OnInit {
       this.universityForm.reset();
       this.modalCtrl.dismiss({ university : university });
     } else {
-      console.log('Form is not valid');
+      this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
 

@@ -25,7 +25,7 @@ export class ClassRoomModalComponent  implements OnInit {
     private spinnerService: SpinnerService,
     private adminServiceService: AdminServiceService
   ) {
-   }
+  }
 
   ngOnInit() {
     this.classRoomForm = this.formBuilder.group({

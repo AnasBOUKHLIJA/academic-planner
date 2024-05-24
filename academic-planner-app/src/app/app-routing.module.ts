@@ -11,6 +11,7 @@ import { EstablishmentManagementComponent } from './establishment-management/est
 import { DepartmentManagementComponent } from './department-management/department-management.component';
 import { AcademicProgramManagementComponent } from './academic-program-management/academic-program-management.component';
 import { CourseManagementComponent } from './course-management/course-management.component';
+import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [
@@ -58,6 +59,13 @@ const routes: Routes = [
   },
   {
     path: 'course/:code', component: CourseManagementComponent,
+    data: {
+      title: "",
+      description: ""
+    }
+  },
+  {
+    path: 'user/:username', component: UserComponent,
     data: {
       title: "",
       description: ""

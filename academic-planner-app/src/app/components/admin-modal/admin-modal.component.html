@@ -1,0 +1,93 @@
+<div class="modal-header">
+  <span class="close-button" (click)="closeModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </span>
+</div>
+
+<div class="form-container">
+  <div class="form-header">
+    <h1>{{ 'adminRegistrationTitle' | translate }}</h1>
+    <p>{{ 'adminRegistrationDescription' | translate }}</p>
+  </div>
+
+  <form [formGroup]="adminForm" (ngSubmit)="submitForm()" novalidate>
+    <app-profile-picture [fileBase64]="adminForm.get('thumbnail')?.value"
+        (fileBase64Selected)="handleFileSelected($event)"></app-profile-picture>
+
+    <div class="form-row">
+        <ion-item lines="full">
+            <ion-label position="stacked">{{ 'firstNameLabel' | translate }}</ion-label>
+            <ion-input formControlName="firstName" placeholder="{{ 'enterFirstNamePlaceholder' | translate }}"
+                type="text" ngDefaultControl></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+            <ion-label position="stacked">{{ 'lastNameLabel' | translate }}</ion-label>
+            <ion-input formControlName="lastName" placeholder="{{ 'enterLastNamePlaceholder' | translate }}"
+                type="text" ngDefaultControl></ion-input>
+        </ion-item>
+    </div>
+
+    <div class="form-row">
+        <ion-item lines="full">
+            <ion-label position="stacked">{{ 'emailLabel' | translate }}</ion-label>
+            <ion-input formControlName="email" placeholder="{{ 'enterEmailPlaceholder' | translate }}" type="email"
+                ngDefaultControl></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+            <ion-label position="stacked">{{ 'birthDateLabel' | translate }}</ion-label>
+            <ion-input formControlName="birthDate" placeholder="{{ 'selectBirthDatePlaceholder' | translate }}"
+                type="date" ngDefaultControl></ion-input>
+        </ion-item>
+    </div>
+
+    <ion-item lines="full">
+        <ion-select formControlName="gender" label="{{ 'genderLabel' | translate }}"
+            placeholder="{{ 'selectGenderPlaceholder' | translate }}">
+            <ion-select-option value="true">{{ 'maleOption' | translate }}</ion-select-option>
+            <ion-select-option value="false">{{ 'femaleOption' | translate }}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-select formControlName="legalIdType" label="{{ 'legalIdTypeLabel' | translate }}"
+            placeholder="{{ 'selectLegalIdTypePlaceholder' | translate }}">
+            <ion-select-option *ngFor="let legalIdType of legalIdTypes" [value]="legalIdType">{{ legalIdType.name |
+                translate }}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    
+    <div class="form-row">
+        <ion-item lines="full">
+            <ion-label position="stacked">{{ 'legalIdNumberLabel' | translate }}</ion-label>
+            <ion-input formControlName="legalIdNumber"
+                placeholder="{{ 'enterLegalIdNumberPlaceholder' | translate }}" type="text"
+                ngDefaultControl></ion-input>
+        </ion-item>
+    </div>
+
+    <ion-item lines="full">
+        <ion-select formControlName="citizenship" label="{{ 'citizenshipLabel' | translate }}"
+            placeholder="{{ 'selectCitizenshipPlaceholder' | translate }}">
+            <ion-select-option *ngFor="let country of countries" [value]="country">{{ country.name |
+                translate }}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item lines="full" *ngIf="selectedCountry && selectedCountry.cities">
+        <ion-select formControlName="city" label="{{ 'cityLabel' | translate }}"
+            placeholder="{{ 'selectCityPlaceholder' | translate }}">
+            <ion-select-option *ngFor="let city of selectedCountry.cities" [value]="city">{{ city.name |
+                translate }}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <div class="form-buttons">
+        <ion-button type="submit">
+            <ion-icon name="send-outline" slot="end"></ion-icon>
+            {{ 'saveButtonLabel' | translate }} &nbsp;
+        </ion-button>
+    </div>
+
+</form>
+
+</div>
