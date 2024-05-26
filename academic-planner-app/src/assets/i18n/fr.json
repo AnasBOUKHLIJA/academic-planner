@@ -123,6 +123,16 @@
     "add_new_classRoom" : "Ajouter une nouvelle salle de classe",
     "classroomRegistrationTitle" : "Enregistrement de la salle de classe",
     "classroomRegistrationDescription" : "Enregistrez les informations détaillées de la salle de classe",
-    "actionsLabel": "Actions"
-
+    "actionsLabel": "Actions",
+    "promotions": "Promotions",
+    "reload_promotions": "Recharger les promotions",
+    "add_new_promotion": "Ajouter une nouvelle promotion",
+    "promotionRegistrationTitle": "Inscription à la promotion",
+    "promotionRegistrationDescription": "Enregistrez les informations détaillées de la promotion.",
+    "startYearLabel": "Année de début",
+    "enterStartYearPlaceholder": "Entrez l'année de début",
+    "endYearLabel": "Année de fin",
+    "enterEndYearPlaceholder": "Entrez l'année de fin",
+    "actualSemesterLabel": "Semestre actuel",
+    "selectActualSemesterPlaceholder": "Sélectionnez le semestre actuel"
 }

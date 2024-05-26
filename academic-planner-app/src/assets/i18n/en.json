@@ -123,5 +123,16 @@
     "add_new_classRoom": "Add a new classroom",
     "classroomRegistrationTitle": "Classroom Registration",
     "classroomRegistrationDescription": "Register detailed information of the classroom",
-    "actionsLabel": "Actions"
+    "actionsLabel": "Actions",
+    "promotions": "Promotions",
+    "reload_promotions": "Reload Promotions",
+    "add_new_promotion": "Add New Promotion",
+    "promotionRegistrationTitle": "Promotion Registration",
+    "promotionRegistrationDescription": "Register detailed information of the promotion.",
+    "startYearLabel": "Start Year",
+    "enterStartYearPlaceholder": "Enter the start year",
+    "endYearLabel": "End Year",
+    "enterEndYearPlaceholder": "Enter the end year",
+    "actualSemesterLabel": "Actual Semester",
+    "selectActualSemesterPlaceholder": "Select the actual semester"
 }

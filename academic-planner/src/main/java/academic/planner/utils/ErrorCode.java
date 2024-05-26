@@ -2,6 +2,7 @@ package academic.planner.utils;
 
 public enum ErrorCode {
 
+    Declined,
     country_not_found,
     city_not_found,
     university_not_found,

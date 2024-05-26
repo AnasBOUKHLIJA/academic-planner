@@ -45,6 +45,7 @@ import { UserComponent } from './user/user.component';
 import { AdminModalComponent } from './components/admin-modal/admin-modal.component';
 import { StudentModalComponent } from './components/student-modal/student-modal.component';
 import { TeacherModalComponent } from './components/teacher-modal/teacher-modal.component';
+import { PromotionModalComponent } from './components/promotion-modal/promotion-modal.component';
 
 export function ConfigLoader(configurationService: ConfigurationService) {
   return () => configurationService.load(environment.configFile);
@@ -89,6 +90,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdminModalComponent,
     StudentModalComponent,
     TeacherModalComponent,
+    PromotionModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,9 +12,13 @@ import { DepartmentManagementComponent } from './department-management/departmen
 import { AcademicProgramManagementComponent } from './academic-program-management/academic-program-management.component';
 import { CourseManagementComponent } from './course-management/course-management.component';
 import { UserComponent } from './user/user.component';
+import { StudentsComponent } from './students/students.component';
 
 
 const routes: Routes = [
+  {
+    path: 'students', component: StudentsComponent
+  },
   {
     path: '', component: HomeComponent,
     data: {

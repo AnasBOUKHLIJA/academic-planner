@@ -17,6 +17,7 @@ import { Department } from '../models/Department';
 import { AcademicProgram } from '../models/AcademicProgram';
 import { Course } from '../models/Course';
 import { ClassRoom } from '../models/ClassRoom';
+import { Promotion } from '../models/Promotion';
 
 @Injectable({
   providedIn: 'root'
@@ -192,4 +193,14 @@ export class AdminServiceService {
     });
   }
 
+  savePromotion(promotion: Promotion) : Promise<Promotion>{
+    return new Promise( async (resolve, reject) => {
+      this.networkService.post(this.MODULE_GET_URL + "promotionSave", promotion, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
 }

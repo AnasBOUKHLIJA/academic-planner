@@ -1,8 +1,10 @@
 package academic.planner.utils;
 
+import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Data
 public class AcademicPlannerException extends RuntimeException {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());

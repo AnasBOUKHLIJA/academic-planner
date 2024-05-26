@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DepartmentModalComponent } from '../components/department-modal/department-modal.component';
 import { CourseModalComponent } from '../components/course-modal/course-modal.component';
 import { AcademicProgramModalComponent } from '../components/academic-program-modal/academic-program-modal.component';
+import { PromotionModalComponent } from '../components/promotion-modal/promotion-modal.component';
+import { Promotion } from '../models/Promotion';
 
 @Component({
   selector: 'app-academic-program-management',
@@ -19,6 +21,7 @@ export class AcademicProgramManagementComponent  implements OnInit {
   code                : string | null;
   academicProgram     : AcademicProgram;
   courses             : Course[];
+  promotions          : Promotion[];
 
   constructor(
     private kernelService : KernelServiceService,
@@ -34,8 +37,9 @@ export class AcademicProgramManagementComponent  implements OnInit {
     });  
     
     if(this.code) {
-      this.academicProgram =  await this.kernelService.academicProgramByCodeGet(this.code);
-      this.courses  = await this.kernelService.coursesByAcademicProgramCodeGet(this.academicProgram.code);
+      this.academicProgram  =  await this.kernelService.academicProgramByCodeGet(this.code);
+      this.courses          = await this.kernelService.coursesByAcademicProgramCodeGet(this.academicProgram.code);
+      this.promotions       = await this.kernelService.promotionsByAcademicProgramCodeGet(this.academicProgram.code);
     }
   }
 
@@ -81,6 +85,38 @@ export class AcademicProgramManagementComponent  implements OnInit {
       const index = this.courses.findIndex(e => e.id === data.course.id);
       if (index !== -1) {
         this.courses[index] = data.course;
+      }
+    }
+  }
+
+  async openAddPromotionModal() {
+    const modal = await this.modalCtrl.create({
+      component: PromotionModalComponent,
+      cssClass: 'card-modal',
+      componentProps: {
+        academicProgram: this.academicProgram
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if(data) this.promotions.push(data.course);
+  }
+
+  async openPromotionModal(Promotion : Promotion) {
+    const modal = await this.modalCtrl.create({
+      component: PromotionModalComponent,
+      cssClass: 'card-modal',
+      componentProps: {
+        promotion: Promotion,
+        academicProgram: this.academicProgram
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if(data) {
+      const index = this.promotions.findIndex(e => e.id === data.promotion.id);
+      if (index !== -1) {
+        this.promotions[index] = data.promotion;
       }
     }
   }

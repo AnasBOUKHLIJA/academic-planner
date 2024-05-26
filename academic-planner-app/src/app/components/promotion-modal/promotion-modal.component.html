@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <span class="close-button" (click)="closeModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </span>
+</div>
+
+<div class="form-container">
+  <div class="form-header">
+    <h1>{{ 'promotionRegistrationTitle' | translate }}</h1>
+    <p>{{ 'promotionRegistrationDescription' | translate }}</p>
+  </div>
+
+  <form [formGroup]="promotionForm" (ngSubmit)="submitForm()" novalidate>
+
+    <div class="form-controls">
+      <ion-item lines="full">
+        <ion-label position="stacked">{{ 'startYearLabel' | translate }}</ion-label>
+        <ion-input formControlName="startYear" placeholder="{{ 'enterStartYearPlaceholder' | translate }}" type="date"
+          ngDefaultControl></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="stacked">{{ 'endYearLabel' | translate }}</ion-label>
+        <ion-input formControlName="endYear" placeholder="{{ 'enterEndYearPlaceholder' | translate }}" type="date"
+          ngDefaultControl></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-select formControlName="actualSemester" label="{{ 'actualSemesterLabel' | translate }}"
+          placeholder="{{ 'selectActualSemesterPlaceholder' | translate }}">
+          <ion-select-option *ngFor="let semester of semesters" [value]="semester">{{ semester.name |
+            translate }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </div>
+
+    <div class="form-buttons">
+      <ion-button type="submit">
+        <ion-icon name="send-outline" slot="end"></ion-icon>
+        {{ 'saveButtonLabel' | translate }} &nbsp;
+      </ion-button>
+    </div>
+
+  </form>
+</div>
