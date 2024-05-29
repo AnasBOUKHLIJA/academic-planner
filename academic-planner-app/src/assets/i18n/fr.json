@@ -134,5 +134,6 @@
     "endYearLabel": "Année de fin",
     "enterEndYearPlaceholder": "Entrez l'année de fin",
     "actualSemesterLabel": "Semestre actuel",
-    "selectActualSemesterPlaceholder": "Sélectionnez le semestre actuel"
+    "selectActualSemesterPlaceholder": "Sélectionnez le semestre actuel",
+    "deleteButtonLabel": "Supprimer"
 }

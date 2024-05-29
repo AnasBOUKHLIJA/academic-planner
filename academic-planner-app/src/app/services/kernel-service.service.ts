@@ -14,6 +14,7 @@ import { Course } from '../models/Course';
 import { Semester } from '../models/Semester';
 import { ClassRoom } from '../models/ClassRoom';
 import { Person } from '../models/Person';
+import { Promotion } from '../models/Promotion';
 
 @Injectable({
   providedIn: 'root'
@@ -84,7 +85,7 @@ export class KernelServiceService {
 
   establishmentByCodeGet(code : string): Promise<Establishment>{
     return new Promise((resolve, reject) => {
-      this.networkService.get(this.MODULE_GET_URL + "establishmentByCodeGet/" + code , false).then((response: any) => {
+      this.networkService.get(this.MODULE_GET_URL + "establishmentByCodeGet/" + code , true).then((response: any) => {
           resolve(response);
       }, error => {
           reject(error);
@@ -93,14 +94,14 @@ export class KernelServiceService {
     });
   }
 
-  establishmentsGet(): Promise<Establishment[]>{
+  establishmentsGet(reload : boolean = false): Promise<Establishment[]>{
     return new Promise((resolve, reject) => {
       // Base on previous BE response
-      if(this.establishments){
+      if(!reload && this.establishments){
         resolve(this.establishments);
         return;
       }
-      this.networkService.get(this.MODULE_GET_URL + "establishmentsGet" , false).then((response: any) => {
+      this.networkService.get(this.MODULE_GET_URL + "establishmentsGet" , true).then((response: any) => {
         this.establishments = response;
           resolve(response);
       }, error => {
@@ -180,7 +181,7 @@ export class KernelServiceService {
 
   departmentByCodeGet(code : string): Promise<Department>{
     return new Promise((resolve, reject) => {
-      this.networkService.get(this.MODULE_GET_URL + "departmentByCodeGet/" + code , false).then((response: any) => {
+      this.networkService.get(this.MODULE_GET_URL + "departmentByCodeGet/" + code , true).then((response: any) => {
           resolve(response);
       }, error => {
           reject(error);
@@ -191,7 +192,7 @@ export class KernelServiceService {
 
   departmentByEstablishmentCodeGet(establishmentCode : string): Promise<Department[]>{
     return new Promise((resolve, reject) => {
-      this.networkService.get(this.MODULE_GET_URL + "departmentsGet/" + establishmentCode , false).then((response: any) => {
+      this.networkService.get(this.MODULE_GET_URL + "departmentsGet/" + establishmentCode , true).then((response: any) => {
           resolve(response);
       }, error => {
           reject(error);
@@ -202,7 +203,7 @@ export class KernelServiceService {
 
   academicProgramsByDepartmentCodeGet(departmentCode : string): Promise<AcademicProgram[]>{
     return new Promise((resolve, reject) => {
-      this.networkService.get(this.MODULE_GET_URL + "academicProgramsGet/" + departmentCode , false).then((response: any) => {
+      this.networkService.get(this.MODULE_GET_URL + "academicProgramsGet/" + departmentCode , true).then((response: any) => {
           resolve(response);
       }, error => {
           reject(error);
@@ -213,7 +214,7 @@ export class KernelServiceService {
 
   academicProgramByCodeGet(code : string): Promise<AcademicProgram>{
     return new Promise((resolve, reject) => {
-      this.networkService.get(this.MODULE_GET_URL + "academicProgramByCodeGet/" + code , false).then((response: any) => {
+      this.networkService.get(this.MODULE_GET_URL + "academicProgramByCodeGet/" + code , true).then((response: any) => {
           resolve(response);
       }, error => {
           reject(error);
@@ -224,7 +225,7 @@ export class KernelServiceService {
 
   academicProgramGet(id : number): Promise<AcademicProgram>{
     return new Promise((resolve, reject) => {
-      this.networkService.get(this.MODULE_GET_URL + "academicProgramGet/" + id , false).then((response: any) => {
+      this.networkService.get(this.MODULE_GET_URL + "academicProgramGet/" + id , true).then((response: any) => {
           resolve(response);
       }, error => {
           reject(error);
@@ -235,7 +236,18 @@ export class KernelServiceService {
 
   coursesByAcademicProgramCodeGet(academicProgramCode : string): Promise<Course[]>{
     return new Promise((resolve, reject) => {
-      this.networkService.get(this.MODULE_GET_URL + "coursesGet/" + academicProgramCode , false).then((response: any) => {
+      this.networkService.get(this.MODULE_GET_URL + "coursesGet/" + academicProgramCode , true).then((response: any) => {
+          resolve(response);
+      }, error => {
+          reject(error);
+      }
+      );
+    });
+  }
+
+  promotionsByAcademicProgramCodeGet(academicProgramCode : string): Promise<Promotion[]>{
+    return new Promise((resolve, reject) => {
+      this.networkService.get(this.MODULE_GET_URL + "promotionsGet/" + academicProgramCode , true).then((response: any) => {
           resolve(response);
       }, error => {
           reject(error);
@@ -246,7 +258,7 @@ export class KernelServiceService {
 
   courseByCodeGet(code : string): Promise<Course>{
     return new Promise((resolve, reject) => {
-      this.networkService.get(this.MODULE_GET_URL + "courseByCodeGet/" + code , false).then((response: any) => {
+      this.networkService.get(this.MODULE_GET_URL + "courseByCodeGet/" + code , true).then((response: any) => {
           resolve(response);
       }, error => {
           reject(error);
@@ -257,7 +269,7 @@ export class KernelServiceService {
 
   classRoomsByEstablishmentCodeGet(establishmentCode : string): Promise<ClassRoom[]>{
     return new Promise((resolve, reject) => {
-      this.networkService.get(this.MODULE_GET_URL + "classRoomsGet/" + establishmentCode , false).then((response: any) => {
+      this.networkService.get(this.MODULE_GET_URL + "classRoomsGet/" + establishmentCode , true).then((response: any) => {
           resolve(response);
       }, error => {
           reject(error);
@@ -269,7 +281,7 @@ export class KernelServiceService {
 
   personByUsernameGet(username : string): Promise<Person>{
     return new Promise((resolve, reject) => {
-      this.networkService.get(this.MODULE_GET_URL + "personByUsernameGet/" + username , false).then((response: any) => {
+      this.networkService.get(this.MODULE_GET_URL + "personByUsernameGet/" + username , true).then((response: any) => {
           resolve(response);
       }, error => {
           reject(error);

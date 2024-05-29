@@ -20,10 +20,36 @@
 
     <div class="section-body">
       <div class="section-buttons">
-        <ion-button fill="solid"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_promotions' |
+        <ion-button fill="solid" (click)="reloadPromotions()"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_promotions' |
           translate}}</ion-button>
         <ion-button fill="outline" (click)="openAddPromotionModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{
           'add_new_promotion' | translate}}</ion-button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>{{ 'startYearLabel' | translate }}</th>
+              <th>{{ 'endYearLabel' | translate }}</th>
+              <th>{{ 'actualSemesterLabel' | translate }}</th>
+              <th>{{ 'actionsLabel' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let promotion of promotions">
+              <td>{{ promotion.startYear }}</td>
+              <td>{{ promotion.endYear }}</td>
+              <td>{{ promotion.actualSemester.name }}</td>
+              <td>
+                <ion-button  fill="clear" (click)="openPromotionModal(promotion)">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -36,20 +62,20 @@
   
     <div class="section-body">
       <div class="section-buttons">
-        <ion-button fill="solid"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_courses' |
+        <ion-button fill="solid" (click)="reloadCourses()"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_courses' |
           translate}}</ion-button>
         <ion-button fill="outline" (click)="openAddCourseModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{
           'add_new_course' | translate}}</ion-button>
       </div>
   
       <div class="grid-container">
-        <div class="card" *ngFor="let course of courses">
+        <div class="card" *ngFor="let course of courses; let i = index">
           <span class="float-card-button" (click)="openCourseModal(course)">
             <ion-icon name="create-outline"></ion-icon>
           </span>
           <div class="image-container">
             <p class="semester"> {{course.semester.name}} </p>
-            <img [alt]="course.name" [src]="getBackground()" />
+            <img [alt]="course.name" [src]="getBackground(i)" />
           </div>
           <ion-card-header>
             <ion-card-title>{{ course.title }}</ion-card-title>

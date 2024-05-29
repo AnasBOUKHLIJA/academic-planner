@@ -4,6 +4,7 @@ package academic.planner.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Promotion {
@@ -27,6 +28,8 @@ public class Promotion {
     @Column(name = "end_year", nullable=false)
     private Date endYear;
 
+    @OneToMany(mappedBy="promotion")
+    private List<PromotionCourse>  promotionCourses;
     //--------------------------------------------------------------------------------
     // GETTER AND SETTERS
     //--------------------------------------------------------------------------------
@@ -69,5 +72,13 @@ public class Promotion {
 
     public void setEndYear(Date endYear) {
         this.endYear = endYear;
+    }
+
+    public List<PromotionCourse> getPromotionCourses() {
+            return promotionCourses;
+    }
+
+    public void setPromotionCourses(List<PromotionCourse> promotionCourses) {
+        this.promotionCourses = promotionCourses;
     }
 }

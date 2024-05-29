@@ -10,6 +10,7 @@
     <p>{{ 'promotionRegistrationDescription' | translate }}</p>
   </div>
 
+
   <form [formGroup]="promotionForm" (ngSubmit)="submitForm()" novalidate>
 
     <div class="form-controls">
@@ -26,16 +27,28 @@
       </ion-item>
 
       <ion-item lines="full">
-        <ion-select formControlName="actualSemester" label="{{ 'actualSemesterLabel' | translate }}"
+        <ion-select [(ngModel)]="actualSemester" formControlName="actualSemester" label="{{ 'actualSemesterLabel' | translate }}"
           placeholder="{{ 'selectActualSemesterPlaceholder' | translate }}">
           <ion-select-option *ngFor="let semester of semesters" [value]="semester">{{ semester.name |
             translate }}</ion-select-option>
         </ion-select>
       </ion-item>
 
+      <ion-item lines="full">
+        <ion-select [(ngModel)]="actualPromotionCourses" formControlName="promotionCourses" label="{{ 'coursesLabel' | translate }}"
+          placeholder="{{ 'selectCoursesPlaceholder' | translate }}" [multiple]="true">
+          <ion-select-option *ngFor="let promotionCourse of promotionCourses" [value]="promotionCourse" >{{ promotionCourse.course.title }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
     </div>
 
-    <div class="form-buttons">
+    <div class="form-buttons" [style.justify-content]="(this.promotion && this.promotion.id) ? 'space-between' : 'flex-end'">
+      <ion-button color="danger" fill="clear" *ngIf="this.promotion && this.promotion.id " (click)="delete()">
+        <ion-icon name="trash-outline" slot="start"></ion-icon>
+        &nbsp;{{ 'deleteButtonLabel' | translate }} 
+      </ion-button>
+
       <ion-button type="submit">
         <ion-icon name="send-outline" slot="end"></ion-icon>
         {{ 'saveButtonLabel' | translate }} &nbsp;

@@ -21,7 +21,7 @@
   
     <div class="section-body">
       <div class="section-buttons">
-        <ion-button fill="solid"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_establishments' |
+        <ion-button fill="solid" (click)="reload()"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_establishments' |
           translate}}</ion-button>
         <ion-button fill="outline" (click)="openAddEstablishmentModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{
           'add_new_establishment' | translate}}</ion-button>

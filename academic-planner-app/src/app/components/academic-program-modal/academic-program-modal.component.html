@@ -14,32 +14,36 @@
 
     <div class="form-controls">
       <ion-item lines="full">
-        <ion-label position="stacked">{{ 'codeLabel' | translate }}</ion-label>
-        <ion-input formControlName="code" placeholder="{{ 'enterCodePlaceholder' | translate }}" type="text" ngDefaultControl></ion-input>
+        <ion-label position="stacked" aria-labelledby="code" for="code">{{ 'codeLabel' | translate }}</ion-label>
+        <ion-input id="code" formControlName="code" placeholder="{{ 'enterCodePlaceholder' | translate }}" type="text" ngDefaultControl></ion-input>
       </ion-item>
 
       <ion-item lines="full">
-        <ion-label position="stacked">{{ 'nameLabel' | translate }}</ion-label>
-        <ion-input formControlName="name" placeholder="{{ 'enterNamePlaceholder' | translate }}" type="text" ngDefaultControl></ion-input>
+        <ion-label aria-labelledby="name" position="stacked" for="name">{{ 'nameLabel' | translate }}</ion-label>
+        <ion-input id="name" formControlName="name" placeholder="{{ 'enterNamePlaceholder' | translate }}" type="text" ngDefaultControl></ion-input>
       </ion-item>
 
       <ion-item lines="full">
-        <ion-label position="stacked">{{ 'descriptionLabel' | translate }}</ion-label>
-        <ion-textarea rows="4" formControlName="description" placeholder="{{ 'enterDescriptionPlaceholder' | translate }}" type="text"
+        <ion-label aria-labelledby="description" for="description" position="stacked">{{ 'descriptionLabel' | translate }}</ion-label>
+        <ion-textarea id="description" rows="4" formControlName="description" placeholder="{{ 'enterDescriptionPlaceholder' | translate }}" type="text"
           ngDefaultControl></ion-textarea>
       </ion-item>
 
       <ion-item lines="full">
-        <ion-select formControlName="degree" label="{{ 'degreeLabel' | translate }}"
+        <ion-select id="degree" formControlName="degree" label="{{ 'degreeLabel' | translate }}"
             placeholder="{{ 'selectDegreePlaceholder' | translate }}">
             <ion-select-option *ngFor="let degree of degrees" [value]="degree">{{ degree.name |
                 translate }}</ion-select-option>
         </ion-select>
     </ion-item>
-
     </div>
 
-    <div class="form-buttons">
+    <div class="form-buttons" [style.justify-content]="(this.academicProgram && this.academicProgram.id) ? 'space-between' : 'flex-end'">
+      <ion-button color="danger" fill="clear" *ngIf="this.academicProgram && this.academicProgram.id " (click)="delete()">
+        <ion-icon name="trash-outline" slot="start"></ion-icon>
+        &nbsp;{{ 'deleteButtonLabel' | translate }} 
+      </ion-button>
+
       <ion-button type="submit">
         <ion-icon name="send-outline" slot="end"></ion-icon>
         {{ 'saveButtonLabel' | translate }} &nbsp;

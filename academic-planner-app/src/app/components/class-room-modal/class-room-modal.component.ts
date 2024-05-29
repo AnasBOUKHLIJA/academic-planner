@@ -42,13 +42,19 @@ async submitForm() {
     if (this.classRoomForm.valid) {
       const classRoom = await this.adminServiceService.saveClassRoom(this.classRoomForm.value);
       this.classRoomForm.reset();
-      this.modalCtrl.dismiss({ classRoom : classRoom});
+      this.modalCtrl.dismiss({ classRoom : classRoom, role : 'save'});
     } else {
       this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
+
   closeModal() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss({ role : 'nothing'});
   }
 
+  async delete() {
+    await this.adminServiceService.deleteClassRoom(this.classRoom.id);
+    this.classRoomForm.reset();
+    this.modalCtrl.dismiss({  classRoom : this.classRoom, role : 'delete' });
+  }
 }

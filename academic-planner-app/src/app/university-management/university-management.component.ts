@@ -38,7 +38,7 @@ export class UniversityManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) this.university = data.university;
+    if(data && data.role === 'save') this.university = data.university;
   }
 
   async openAddEstablishmentModal() {
@@ -51,7 +51,7 @@ export class UniversityManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) this.establishments.push(data.establishment);
+    if(data && data.role === 'save') this.establishments.push(data.establishment);
   }
 
   async openEstablishmentModal(establishment : Establishment) {
@@ -65,7 +65,13 @@ export class UniversityManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) {
+
+    if (data.role === 'delete') {
+      const index = this.establishments.findIndex(e => e.id === establishment.id);
+      if (index !== -1) {
+        this.establishments.splice(index, 1);
+      }
+    } else if (data.role === 'save' && data.establishment) {
       const index = this.establishments.findIndex(e => e.id === data.establishment.id);
       if (index !== -1) {
         this.establishments[index] = data.establishment;
@@ -77,4 +83,7 @@ export class UniversityManagementComponent  implements OnInit {
     this.router.navigate([`/establishment/${code}`]);
   }
 
+  async reload(){
+    this.establishments = await this.kernelService.establishmentsGet(true);
+  }
 }

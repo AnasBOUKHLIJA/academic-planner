@@ -55,14 +55,20 @@ export class AcademicProgramModalComponent  implements OnInit {
     if (this.academicProgramForm.valid) {
       const academicProgram = await this.adminServiceService.saveAcademicProgram(this.academicProgramForm.value);
       this.academicProgramForm.reset();
-      this.modalCtrl.dismiss({ academicProgram : academicProgram});
+      this.modalCtrl.dismiss({ academicProgram : academicProgram, role : 'save'});
     } else {
       this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
 
   closeModal() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss({ role : 'nothing'});
+  }
+
+  async delete() {
+    await this.adminServiceService.deleteAcademicProgram(this.academicProgram.id);
+    this.academicProgramForm.reset();
+    this.modalCtrl.dismiss({ academicProgram : this.academicProgram, role : 'delete' });
   }
 
 }

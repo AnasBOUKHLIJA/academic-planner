@@ -37,7 +37,7 @@ export class AcademicProgramManagementComponent  implements OnInit {
     });  
     
     if(this.code) {
-      this.academicProgram  =  await this.kernelService.academicProgramByCodeGet(this.code);
+      this.academicProgram  = await this.kernelService.academicProgramByCodeGet(this.code);
       this.courses          = await this.kernelService.coursesByAcademicProgramCodeGet(this.academicProgram.code);
       this.promotions       = await this.kernelService.promotionsByAcademicProgramCodeGet(this.academicProgram.code);
     }
@@ -54,7 +54,7 @@ export class AcademicProgramManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) this.academicProgram = data.academicProgram;
+    if(data && data.role === 'save') this.academicProgram = data.academicProgram;
   }
 
   async openAddCourseModal() {
@@ -67,7 +67,7 @@ export class AcademicProgramManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) this.courses.push(data.course);
+    if(data && data.role === 'save') this.courses.push(data.course);
   }
 
   async openCourseModal(course : Course) {
@@ -81,7 +81,13 @@ export class AcademicProgramManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) {
+
+    if (data.role === 'delete') {
+      const index = this.courses.findIndex(e => e.id === course.id);
+      if (index !== -1) {
+        this.courses.splice(index, 1);
+      }
+    } else if (data.role === 'save' && data.course) {
       const index = this.courses.findIndex(e => e.id === data.course.id);
       if (index !== -1) {
         this.courses[index] = data.course;
@@ -99,21 +105,27 @@ export class AcademicProgramManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) this.promotions.push(data.course);
+    if(data && data.role === 'save') this.promotions.push(data.promotion);
   }
 
-  async openPromotionModal(Promotion : Promotion) {
+  async openPromotionModal(promotion : Promotion) {
     const modal = await this.modalCtrl.create({
       component: PromotionModalComponent,
       cssClass: 'card-modal',
       componentProps: {
-        promotion: Promotion,
+        promotion: promotion,
         academicProgram: this.academicProgram
       }
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) {
+
+    if (data.role === 'delete') {
+      const index = this.promotions.findIndex(e => e.id === promotion.id);
+      if (index !== -1) {
+        this.promotions.splice(index, 1);
+      }
+    } else if (data.role === 'save' && data.promotion) {
       const index = this.promotions.findIndex(e => e.id === data.promotion.id);
       if (index !== -1) {
         this.promotions[index] = data.promotion;
@@ -125,8 +137,16 @@ export class AcademicProgramManagementComponent  implements OnInit {
     this.router.navigate([`/course/${code}`]);
   }
 
-  getBackground() {
-    return this.utilsService.generateRandomSvgBackground();
+  getBackground(indice: number) {
+    return this.utilsService.generateRandomSvgBackground(indice);
+  }
+
+  async reloadPromotions(){
+    this.promotions       = await this.kernelService.promotionsByAcademicProgramCodeGet(this.academicProgram.code);
+  }
+
+  async reloadCourses(){
+    this.courses          = await this.kernelService.coursesByAcademicProgramCodeGet(this.academicProgram.code);
   }
 
 }

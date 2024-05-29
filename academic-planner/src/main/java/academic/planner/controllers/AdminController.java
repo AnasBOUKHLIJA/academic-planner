@@ -2,6 +2,7 @@ package academic.planner.controllers;
 
 import academic.planner.entities.*;
 import academic.planner.msg.Filter;
+import academic.planner.msg.PromotionDTO;
 import academic.planner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -289,7 +290,7 @@ public class AdminController {
             value = "/promotionSave",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Promotion> promotionSave(@RequestBody Promotion promotion) {
+    public ResponseEntity<PromotionDTO> promotionSave(@RequestBody Promotion promotion) {
         return new ResponseEntity<>(promotionService.save(promotion), HttpStatus.OK);
     }
 

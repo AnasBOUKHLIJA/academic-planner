@@ -6,9 +6,9 @@
     </span>
     <img *ngIf="establishment.thumbnail" [alt]="establishment.name" [src]="establishment.thumbnail" />
     <h1 *ngIf="establishment.name">{{establishment.name}}
-     <ng-container *ngIf="establishment.city && establishment.city.name">
-      (<ion-icon name="location-outline"></ion-icon> {{establishment.city.name}})
-    </ng-container>
+      <ng-container *ngIf="establishment.city && establishment.city.name">
+        (<ion-icon name="location-outline"></ion-icon> {{establishment.city.name}})
+      </ng-container>
     </h1>
     <p *ngIf="establishment.description">{{establishment.description}}</p>
   </div>
@@ -36,19 +36,19 @@
 
     <div class="section-body">
       <div class="section-buttons">
-        <ion-button fill="solid"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_departments' |
+        <ion-button fill="solid" (click)="reloadDepartments()"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_departments' |
           translate}}</ion-button>
         <ion-button fill="outline" (click)="openAddDepartmentModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{
           'add_new_department' | translate}}</ion-button>
       </div>
 
       <div class="grid-container">
-        <div class="card" *ngFor="let department of departments">
+        <div class="card" *ngFor="let department of departments; let i = index">
           <span class="float-card-button" (click)="openDepartmentModal(department)">
             <ion-icon name="create-outline"></ion-icon>
           </span>
           <div class="image-container">
-            <img [alt]="department.name" [src]="getBackground()" />
+            <img [alt]="department.name" [src]="getBackground(i)" />
           </div>
           <ion-card-header>
             <ion-card-title>{{ department.name }}</ion-card-title>
@@ -59,58 +59,58 @@
             <p>{{ department.description }}</p>
           </ion-card-content>
           <div class="card-bottom-buttons">
-            <ion-button color="primary" fill="clear" (click)="openDepartmentPage(department.code)"> {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon
-                name="arrow-forward-outline"></ion-icon></ion-button>
+            <ion-button color="primary" fill="clear" (click)="openDepartmentPage(department.code)"> {{
+              'moreDetailsLabel' | translate }} &nbsp; <ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-<!-- class rooms sections -->
+  <!-- class rooms sections -->
 
-<section class="page-shaped-section-conatiner">
+  <section class="page-shaped-section-conatiner">
 
-  <div class="section-header">
-    <h1 class="title">{{ 'classRooms' | translate}}</h1>
-  </div>
-
-  <div class="section-body">
-    <div class="section-buttons">
-      <ion-button fill="solid"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_classRooms' |
-        translate}}</ion-button>
-      <ion-button fill="outline" (click)="openAddClassRoomModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{
-        'add_new_classRoom' | translate}}</ion-button>
+    <div class="section-header">
+      <h1 class="title">{{ 'classRooms' | translate}}</h1>
     </div>
 
-    <div class="table-responsive">
-      <table class="table table-striped">
+    <div class="section-body">
+      <div class="section-buttons">
+        <ion-button fill="solid" (click)="reloadClassRooms()"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_classRooms' |
+          translate}}</ion-button>
+        <ion-button fill="outline" (click)="openAddClassRoomModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{
+          'add_new_classRoom' | translate}}</ion-button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
           <thead>
-              <tr>
-                  <th>{{ 'codeLabel' | translate }}</th>
-                  <th>{{ 'nameLabel' | translate }}</th>
-                  <th>{{ 'establishmentLabel' | translate }}</th>
-                  <th>{{ 'actionsLabel' | translate }}</th>
-              </tr>
+            <tr>
+              <th>{{ 'codeLabel' | translate }}</th>
+              <th>{{ 'nameLabel' | translate }}</th>
+              <th>{{ 'establishmentLabel' | translate }}</th>
+              <th>{{ 'actionsLabel' | translate }}</th>
+            </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let classRoom of classRooms">
-                  <td>{{ classRoom.code }}</td>
-                  <td>{{ classRoom.name }}</td>
-                  <td>{{ classRoom.establishment.name }}</td>
-                  <td>
-                      <ion-button color="danger" fill="clear" (click)="deleteClassRoom(classRoom)">
-                        <ion-icon name="trash-outline"></ion-icon>
-                      </ion-button>
-                  </td>
+            <tr *ngFor="let classRoom of classRooms">
+              <td>{{ classRoom.code }}</td>
+              <td>{{ classRoom.name }}</td>
+              <td>{{ classRoom.establishment.name }}</td>
+              <td>
+                <ion-button  fill="clear" (click)="openClassRoomModal(classRoom)">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+              </td>
 
-              </tr>
+            </tr>
           </tbody>
-      </table>
-  </div>
-  </div>
+        </table>
+      </div>
+    </div>
 
-</section>
+  </section>
 
 
 </app-base>

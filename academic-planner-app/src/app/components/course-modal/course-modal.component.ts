@@ -75,13 +75,19 @@ export class CourseModalComponent  implements OnInit {
     if (this.courseForm.valid) {
       const course = await this.adminServiceService.saveCourse(this.courseForm.value);
       this.courseForm.reset();
-      this.modalCtrl.dismiss({ course : course});
+      this.modalCtrl.dismiss({ course : course, role : 'save'});
     } else {
       this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
 
   closeModal() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss({ role : 'nothing'});
+  }
+
+  async delete() {
+    await this.adminServiceService.deleteCourse(this.course.id);
+    this.courseForm.reset();
+    this.modalCtrl.dismiss({ course : this.course, role : 'delete' });
   }
 }

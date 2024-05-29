@@ -12,10 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class GenericFilter implements Filter {
@@ -37,24 +34,49 @@ public class GenericFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
+        String method = httpRequest.getMethod();
+        if ("OPTIONS".equalsIgnoreCase(method)) {
+            chain.doFilter(request, response);
+            return;
+        }
 
-        // Log request
-        logger.info("Incoming request - Method: {}, URI: {}",  httpRequest.getMethod(),  httpRequest.getRequestURI());
+
+        ObjectMapper objectMapper = new ObjectMapper();
 
         // Continue with the filter chain
         try {
+
+            // Log all headers for debugging
+            /*Enumeration<String> headerNames = httpRequest.getHeaderNames();
+            Map<String, String> headersMap = new HashMap<>();
+            while (headerNames.hasMoreElements()) {
+                String headerName = headerNames.nextElement();
+                String headerValue = httpRequest.getHeader(headerName);
+                headersMap.put(headerName, headerValue);
+            }
+            String headersJson = objectMapper.writeValueAsString(headersMap);*/
+
             String requestURI           = httpRequest.getRequestURI();
             String contextPath          = httpRequest.getContextPath();
             String uriWithoutContext    = requestURI.substring(contextPath.length());
 
-            List<String> publicEndPoints        = Arrays.asList("security/login");
+            List<String> publicEndPoints        = Arrays.asList("/security/login");
+            String username                     = null;
+            String token                        = null;
+            if (! publicEndPoints.contains(uriWithoutContext)) {
 
-            if (publicEndPoints.contains(uriWithoutContext)) {
+                username = httpRequest.getHeader("username");
+                token    = httpRequest.getHeader("Authorization");
+                if (token != null && token.startsWith("Bearer ")) {
+                    token = token.substring("Bearer ".length());
+                }
 
-                String token = httpRequest.getHeader("Authorization");
+                // Log request
+                logger.info("Incoming request -> Method: {}, URI: {}, username: {}",
+                        httpRequest.getMethod(),  httpRequest.getRequestURI(), username);
 
                 // Validate the token using TokenValidator
-                boolean isValidToken = jwtTokenManager.validateToken(token);
+                boolean isValidToken = jwtTokenManager.validateTokenForUsername(token, username);
 
                 if (!isValidToken) {
                     // Token is invalid, return unauthorized status
@@ -89,7 +111,6 @@ public class GenericFilter implements Filter {
             errorResponse.put("status", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
 
             httpResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            ObjectMapper objectMapper = new ObjectMapper();
             PrintWriter writer = httpResponse.getWriter();
             objectMapper.writeValue(writer, errorResponse);
             writer.flush();

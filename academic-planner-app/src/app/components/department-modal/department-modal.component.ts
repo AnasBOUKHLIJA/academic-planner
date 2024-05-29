@@ -46,14 +46,20 @@ export class DepartmentModalComponent  implements OnInit {
     if (this.departmentForm.valid) {
       const department = await this.adminServiceService.saveDepartment(this.departmentForm.value);
       this.departmentForm.reset();
-      this.modalCtrl.dismiss({ department : department});
+      this.modalCtrl.dismiss({ department : department, role : 'save'});
     } else {
       this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
 
   closeModal() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss({ role : 'nothing'});
+  }
+
+  async delete() {
+    await this.adminServiceService.deleteDepartment(this.department.id);
+    this.departmentForm.reset();
+    this.modalCtrl.dismiss({ department : this.department, role : 'delete'});
   }
 
 }

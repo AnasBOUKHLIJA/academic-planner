@@ -31,12 +31,17 @@
 
     </div>
 
-    <div class="form-buttons">
+    <div class="form-buttons" [style.justify-content]="(this.department && this.department.id) ? 'space-between' : 'flex-end'">
+      <ion-button color="danger" fill="clear" *ngIf="this.department && this.department.id " (click)="delete()">
+        <ion-icon name="trash-outline" slot="start"></ion-icon>
+        &nbsp;{{ 'deleteButtonLabel' | translate }} 
+      </ion-button>
+
       <ion-button type="submit">
         <ion-icon name="send-outline" slot="end"></ion-icon>
         {{ 'saveButtonLabel' | translate }} &nbsp;
       </ion-button>
     </div>
-
+    
   </form>
 </div>

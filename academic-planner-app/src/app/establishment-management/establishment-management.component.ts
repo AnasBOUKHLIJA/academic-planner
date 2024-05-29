@@ -56,16 +56,7 @@ export class EstablishmentManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if (data) this.establishment = data.establishment;
-  }
-
-  async openCourseModal() {
-    const modal = await this.modalCtrl.create({
-      component: CourseModalComponent,
-      cssClass: 'card-modal',
-    });
-    await modal.present();
-    const { data } = await modal.onWillDismiss();
+    if (data && data.role === 'save') this.establishment = data.establishment;
   }
 
   async openAddDepartmentModal() {
@@ -78,7 +69,7 @@ export class EstablishmentManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if (data) this.departments.push(data.department);
+    if (data && data.role === 'save') this.departments.push(data.department);
   }
 
   async openDepartmentModal(department : Department) {
@@ -92,7 +83,12 @@ export class EstablishmentManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if (data) {
+    if (data.role === 'delete') {
+      const index = this.departments.findIndex(e => e.id === department.id);
+      if (index !== -1) {
+        this.departments.splice(index, 1);
+      }
+    } else if (data.role === 'save' && data.department) {
       const index = this.departments.findIndex(e => e.id === data.department.id);
       if (index !== -1) {
         this.departments[index] = data.department;
@@ -111,7 +107,7 @@ export class EstablishmentManagementComponent  implements OnInit {
     await modal.present();
     const { data } = await modal.onWillDismiss();
     console.log(data)
-    if (data) this.classRooms.push(data.classRoom);
+    if (data && data.role === 'save') this.classRooms.push(data.classRoom);
   }
 
   async openClassRoomModal(classRoom: ClassRoom) {
@@ -125,7 +121,13 @@ export class EstablishmentManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if (data) {
+
+    if (data.role === 'delete') {
+      const index = this.classRooms.findIndex(e => e.id === classRoom.id);
+      if (index !== -1) {
+        this.classRooms.splice(index, 1);
+      }
+    } else if (data.role === 'save' && data.classRoom) {
       const index = this.classRooms.findIndex(e => e.id === data.classRoom.id);
       if (index !== -1) {
         this.classRooms[index] = data.classRoom;
@@ -133,19 +135,19 @@ export class EstablishmentManagementComponent  implements OnInit {
     }
   }
 
-  async deleteClassRoom(classRoom: ClassRoom) {
-    await this.adminService.deleteClassRoom(classRoom);
-    const index = this.classRooms.findIndex(e => e.id === classRoom.id);
-    if (index !== -1) {
-      this.classRooms.splice(index, 1);
-    }
-  }
-
   openDepartmentPage(code: string) {
     this.router.navigate([`/department/${code}`]);
   }
 
-  getBackground() {
-    return this.utilsService.generateRandomSvgBackground();
+  getBackground(indice: number) {
+    return this.utilsService.generateRandomSvgBackground(indice);
+  }
+
+  async reloadDepartments(){
+    this.departments = await this.kernelService.departmentByEstablishmentCodeGet(this.establishment.code);
+  }
+
+  async reloadClassRooms(){
+    this.classRooms = await this.kernelService.classRoomsByEstablishmentCodeGet(this.establishment.code);
   }
 }

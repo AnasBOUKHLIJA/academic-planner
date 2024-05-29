@@ -1,6 +1,7 @@
 package academic.planner.controllers;
 
 import academic.planner.entities.*;
+import academic.planner.msg.PromotionDTO;
 import academic.planner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -164,6 +165,21 @@ public class KernelController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Course>> coursesGet(@PathVariable String academicProgramCode) {
         return new ResponseEntity<>(courseService.getByAcademicProgramCode(academicProgramCode), HttpStatus.OK);
+    }
+
+
+    @GetMapping(
+            value = "/promotionGet/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PromotionDTO> promotionGet(@PathVariable Long id) {
+        return new ResponseEntity<>(promotionService.getById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/promotionsGet/{academicProgramCode}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<PromotionDTO>> promotionsGet(@PathVariable String academicProgramCode) {
+        return new ResponseEntity<>(promotionService.getByAcademicProgramCode(academicProgramCode), HttpStatus.OK);
     }
 
     @GetMapping(

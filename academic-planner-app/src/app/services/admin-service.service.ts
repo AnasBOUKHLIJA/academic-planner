@@ -45,6 +45,7 @@ export class AdminServiceService {
     });
   }
 
+
   getStudents(filter : Filter) : Promise<StudentsResponse>{
     return new Promise((resolve, reject) => {
         this.networkService.post(this.MODULE_GET_URL + "studentsGet", filter, true).then((response: any) => {
@@ -182,9 +183,9 @@ export class AdminServiceService {
     });
   }
 
-  deleteClassRoom(classRoom: ClassRoom) : Promise<ClassRoom>{
+  deleteClassRoom(id: number) : Promise<any>{
     return new Promise( async (resolve, reject) => {
-      this.networkService.delete(this.MODULE_GET_URL + "classRoomDelete/" + classRoom.id, true).then((response: any) => {
+      this.networkService.delete(this.MODULE_GET_URL + "classRoomDelete/" + id, true).then((response: any) => {
             resolve(response);
         }, error => {
             reject(error);
@@ -196,6 +197,105 @@ export class AdminServiceService {
   savePromotion(promotion: Promotion) : Promise<Promotion>{
     return new Promise( async (resolve, reject) => {
       this.networkService.post(this.MODULE_GET_URL + "promotionSave", promotion, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  deleteStudent(id: number) : Promise<any>{
+    return new Promise((resolve, reject) => {
+        this.networkService.delete(this.MODULE_GET_URL + "studentDelete/" + id, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  deleteAdmin(id: number) : Promise<any>{
+    return new Promise((resolve, reject) => {
+        this.networkService.delete(this.MODULE_GET_URL + "adminDelete/" + id, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  deleteTeacher(id: number) : Promise<any>{
+    return new Promise((resolve, reject) => {
+        this.networkService.delete(this.MODULE_GET_URL + "teacherDelete/" + id, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  deleteEstablishment(id: number) : Promise<any>{
+    return new Promise((resolve, reject) => {
+        this.networkService.delete(this.MODULE_GET_URL + "establishmentDelete/" + id, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  deleteDepartment(id: number) : Promise<any>{
+    return new Promise((resolve, reject) => {
+        this.networkService.delete(this.MODULE_GET_URL + "departmentDelete/" + id, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  deleteAcademicProgram(id: number) : Promise<any>{
+    return new Promise((resolve, reject) => {
+        this.networkService.delete(this.MODULE_GET_URL + "academicProgramDelete/" + id, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  deletePromotion(id: number) : Promise<any>{
+    return new Promise((resolve, reject) => {
+        this.networkService.delete(this.MODULE_GET_URL + "promotionDelete/" + id, true).then((response: any) => {
+            resolve(response);
+        }, error => {
+            reject(error);
+        }
+        );
+    });
+  }
+
+  deleteCourse(id: number) : Promise<any>{
+    return new Promise((resolve, reject) => {
+        this.networkService.delete(this.MODULE_GET_URL + "courseDelete/" + id, true).then((response: any) => {
             resolve(response);
         }, error => {
             reject(error);

@@ -45,7 +45,7 @@ export class CourseManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) this.course = data.course;
+    if(data && data.role === 'save') this.course = data.course;
   }
 
 }

@@ -81,25 +81,20 @@ export class EstablishmentModalComponent  implements OnInit {
     if (this.establishmentForm.valid) {
       const establishment = await this.adminServiceService.saveEstablishment(this.establishmentForm.value);
       this.establishmentForm.reset();
-      this.modalCtrl.dismiss({ establishment : establishment});
+      this.modalCtrl.dismiss({ establishment : establishment, role : 'save'});
     } else {
       this.spinnerService.presentAlert('error','Form is not valid')
     }
   }
 
   closeModal() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss({ role : 'nothing'});
   }
 
-  base64ToBlob(base64String: string) {
-    const byteString = atob(base64String.split(',')[1]);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const uint8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      uint8Array[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([uint8Array], { type: 'image/jpeg' });
+  async delete() {
+    await this.adminServiceService.deleteEstablishment(this.establishment.id);
+    this.establishmentForm.reset();
+    this.modalCtrl.dismiss({ establishment : this.establishment, role : 'delete'});
   }
-
   
 }

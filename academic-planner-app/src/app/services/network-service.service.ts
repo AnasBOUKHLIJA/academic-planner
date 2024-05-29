@@ -16,14 +16,33 @@ export class NetworkServiceService {
     private alertController: AlertController
   ) { }
 
+  private getAuthToken(): string | null {
+    const storedInfo = localStorage.getItem('securityInfo');
+    const securityDTO = storedInfo ? JSON.parse(storedInfo) : null;
+    if(! securityDTO) return null;
+    return 'Bearer ' + securityDTO.token;
+  }
+
+  private getUsername(): string | null {
+    const storedInfo = localStorage.getItem('securityInfo');
+    const securityDTO = storedInfo ? JSON.parse(storedInfo) : null;
+    if(! securityDTO) return null;
+    return securityDTO.username;
+  }
+
   public post(module: string, query: any, toBeLoaded: boolean): Promise<any> {
     if (toBeLoaded) this.spinner.show();
+    const token       = this.getAuthToken();
+    const username    = this.getUsername();
     const endPointUrL = this.configuration.configuration.serverUrl + module;
 
     let httpHeaders: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin' : '*'
     });
+
+    if (token)  httpHeaders = httpHeaders.set('Authorization', token);
+    if (username)  httpHeaders = httpHeaders.set('username', username);
+
     let httpOptions = {
       headers: httpHeaders,
       params: undefined,
@@ -56,13 +75,16 @@ export class NetworkServiceService {
 
   public get(module: string, toBeLoaded: boolean): Promise<any> {
     if (toBeLoaded) this.spinner.show();
+    const token       = this.getAuthToken();
+    const username    = this.getUsername();
     const endPointUrL = this.configuration.configuration.serverUrl + module;
 
-    let httpHeaders: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-    });
+    let httpHeaders: HttpHeaders = new HttpHeaders();
+
+    if (token)  httpHeaders = httpHeaders.set('Authorization', token);
+    if (username)  httpHeaders = httpHeaders.set('username', username);
+
+
     let httpOptions = {
       headers: httpHeaders,
       params: undefined,
@@ -98,13 +120,18 @@ export class NetworkServiceService {
 
   public delete(module: string, toBeLoaded: boolean): Promise<any> {
     if (toBeLoaded) this.spinner.show();
+    const token       = this.getAuthToken();
+    const username    = this.getUsername();
     const endPointUrL = this.configuration.configuration.serverUrl + module;
 
     let httpHeaders: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+
     });
+
+    if (token)  httpHeaders = httpHeaders.set('Authorization', token);
+    if (username)  httpHeaders = httpHeaders.set('username', username);
+
     let httpOptions = {
       headers: httpHeaders,
       params: undefined,

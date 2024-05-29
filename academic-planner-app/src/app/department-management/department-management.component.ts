@@ -51,7 +51,7 @@ export class DepartmentManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) this.department = data.department;
+    if(data && data.role === 'save') this.department = data.department;
   }
 
   async openCourseModal() {
@@ -73,7 +73,7 @@ export class DepartmentManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) this.academicPrograms.push(data.academicProgram);
+    if(data && data.role === 'save') this.academicPrograms.push(data.academicProgram);
   }
 
   async openAcademicProgramModal(academicProgram : AcademicProgram) {
@@ -87,7 +87,13 @@ export class DepartmentManagementComponent  implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if(data) {
+
+    if (data.role === 'delete') {
+      const index = this.academicPrograms.findIndex(e => e.id === academicProgram.id);
+      if (index !== -1) {
+        this.academicPrograms.splice(index, 1);
+      }
+    } else if (data.role === 'save' && data.academicProgram) {
       const index = this.academicPrograms.findIndex(e => e.id === data.academicProgram.id);
       if (index !== -1) {
         this.academicPrograms[index] = data.academicProgram;
@@ -99,7 +105,11 @@ export class DepartmentManagementComponent  implements OnInit {
     this.router.navigate([`/academic-program/${code}`]);
   }
 
-  getBackground() {
-    return this.utilsService.generateRandomSvgBackground();
+  getBackground(indice : number) {
+    return this.utilsService.generateRandomSvgBackground(indice);
+  }
+
+  async reload(){
+    this.academicPrograms = await this.kernelService.academicProgramsByDepartmentCodeGet(this.department.code);
   }
 }
