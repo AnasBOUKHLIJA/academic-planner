@@ -1,9 +1,6 @@
 package academic.planner.msg;
 
-import academic.planner.entities.AcademicProgram;
-import academic.planner.entities.Promotion;
-import academic.planner.entities.PromotionCourse;
-import academic.planner.entities.Semester;
+import academic.planner.entities.*;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -18,6 +15,7 @@ public class PromotionDTO {
     private Date startYear;
     private Date endYear;
     private List<PromotionCourse> promotionCourses;
+    private List<Student> students;
 
     public void init(Promotion promotion){
         this.id = promotion.getId();
@@ -84,5 +82,13 @@ public class PromotionDTO {
 
     public void setPromotionCourses(List<PromotionCourse> promotionCourses) {
         this.promotionCourses = promotionCourses;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

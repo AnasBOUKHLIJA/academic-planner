@@ -4,10 +4,11 @@
     <span class="edit-button" (click)="openAcademicProgramModal()">
       <ion-icon name="create-outline"></ion-icon>
     </span>
-    <h1 *ngIf="academicProgram.name">{{academicProgram.name}} 
-     <ng-container *ngIf="academicProgram.department.establishment.city && academicProgram.department.establishment.city.name">
-      (<ion-icon name="location-outline"></ion-icon> {{academicProgram.department.establishment.name}})
-    </ng-container>
+    <h1 *ngIf="academicProgram.name">{{academicProgram.name}}
+      <ng-container
+        *ngIf="academicProgram.department.establishment.city && academicProgram.department.establishment.city.name">
+        (<ion-icon name="location-outline"></ion-icon> {{academicProgram.department.establishment.name}})
+      </ng-container>
     </h1>
     <p *ngIf="academicProgram.description">{{academicProgram.description}}</p>
   </div>
@@ -20,7 +21,8 @@
 
     <div class="section-body">
       <div class="section-buttons">
-        <ion-button fill="solid" (click)="reloadPromotions()"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_promotions' |
+        <ion-button fill="solid" (click)="reloadPromotions()"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{
+          'reload_promotions' |
           translate}}</ion-button>
         <ion-button fill="outline" (click)="openAddPromotionModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{
           'add_new_promotion' | translate}}</ion-button>
@@ -38,12 +40,15 @@
           </thead>
           <tbody>
             <tr *ngFor="let promotion of promotions">
-              <td>{{ promotion.startYear }}</td>
-              <td>{{ promotion.endYear }}</td>
+              <td>{{ promotion.startYear | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ promotion.endYear | date: 'dd/MM/yyyy' }}</td>
               <td>{{ promotion.actualSemester.name }}</td>
               <td>
-                <ion-button  fill="clear" (click)="openPromotionModal(promotion)">
+                <ion-button fill="clear" (click)="openPromotionModal(promotion)">
                   <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+                <ion-button fill="clear" (click)="openRegistrationModal(promotion)">
+                  <ion-icon name="people-outline"></ion-icon>
                 </ion-button>
               </td>
 
@@ -59,15 +64,16 @@
     <div class="section-header">
       <h1 class="title">{{ 'courses' | translate}}</h1>
     </div>
-  
+
     <div class="section-body">
       <div class="section-buttons">
-        <ion-button fill="solid" (click)="reloadCourses()"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{ 'reload_courses' |
+        <ion-button fill="solid" (click)="reloadCourses()"><ion-icon name="reload-outline"></ion-icon> &nbsp; {{
+          'reload_courses' |
           translate}}</ion-button>
         <ion-button fill="outline" (click)="openAddCourseModal()"><ion-icon name="add-outline"></ion-icon> &nbsp; {{
           'add_new_course' | translate}}</ion-button>
       </div>
-  
+
       <div class="grid-container">
         <div class="card" *ngFor="let course of courses; let i = index">
           <span class="float-card-button" (click)="openCourseModal(course)">
@@ -85,7 +91,8 @@
             <p>{{ course.description }}</p>
           </ion-card-content>
           <div class="card-bottom-buttons">
-            <ion-button color="primary" fill="clear" (click)="openCoursePage(course.code)"> {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+            <ion-button color="primary" fill="clear" (click)="openCoursePage(course.code)"> {{ 'moreDetailsLabel' |
+              translate }} &nbsp; <ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
           </div>
         </div>
       </div>

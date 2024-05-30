@@ -15,6 +15,7 @@ import { Semester } from '../models/Semester';
 import { ClassRoom } from '../models/ClassRoom';
 import { Person } from '../models/Person';
 import { Promotion } from '../models/Promotion';
+import { Registration } from '../models/Registration';
 
 @Injectable({
   providedIn: 'root'

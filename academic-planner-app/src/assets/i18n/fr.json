@@ -135,5 +135,9 @@
     "enterEndYearPlaceholder": "Entrez l'année de fin",
     "actualSemesterLabel": "Semestre actuel",
     "selectActualSemesterPlaceholder": "Sélectionnez le semestre actuel",
-    "deleteButtonLabel": "Supprimer"
+    "deleteButtonLabel": "Supprimer",
+    "enrolmentTitle": "Souscription des étudiants pour le programme académique",
+    "enrolmentDescription": "Veuillez sélectionner les étudiants de cette promotion pour ce programme académique",
+    "studentsOf": "Les étudiants de",
+    "ofPromotion": "de Promotion"
 }

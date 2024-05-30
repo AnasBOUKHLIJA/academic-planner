@@ -15,11 +15,11 @@ public class Registration {
 
     @ManyToOne
     @JoinColumn(name="promotion_id", foreignKey=@ForeignKey(name="fk_promotion_student_promotion"), nullable=false)
-    public Promotion promotion;
+    private Promotion promotion;
 
     @ManyToOne
     @JoinColumn(name="student_id", foreignKey=@ForeignKey(name="fk_promotion_student_student"), nullable=false)
-    public Student student;
+    private Student student;
 
     @Column(name = "registration_date", nullable=false)
     private Date registrationDate;

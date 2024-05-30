@@ -1,0 +1,128 @@
+<div class="modal-header">
+  <span class="close-button" (click)="closeModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </span>
+</div>
+
+<div class="form-container">
+  <div class="form-header">
+    <h1>{{ 'enrolmentTitle' | translate }}</h1>
+    <p>{{ 'enrolmentDescription' | translate }}</p>
+  </div>
+
+  <div>
+    <form [formGroup]="filterForm" (ngSubmit)="submitFilterForm()" novalidate>
+      <div class="form-row">
+        <ion-item lines="full">
+          <ion-label position="stacked">{{ 'firstNameLabel' | translate }}</ion-label>
+          <ion-input formControlName="firstName" placeholder="{{ 'enterFirstNamePlaceholder' | translate }}" type="text"
+            ngDefaultControl></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="stacked">{{ 'lastNameLabel' | translate }}</ion-label>
+          <ion-input formControlName="lastName" placeholder="{{ 'enterLastNamePlaceholder' | translate }}" type="text"
+            ngDefaultControl></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="form-row">
+        <ion-item lines="full">
+          <ion-label position="stacked">{{ 'apogeeCodeLabel' | translate }}</ion-label>
+          <ion-input formControlName="apogeeCode" placeholder="{{ 'enterApogeeCodePlaceholder' | translate }}"
+            type="text" ngDefaultControl></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="stacked">{{ 'studentNationalCodeLabel' | translate }}</ion-label>
+          <ion-input formControlName="studentNationalCode"
+            placeholder="{{ 'enterStudentNationalCodePlaceholder' | translate }}" type="text"
+            ngDefaultControl></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="form-buttons">
+        <ion-button fill="outline" (click)="clearFilter()">
+          <ion-icon name="sync-circle-outline" slot="start"></ion-icon>
+          &nbsp; {{ 'clearFilter' | translate }}
+        </ion-button>
+
+        <ion-button type="submit">
+          <ion-icon name="send-outline" slot="end"></ion-icon>
+          {{ 'submitFilterLabel' | translate }} &nbsp;
+        </ion-button>
+      </div>
+    </form>
+  </div>
+
+  <div>
+    <ion-list *ngIf="studentsResponse && studentsResponse.content && studentsResponse.content.length !== 0">
+      <ion-item *ngFor="let student of studentsResponse.content">
+        <ion-checkbox [checked]="isSelected(student)" (ionChange)="toggleStudentSelection(student)"
+          justify="space-between">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <img class="thumbnail" alt="" [src]="student.thumbnail" /> {{student.firstName}} {{student.lastName}} -
+            {{student.studentNationalCode}}
+          </div>
+        </ion-checkbox>
+      </ion-item>
+
+      <div class="paggination">
+        <ion-button fill="solid" (click)="paginate('prev')"> <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <p>Page {{ studentsResponse.number+1 }} of {{ studentsResponse.totalPages }}</p>
+        <ion-button fill="solid" (click)="paginate('next')"> <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-list>
+
+    <h1> {{'studentsOf' | translate}} {{academicProgram.name}}  {{'ofPromotion' | translate}} {{ promotion.startYear | date: 'dd/MM/yyyy' }}-{{ promotion.endYear | date: 'dd/MM/yyyy' }} </h1>
+
+    <!-- <ion-list >
+      <ion-item *ngFor="let registration of registrations">
+        
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <img class="thumbnail" alt="" [src]="registration.student.thumbnail" /> {{registration.student.firstName}}
+          {{registration.student.lastName}} - {{registration.student.studentNationalCode}}
+        </div> -->
+
+
+        <div class="table-responsive" *ngIf="registrations && registrations.length !== 0">
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th></th>
+                      <th>{{ 'firstNameLabel' | translate }}</th>
+                      <th>{{ 'lastNameLabel' | translate }}</th>
+                      <th>{{ 'apogeeCodeLabel' | translate }}</th>
+                      <th>{{ 'registrationDateLabel' | translate }}</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let registration of registrations">
+                      <td>
+                          <img alt="" [src]="registration.student.thumbnail" />
+                      </td>
+                      <td>{{ registration.student.firstName }}</td>
+                      <td>{{ registration.student.lastName }}</td>
+                      <td>{{ registration.student.apogeeCode }}</td>
+                      <td>{{ registration.registrationDate | date: 'dd/MM/yyyy' }}</td>
+                      <td>
+                          <ion-button color="danger" fill="clear" (click)="delete(registration.id)"> 
+                            <ion-icon name="trash-outline"></ion-icon></ion-button>
+                      </td>
+                      
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+
+
+      <div style="display: flex; justify-content: flex-end; margin: 10px 0 0 0;">
+        <ion-button type="submit" (click)="save()">
+          <ion-icon name="send-outline" slot="end"></ion-icon>
+          {{ 'saveButtonLabel' | translate }} &nbsp;
+        </ion-button>
+      </div>
+
+  </div>
+</div>

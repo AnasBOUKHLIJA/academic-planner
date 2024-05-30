@@ -10,6 +10,7 @@ import { CourseModalComponent } from '../components/course-modal/course-modal.co
 import { AcademicProgramModalComponent } from '../components/academic-program-modal/academic-program-modal.component';
 import { PromotionModalComponent } from '../components/promotion-modal/promotion-modal.component';
 import { Promotion } from '../models/Promotion';
+import { RegistrationModalComponent } from '../components/registration-modal/registration-modal.component';
 
 @Component({
   selector: 'app-academic-program-management',
@@ -106,6 +107,25 @@ export class AcademicProgramManagementComponent  implements OnInit {
     await modal.present();
     const { data } = await modal.onWillDismiss();
     if(data && data.role === 'save') this.promotions.push(data.promotion);
+  }
+
+  async openRegistrationModal(promotion: Promotion) {
+    const modal = await this.modalCtrl.create({
+      component: RegistrationModalComponent,
+      cssClass: 'card-modal',
+      componentProps: {
+        promotion: promotion,
+        academicProgram: this.academicProgram
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data.role === 'save' && data.promotion) {
+      const index = this.promotions.findIndex(e => e.id === data.promotion.id);
+      if (index !== -1) {
+        this.promotions[index] = data.promotion;
+      }
+    }
   }
 
   async openPromotionModal(promotion : Promotion) {

@@ -216,7 +216,7 @@
                     <td>{{ teacher.firstName }}</td>
                     <td>{{ teacher.lastName }}</td>
                     <td>{{ teacher.username }}</td>
-                    <td>{{ teacher.birthDate }}</td>
+                    <td>{{ teacher.birthDate | date: 'dd/MM/yyyy' }}</td>
                     <td>
                         <ion-button color="primary" fill="clear" (click)="openPersonPage(teacher.username)">
                             {{ 'moreDetailsLabel' | translate }} &nbsp; <ion-icon

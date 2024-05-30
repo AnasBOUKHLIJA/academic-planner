@@ -80,8 +80,7 @@ public class GenericFilter implements Filter {
 
                 if (!isValidToken) {
                     // Token is invalid, return unauthorized status
-                    httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                    return;
+                    throw new AcademicPlannerException(ErrorCode.unauthorized, "You are not authorized. Please login.");
                 }
             }
             chain.doFilter(request, response);
@@ -99,6 +98,9 @@ public class GenericFilter implements Filter {
             if (cause instanceof AcademicPlannerException academicPlannerException) {
                 errorCode = academicPlannerException.getErrorCode().name();
                 errorMessage = academicPlannerException.getMessage();
+                if(ErrorCode.unauthorized.equals(academicPlannerException.getErrorCode())){
+                    httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                }
             } else {
                 errorCode = ErrorCode.Declined.name();
                 errorMessage = "An error occurred while processing the request";

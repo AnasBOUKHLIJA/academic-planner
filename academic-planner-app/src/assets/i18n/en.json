@@ -135,5 +135,9 @@
     "enterEndYearPlaceholder": "Enter the end year",
     "actualSemesterLabel": "Actual Semester",
     "selectActualSemesterPlaceholder": "Select the actual semester",
-    "deleteButtonLabel": "Delete"
+    "deleteButtonLabel": "Delete",
+    "enrolmentTitle": "Student Enrollment for the Academic Program",
+    "enrolmentDescription": "Please select the students from this promotion for this academic program",
+    "studentsOf": "Students of",
+    "ofPromotion": "of Promotion"
 }

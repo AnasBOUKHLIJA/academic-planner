@@ -1,0 +1,27 @@
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0 0 0;
+
+    ion-button {
+        min-width: 15%;
+    }
+}
+
+.thumbnail {
+    width: 40px;
+    height: 40px;
+}
+
+ion-item {
+    --padding-start: 10px;
+    --padding-end: 10px;
+    --padding-top: 0;
+    --padding-bottom: 0;
+}
