@@ -1,5 +1,6 @@
 package academic.planner.services;
 
+import academic.planner.entities.Student;
 import academic.planner.entities.Teacher;
 import academic.planner.msg.Filter;
 import academic.planner.repositories.TeacherRepository;
@@ -47,6 +48,12 @@ public class TeacherService {
     public Teacher getById(Long id) {
         Optional<Teacher> optionalTeacher = teacherRepository.findById(id);
         if(! optionalTeacher.isPresent()) throw new AcademicPlannerException(ErrorCode.teacher_not_found, "Teacher not found with id => " + id);
+        return optionalTeacher.get();
+    }
+
+    public Teacher getByUsername(String username) {
+        Optional<Teacher> optionalTeacher = teacherRepository.findByUsername(username);
+        if (optionalTeacher.isEmpty()) throw new AcademicPlannerException(ErrorCode.user_not_found, "User not found");
         return optionalTeacher.get();
     }
 

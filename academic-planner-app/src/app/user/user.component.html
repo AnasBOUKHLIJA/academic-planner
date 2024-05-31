@@ -1,15 +1,51 @@
 <app-base>
 
+  <section class="user-section" *ngIf="student">
+    <div class="bloc">
+      <img [src]="student?.thumbnail" alt="">
+      <div>
+        <p> {{ 'firstNameLabel' | translate }} : {{student?.firstName}} {{student?.lastName}} ({{student?.profile.name}})</p>
+        <p> {{ 'lastNameLabel' | translate }} : {{student?.username}} </p>
+        <p> {{ 'emailLabel' | translate }} : {{student?.email}} </p>
+        <p> {{ 'legalIdNumberLabel' | translate }} : {{student?.legalIdNumber}} </p>
+        <p> {{ 'legalIdTypeLabel' | translate }} : {{student?.legalIdType.name}} </p>
+        <p> {{ 'citizenshipLabel' | translate }} : {{student?.citizenship.name}} </p>
+      </div>
+      <span class="float-card-button" (click)="openPersonModal()">
+        <ion-icon name="create-outline"></ion-icon>
+      </span>
+    </div>
+
+  </section>
+
+  <section class="user-section" *ngIf="teacher">
+    <div class="bloc">
+      <img [src]="teacher?.thumbnail" alt="">
+      <div>
+        <p> {{ 'firstNameLabel' | translate }} : {{teacher?.firstName}} {{teacher?.lastName}} ({{teacher?.profile.name}})</p>
+        <p> {{ 'lastNameLabel' | translate }} : {{teacher?.username}} </p>
+        <p> {{ 'emailLabel' | translate }} : {{teacher?.email}} </p>
+        <p> {{ 'legalIdNumberLabel' | translate }} : {{teacher?.legalIdNumber}} </p>
+        <p> {{ 'legalIdTypeLabel' | translate }} : {{teacher?.legalIdType.name}} </p>
+        <p> {{ 'citizenshipLabel' | translate }} : {{teacher?.citizenship.name}} </p>
+      </div>
+      <span class="float-card-button" (click)="openPersonModal()">
+        <ion-icon name="create-outline"></ion-icon>
+      </span>
+    </div>
+
+  </section>
+
   <section class="user-section" *ngIf="person">
     <div class="bloc">
-      <img [src]="person.thumbnail" alt="">
+      <img [src]="person?.thumbnail" alt="">
       <div>
-        <p> {{ 'firstNameLabel' | translate }} : {{person.firstName}} {{person.lastName}} ({{person.profile.name}})</p>
-        <p> {{ 'lastNameLabel' | translate }} : {{person.username}} </p>
-        <p> {{ 'emailLabel' | translate }} : {{person.email}} </p>
-        <p> {{ 'legalIdNumberLabel' | translate }} : {{person.legalIdNumber}} </p>
-        <p> {{ 'legalIdTypeLabel' | translate }} : {{person.legalIdType.name}} </p>
-        <p> {{ 'citizenshipLabel' | translate }} : {{person.citizenship.name}} </p>
+        <p> {{ 'firstNameLabel' | translate }} : {{person?.firstName}} {{person?.lastName}} ({{person?.profile.name}})</p>
+        <p> {{ 'lastNameLabel' | translate }} : {{person?.username}} </p>
+        <p> {{ 'emailLabel' | translate }} : {{person?.email}} </p>
+        <p> {{ 'legalIdNumberLabel' | translate }} : {{person?.legalIdNumber}} </p>
+        <p> {{ 'legalIdTypeLabel' | translate }} : {{person?.legalIdType.name}} </p>
+        <p> {{ 'citizenshipLabel' | translate }} : {{person?.citizenship.name}} </p>
       </div>
       <span class="float-card-button" (click)="openPersonModal()">
         <ion-icon name="create-outline"></ion-icon>

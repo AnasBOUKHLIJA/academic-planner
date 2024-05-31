@@ -46,13 +46,15 @@ public class PersonService {
 
     public Person getByUsername(String username) {
         Optional<Person> optionalPerson = personRepository.findByUsername(username);
-        if (optionalPerson.isEmpty()) throw new AcademicPlannerException(ErrorCode.security_login_password, "Login or Password invalid");
+        if (optionalPerson.isEmpty()) throw new AcademicPlannerException(ErrorCode.user_not_found, "User not found");
         return optionalPerson.get();
     }
     public Person save(Person person) {
         String username = generateUsername(person.getFirstName(), person.getLastName());
-        person.setUsername(username);
-        person.setPassword(encryptionManager.digest(person.getUsername(), person.getUsername()));
+        if(person.getUsername() != null) {
+            person.setUsername(username);
+            person.setPassword(encryptionManager.digest(person.getUsername(), person.getUsername()));
+        }
         return personRepository.save(person);
     }
 

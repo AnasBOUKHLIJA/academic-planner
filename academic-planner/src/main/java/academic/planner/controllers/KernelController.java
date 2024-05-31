@@ -2,6 +2,8 @@ package academic.planner.controllers;
 
 import academic.planner.entities.*;
 import academic.planner.msg.PromotionDTO;
+import academic.planner.msg.ScheduleDTO;
+import academic.planner.msg.ScheduleRequest;
 import academic.planner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +36,7 @@ public class KernelController {
     private final RegistrationService         registrationService;
     private final GradeService                gradeService;
     private final ScheduleService             scheduleService;
+    private final TeacherService                teacherService;
 
     @Autowired
     public KernelController(CountryService countryService, CityService cityService, UniversityService universityService,
@@ -41,7 +44,7 @@ public class KernelController {
                             DegreeService degreeService, AcademicProgramService academicProgramService, PromotionService promotionService,
                             SemesterService semesterService, CourseService courseService, LegalIdTypeService legalIdTypeService, ProfileService profileService,
                             StudentService studentService, RegistrationService registrationService, GradeService gradeService, ScheduleService scheduleService,
-                            PersonService personService) {
+                            PersonService personService, TeacherService teacherService) {
         this.countryService = countryService;
         this.cityService = cityService;
         this.universityService = universityService;
@@ -60,6 +63,7 @@ public class KernelController {
         this.gradeService = gradeService;
         this.scheduleService = scheduleService;
         this.personService = personService;
+        this.teacherService = teacherService;
     }
 
     @GetMapping(
@@ -196,4 +200,24 @@ public class KernelController {
         return new ResponseEntity<>(personService.getByUsername(username), HttpStatus.OK);
     }
 
+    @GetMapping(
+                value = "/teacherByUsernameGet/{username}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Teacher> teacherByUsernameGet(@PathVariable String username) {
+        return new ResponseEntity<>(teacherService.getByUsername(username), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/studentByUsernameGet/{username}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Student> studentByUsernameGet(@PathVariable String username) {
+        return new ResponseEntity<>(studentService.getByUsername(username), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            value = "/schedulesGet/{promotionId}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ScheduleDTO>> schedulesGet(@PathVariable Long promotionId) {
+        return new ResponseEntity<>(scheduleService.getAll(promotionId), HttpStatus.OK);
+    }
 }

@@ -180,7 +180,7 @@ export class AdminsManagementComponent  implements OnInit {
 
 
   openPersonPage(username: string) {
-    this.router.navigate([`/user/${username}`]);
+    this.router.navigate([`/user/admin/${username}`]);
   }
 
 }

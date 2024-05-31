@@ -1,9 +1,7 @@
 package academic.planner.controllers;
 
 import academic.planner.entities.*;
-import academic.planner.msg.Filter;
-import academic.planner.msg.PromotionDTO;
-import academic.planner.msg.RegistrationDTO;
+import academic.planner.msg.*;
 import academic.planner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -432,8 +430,8 @@ public class AdminController {
             value = "/registrationsSave",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<RegistrationDTO>> registrationsSave(@RequestBody List<Registration> registrations) {
-        return new ResponseEntity<>(registrationService.save(registrations), HttpStatus.OK);
+    public ResponseEntity<List<RegistrationDTO>> registrationsSave(@RequestBody RegistrationRequest registrationRequest) {
+        return new ResponseEntity<>(registrationService.save(registrationRequest), HttpStatus.OK);
     }
 
     @GetMapping(
@@ -441,6 +439,14 @@ public class AdminController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<RegistrationDTO>> registrationsGet(@PathVariable Long promotionId) {
         return new ResponseEntity<>(registrationService.getAll(promotionId), HttpStatus.OK);
+    }
+
+    @PostMapping(
+            value = "/schedulesSave",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ScheduleDTO>> schedulesSave(@RequestBody ScheduleRequest scheduleRequest) {
+        return new ResponseEntity<>(scheduleService.save(scheduleRequest), HttpStatus.OK);
     }
 
     /*

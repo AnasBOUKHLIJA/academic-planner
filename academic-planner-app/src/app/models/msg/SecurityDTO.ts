@@ -2,6 +2,7 @@ import { Profile } from "../Profile";
 
 export class SecurityDTO {
 
+    id:  number;
     firstname:  string;
     lastName:   string;
     username:   string;

@@ -13,6 +13,7 @@ import { AcademicProgramManagementComponent } from './academic-program-managemen
 import { CourseManagementComponent } from './course-management/course-management.component';
 import { UserComponent } from './user/user.component';
 import { StudentsComponent } from './students/students.component';
+import { CoursesComponent } from './courses/courses.component';
 
 
 const routes: Routes = [
@@ -69,7 +70,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'user/:username', component: UserComponent,
+    path: 'user/:type/:username', component: UserComponent,
     data: {
       title: "",
       description: ""
@@ -90,9 +91,9 @@ const routes: Routes = [
     }
   },
   {
-    path: 'absences', component: AbsencesManagementComponent,
+    path: 'courses', component: CoursesComponent,
     data: {
-      title: "Absences",
+      title: "courses",
       description: "Gérez les absences des étudiants et du personnel académique de manière organisée et efficace grâce au module de gestion des absences du planificateur académique."
     }
   },

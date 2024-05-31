@@ -192,7 +192,7 @@ export class TeachersManagementComponent  implements OnInit {
   }
 
   openPersonPage(username: string) {
-    this.router.navigate([`/user/${username}`]);
+    this.router.navigate([`/user/teacher/${username}`]);
   }
   
 }

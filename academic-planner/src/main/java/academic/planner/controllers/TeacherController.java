@@ -1,9 +1,18 @@
 package academic.planner.controllers;
 
+import academic.planner.entities.Course;
+import academic.planner.msg.RegistrationDTO;
 import academic.planner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/teacher")
@@ -49,5 +58,12 @@ public class TeacherController {
         this.registrationService = registrationService;
         this.gradeService = gradeService;
         this.scheduleService = scheduleService;
+    }
+
+    @GetMapping(
+            value = "/CoursesGet/{teacherId}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Course>> CoursesGet(@PathVariable Long teacherId) {
+        return new ResponseEntity<>(courseService.getTeacherCourses(teacherId), HttpStatus.OK);
     }
 }

@@ -28,7 +28,7 @@ public class Promotion {
     @Column(name = "end_year", nullable=false)
     private Date endYear;
 
-    @OneToMany(mappedBy="promotion")
+    @Transient
     private List<PromotionCourse>  promotionCourses;
     //--------------------------------------------------------------------------------
     // GETTER AND SETTERS

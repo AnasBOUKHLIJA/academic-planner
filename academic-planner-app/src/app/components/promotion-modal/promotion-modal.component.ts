@@ -53,6 +53,7 @@ export class PromotionModalComponent  implements OnInit  {
     this.courses.forEach(course => {
         const promotionCourse = new PromotionCourse();
         promotionCourse.course = course;
+        promotionCourse.promotion = this.promotion;
         this.promotionCourses.push(promotionCourse);
     });
     
@@ -68,6 +69,7 @@ export class PromotionModalComponent  implements OnInit  {
 
   async submitForm() {
     if (this.promotionForm.valid) {
+      console.log(this.promotionForm.value);
       const promotion = await this.adminServiceService.savePromotion(this.promotionForm.value);
       this.promotionForm.reset();
       this.modalCtrl.dismiss({ promotion : promotion, role : 'save'});

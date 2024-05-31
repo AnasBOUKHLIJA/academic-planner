@@ -19,6 +19,9 @@ import { Course } from '../models/Course';
 import { ClassRoom } from '../models/ClassRoom';
 import { Promotion } from '../models/Promotion';
 import { Registration } from '../models/Registration';
+import { RegistrationRequest } from '../models/RegistrationRequest';
+import { ScheduleRequest } from '../models/ScheduleRequest';
+import { Schedule } from '../models/Schedule';
 
 @Injectable({
     providedIn: 'root'
@@ -305,9 +308,9 @@ export class AdminServiceService {
         });
     }
 
-    saveRegistrations(registrations: Registration[]): Promise<Registration[]> {
+    saveRegistrations(registrationRequest: RegistrationRequest): Promise<Registration[]> {
         return new Promise((resolve, reject) => {
-            this.networkService.post(this.MODULE_GET_URL + "registrationsSave", registrations, true).then((response: any) => {
+            this.networkService.post(this.MODULE_GET_URL + "registrationsSave", registrationRequest, true).then((response: any) => {
                 resolve(response);
             }, error => {
                 reject(error);
@@ -320,6 +323,17 @@ export class AdminServiceService {
     getRegistrations(promotionId: number): Promise<Registration[]> {
         return new Promise((resolve, reject) => {
             this.networkService.get(this.MODULE_GET_URL + "registrationsGet/" + promotionId, true).then((response: any) => {
+                resolve(response);
+            }, error => {
+                reject(error);
+            }
+            );
+        });
+    }
+
+    saveSchedules(scheduleRequest: ScheduleRequest): Promise<Schedule[]> {
+        return new Promise((resolve, reject) => {
+            this.networkService.post(this.MODULE_GET_URL + "schedulesSave", scheduleRequest, true).then((response: any) => {
                 resolve(response);
             }, error => {
                 reject(error);

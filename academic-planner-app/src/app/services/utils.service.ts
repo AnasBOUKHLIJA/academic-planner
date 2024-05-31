@@ -24,20 +24,19 @@ export class UtilsService {
       { code: 'university', url: '/university', icon: 'business' },
       { code: 'users',      url: '/users-management', icon: 'people' },
       { code: 'schedules',  url: '/schedules', icon: 'time' },
-      { code: 'absences',   url: '/absences', icon: 'calendar' },
     ],
     teacher: [
-      { code: 'dashboard',   url: '/dashboard', icon: 'home' },
+      { code: 'dashboard',   url: '/', icon: 'home' },
       { code: 'courses',     url: '/courses', icon: 'book' },
-      { code: 'absences',    url: '/absences', icon: 'calendar' },
       { code: 'grades',      url: '/grades', icon: 'school' },
       { code: 'students',    url: '/students', icon: 'people' },
+      { code: 'schedules',   url: '/schedules', icon: 'time' },
     ],
     student: [
       { code: 'dashboard',   url: '/dashboard', icon: 'home' },
       { code: 'courses',     url: '/courses', icon: 'book' },
-      { code: 'absences',    url: '/absences', icon: 'calendar' },
       { code: 'grades',      url: '/grades', icon: 'school' },
+      { code: 'schedules',   url: '/schedules', icon: 'time' },
     ]
   };
 

@@ -18,14 +18,11 @@ import java.util.*;
 public class GenericFilter implements Filter {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
-
-    private final PayloadLogger payloadLogger;
     private final JwtTokenManager jwtTokenManager;
 
     @Autowired
-    public GenericFilter(PayloadLogger payloadLogger, JwtTokenManager jwtTokenManager) {
-        this.payloadLogger      = payloadLogger;
-        this.jwtTokenManager    = jwtTokenManager;
+    public GenericFilter(JwtTokenManager jwtTokenManager) {
+        this.jwtTokenManager = jwtTokenManager;
     }
 
     @Override
@@ -45,17 +42,6 @@ public class GenericFilter implements Filter {
 
         // Continue with the filter chain
         try {
-
-            // Log all headers for debugging
-            /*Enumeration<String> headerNames = httpRequest.getHeaderNames();
-            Map<String, String> headersMap = new HashMap<>();
-            while (headerNames.hasMoreElements()) {
-                String headerName = headerNames.nextElement();
-                String headerValue = httpRequest.getHeader(headerName);
-                headersMap.put(headerName, headerValue);
-            }
-            String headersJson = objectMapper.writeValueAsString(headersMap);*/
-
             String requestURI           = httpRequest.getRequestURI();
             String contextPath          = httpRequest.getContextPath();
             String uriWithoutContext    = requestURI.substring(contextPath.length());
@@ -98,9 +84,6 @@ public class GenericFilter implements Filter {
             if (cause instanceof AcademicPlannerException academicPlannerException) {
                 errorCode = academicPlannerException.getErrorCode().name();
                 errorMessage = academicPlannerException.getMessage();
-                if(ErrorCode.unauthorized.equals(academicPlannerException.getErrorCode())){
-                    httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                }
             } else {
                 errorCode = ErrorCode.Declined.name();
                 errorMessage = "An error occurred while processing the request";
@@ -111,6 +94,12 @@ public class GenericFilter implements Filter {
             errorResponse.put("errorCode", errorCode);
             errorResponse.put("errorMessage", errorMessage);
             errorResponse.put("status", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
+
+            // Set the CORS headers
+            httpResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+            httpResponse.setHeader("Access-Control-Allow-Methods", "*");
+            httpResponse.setHeader("Access-Control-Allow-Headers", "*");
+            httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
 
             httpResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
             PrintWriter writer = httpResponse.getWriter();

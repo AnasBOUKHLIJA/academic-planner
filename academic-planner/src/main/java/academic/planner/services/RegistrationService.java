@@ -4,6 +4,7 @@ package academic.planner.services;
 import academic.planner.entities.Registration;
 import academic.planner.msg.PromotionDTO;
 import academic.planner.msg.RegistrationDTO;
+import academic.planner.msg.RegistrationRequest;
 import academic.planner.repositories.PromotionRepository;
 import academic.planner.repositories.RegistrationRepository;
 import academic.planner.utils.AcademicPlannerException;
@@ -29,10 +30,24 @@ public class RegistrationService {
     }
 
     public List<RegistrationDTO> getAll(Long promotionId) {
-        List<Registration> registrations = registrationRepository.findByPromotionId(promotionId);
-        if(registrations == null || registrations.isEmpty()) return null;
-
         List<RegistrationDTO> registrationDTOS = new ArrayList<>();
+        List<Registration> registrations = registrationRepository.findByPromotionId(promotionId);
+        if(registrations == null || registrations.isEmpty()) return registrationDTOS;
+
+        for (Registration registration: registrations) {
+            RegistrationDTO registrationDTO = new RegistrationDTO();
+            registrationDTO.init(registration);
+            registrationDTOS.add(registrationDTO);
+        }
+
+        return registrationDTOS;
+    }
+
+    public List<RegistrationDTO> getStudentRegistration(Long studentId) {
+        List<RegistrationDTO> registrationDTOS = new ArrayList<>();
+        List<Registration> registrations = registrationRepository.findByStudentId(studentId);
+        if(registrations == null || registrations.isEmpty()) return registrationDTOS;
+
         for (Registration registration: registrations) {
             RegistrationDTO registrationDTO = new RegistrationDTO();
             registrationDTO.init(registration);
@@ -53,11 +68,21 @@ public class RegistrationService {
         return registrationRepository.save(registration);
     }
 
-    public List<RegistrationDTO> save(List<Registration> registrations) {
-        if (registrations == null || registrations.isEmpty()) return null;
-
+    public List<RegistrationDTO> save(RegistrationRequest registrationRequest) {
         List<Registration> promotionStudentsList = new ArrayList<>();
-        List<Registration> existingRegistrations = registrationRepository.findByPromotionId(registrations.get(0).getPromotion().getId());
+        List<RegistrationDTO> registrationDTOS = new ArrayList<>();
+
+        List<Registration> existingRegistrations = registrationRepository.findByPromotionId(registrationRequest.getPromotion().getId());
+
+        if (registrationRequest.getRegistrations() == null || registrationRequest.getRegistrations().isEmpty()) {
+            if(existingRegistrations != null) {
+                for (Registration existingRegistration: existingRegistrations) {
+                    registrationRepository.delete(existingRegistration);
+                }
+            }
+            return registrationDTOS;
+        }
+
 
         // Create a set of unique identifiers for existing, non-deleted registrations
         Set<String> existingNonDeletedRegistrations = new HashSet<>();
@@ -70,10 +95,9 @@ public class RegistrationService {
         Set<String> incomingRegistrationIdentifiers = new HashSet<>();
 
         // Save new registrations or update existing ones
-        for (Registration registration : registrations) {
+        for (Registration registration : registrationRequest.getRegistrations()) {
             String uniqueIdentifier = registration.getStudent().getId() + "-" + registration.getPromotion().getId();
             incomingRegistrationIdentifiers.add(uniqueIdentifier);
-
             if (registration.getId() == null) registration.setRegistrationDate(new Date());
             promotionStudentsList.add(registrationRepository.save(registration));
         }
@@ -86,7 +110,6 @@ public class RegistrationService {
             }
         }
 
-        List<RegistrationDTO> registrationDTOS = new ArrayList<>();
         for (Registration registration: promotionStudentsList) {
             RegistrationDTO registrationDTO = new RegistrationDTO();
             registrationDTO.init(registration);

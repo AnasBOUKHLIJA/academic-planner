@@ -46,6 +46,14 @@ public class CourseService {
         return course;
     }
 
+    public List<Course> getTeacherCourses(Long teacherId){
+        List<Course> courses = courseRepository.findByTeacherId(teacherId);
+        for (Course course : courses) {
+            course.getTeacher().setCitizenship(null);
+        }
+        return courses;
+    }
+
     public Course save(Course course) {
         return courseRepository.save(course);
     }

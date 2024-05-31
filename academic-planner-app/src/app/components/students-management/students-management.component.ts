@@ -190,7 +190,7 @@ export class StudentsManagementComponent  implements OnInit {
   }
 
   openPersonPage(username: string) {
-    this.router.navigate([`/user/${username}`]);
+    this.router.navigate([`/user/student/${username}`]);
   }
 
 }

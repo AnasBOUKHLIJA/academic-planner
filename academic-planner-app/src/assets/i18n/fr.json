@@ -9,6 +9,15 @@
         "grades": "Notes",
         "students": "Étudiants"
     },
+    "days": {
+        "monday": "Lundi",
+        "tuesday": "Mardi",
+        "wednesday": "Mercredi",
+        "thursday": "Jeudi",
+        "friday": "Vendredi",
+        "saturday": "Samedi",
+        "sunday": "Dimanche"
+    },
     "en": "Anglais",
     "fr": "Francais",
     "establishments": "Etablissements",
@@ -139,5 +148,21 @@
     "enrolmentTitle": "Souscription des étudiants pour le programme académique",
     "enrolmentDescription": "Veuillez sélectionner les étudiants de cette promotion pour ce programme académique",
     "studentsOf": "Les étudiants de",
-    "ofPromotion": "de Promotion"
+    "ofPromotion": "de Promotion",
+    "academicProgramLabel": "Programme académique",
+    "selectAcademicProgramPlaceholder": "Sélectionnez le programme académique",
+    "promotionLabel": "Promotion",
+    "selectPromotionPlaceholder": "Sélectionnez la promotion",
+    "addNewScheduleTitle": "Ajouter un nouvel horaire",
+    "addNewScheduleDescription": "Entrez les informations nécessaires pour créer une nouvelle entrée d'horaire",
+    "addNewScheduleButtonLabel": "Ajouter un nouvel horaire",
+    "courseLabel": "Cours",
+    "selectCoursePlaceholder": "Sélectionnez le cours",
+    "classRoomLabel": "Salle de classe",
+    "selectClassRoomPlaceholder": "Sélectionnez la salle de classe",
+    "dayLabel": "Jour",
+    "selectDayPlaceholder": "Sélectionnez le jour",
+    "hourLabel": "Heure",
+    "selectHourPlaceholder": "Sélectionnez l'heure",
+    "schedule": "Emplois du temps"
 }

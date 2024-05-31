@@ -9,6 +9,7 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SecurityDTO {
 
+    private Long id;
     private String firstname;
     private String lastName;
     private String username;
@@ -22,6 +23,7 @@ public class SecurityDTO {
     private String token;
 
     public void init(Person person, String token){
+        this.id             = person.getId();
         this.firstname      = person.getFirstName();
         this.lastName       = person.getLastName();
         this.username       = person.getUsername();
@@ -119,5 +121,13 @@ public class SecurityDTO {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

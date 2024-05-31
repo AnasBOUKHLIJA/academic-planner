@@ -27,7 +27,7 @@ public class PromotionDTO {
         if ((promotion.getPromotionCourses() != null) && (! promotion.getPromotionCourses().isEmpty())) {
             List<PromotionCourse> promotionCourseList = promotion.getPromotionCourses();
             for (PromotionCourse promotionCourse: promotionCourseList ) {
-                promotionCourse.getCourse().setAcademicProgram(null);
+                promotionCourse.getCourse().setAcademicProgram(promotionCourse.getPromotion().getAcademicProgram());
                 promotionCourse.getCourse().getTeacher().setCitizenship(null);
                 promotionCourse.setPromotion(null);
             }

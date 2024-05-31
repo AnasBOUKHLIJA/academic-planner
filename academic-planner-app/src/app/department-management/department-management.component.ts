@@ -8,7 +8,6 @@ import { DepartmentModalComponent } from '../components/department-modal/departm
 import { UtilsService } from '../services/utils.service';
 import { AcademicProgram } from '../models/AcademicProgram';
 import { AcademicProgramModalComponent } from '../components/academic-program-modal/academic-program-modal.component';
-import { Establishment } from '../models/Establishment';
 
 @Component({
   selector: 'app-department-management',

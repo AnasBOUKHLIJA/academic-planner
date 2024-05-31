@@ -5,6 +5,7 @@ import { AcademicProgram } from 'src/app/models/AcademicProgram';
 import { Filter } from 'src/app/models/Filter';
 import { Promotion } from 'src/app/models/Promotion';
 import { Registration } from 'src/app/models/Registration';
+import { RegistrationRequest } from 'src/app/models/RegistrationRequest';
 import { Student } from 'src/app/models/Student';
 import { StudentsResponse } from 'src/app/models/msg/StudentsResponse';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
@@ -47,6 +48,7 @@ export class RegistrationModalComponent  implements OnInit {
     });
 
     this.registrations = await this.adminServiceService.getRegistrations(this.promotion.id);
+    if(! this.registrations) this.registrations = [];
   }
 
   closeModal() {
@@ -105,11 +107,14 @@ export class RegistrationModalComponent  implements OnInit {
 
   // Method to check if a student is selected
   isSelected(student: Student): boolean {
-    return this.registrations.some(s => s.student.studentNationalCode === student.studentNationalCode);
+    return this.registrations && this.registrations.some(s => s.student.studentNationalCode === student.studentNationalCode);
   }
 
   async save() {
-    this.registrations = await this.adminServiceService.saveRegistrations(this.registrations);
+    const registrationRequest = new RegistrationRequest();
+    registrationRequest.promotion = this.promotion;
+    registrationRequest.registrations = this.registrations;
+    this.registrations = await this.adminServiceService.saveRegistrations(registrationRequest);
   }
 
   delete(id : number) {

@@ -17,6 +17,7 @@ import { AdminModalComponent } from '../components/admin-modal/admin-modal.compo
 export class UserComponent  implements OnInit {
 
   username  : string | null;
+  type      : string | null;
   person    : Person;
   student   : Student;
   teacher   : Teacher;
@@ -33,11 +34,20 @@ export class UserComponent  implements OnInit {
   async ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.username = params.get('username');
+      this.type     = params.get('type');
     });
 
-    if (this.username) {
-      this.person = await this.kernelService.personByUsernameGet(this.username)
+    console.log(this.username);
+    console.log(this.type);
+
+    if(this.username && this.type){
+      if (this.type === 'student') {
+        this.student  = await this.kernelService.studentByUsernameGet(this.username);
+      } else if (this.type === 'teacher') {
+        this.teacher  = await this.kernelService.teacherByUsernameGet(this.username);
+      } else this.person   = await this.kernelService.personByUsernameGet(this.username);
     }
+    
   }
 
   async openPersonModal() {

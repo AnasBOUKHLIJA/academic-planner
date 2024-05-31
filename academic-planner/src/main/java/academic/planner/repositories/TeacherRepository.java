@@ -10,9 +10,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
+
+    Optional<Teacher> findByUsername(String username);
 
     @Query("SELECT t FROM Teacher t WHERE " +
             "(:username IS NULL OR t.username LIKE %:username%) AND " +

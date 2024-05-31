@@ -8,12 +8,12 @@ import academic.planner.repositories.PromotionCourseRepository;
 import academic.planner.repositories.PromotionRepository;
 import academic.planner.utils.AcademicPlannerException;
 import academic.planner.utils.ErrorCode;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PromotionService {
@@ -30,6 +30,7 @@ public class PromotionService {
         List<Promotion> promotions = promotionRepository.findByAcademicProgramCode(academicProgramCode);
         List<PromotionDTO> promotionDTOs = new ArrayList<>();
         for (Promotion promotion : promotions) {
+            promotion.setPromotionCourses(promotionCourseRepository.findByPromotionId(promotion.getId()));
             PromotionDTO promotionDTO = new PromotionDTO();
             promotionDTO.init(promotion);
             promotionDTOs.add(promotionDTO);
@@ -41,6 +42,7 @@ public class PromotionService {
         List<Promotion> promotions = promotionRepository.findAll();
         List<PromotionDTO> promotionDTOs = new ArrayList<>();
         for (Promotion promotion : promotions) {
+            promotion.setPromotionCourses(promotionCourseRepository.findByPromotionId(promotion.getId()));
             PromotionDTO promotionDTO = new PromotionDTO();
             promotionDTO.init(promotion);
             promotionDTOs.add(promotionDTO);
@@ -54,25 +56,61 @@ public class PromotionService {
             throw new AcademicPlannerException(ErrorCode.promotion_not_found, "Promotion not found with id => " + id);
         }
         Promotion promotion = optionalPromotion.get();
+        promotion.setPromotionCourses(promotionCourseRepository.findByPromotionId(promotion.getId()));
         PromotionDTO promotionDTO = new PromotionDTO();
         promotionDTO.init(promotion);
         return promotionDTO;
     }
 
-
+    @Transactional
     public PromotionDTO save(Promotion promotion) {
-        List<PromotionCourse> promotionCourses = promotion.getPromotionCourses();
-        Promotion promotionDB = promotionRepository.save(promotion);
-        if(promotionCourses != null){
-            promotionDB.setPromotionCourses(new ArrayList<>());
-            for (PromotionCourse promotionCourse : promotionCourses ){
-                promotionCourse.setPromotion(promotionDB);
-                PromotionCourse promotionCourseDB = promotionCourseRepository.save(promotionCourse);
-                promotionDB.getPromotionCourses().add(promotionCourseDB);
+        // List to store the promotion courses that will be saved
+        List<PromotionCourse> promotionCoursesList = new ArrayList<>();
+        List<PromotionCourse> existingPromotionCourses = promotionCourseRepository.findByPromotionId(promotion.getId());
+
+        if (promotion.getPromotionCourses() == null || promotion.getPromotionCourses().isEmpty()) {
+            if (existingPromotionCourses != null) {
+                for (PromotionCourse existingCourse : existingPromotionCourses) {
+                    promotionCourseRepository.delete(existingCourse);
+                }
             }
+            return convertToDTO(promotionRepository.save(promotion));
         }
+
+        // Create a set of unique identifiers for existing, non-deleted promotion courses
+        Set<Long> existingCourseIds = existingPromotionCourses.stream()
+                .map(PromotionCourse::getId)
+                .collect(Collectors.toSet());
+
+        // Create a set to track incoming promotion course identifiers
+        Set<Long> incomingCourseIds = new HashSet<>();
+
+        // Save new promotion courses or update existing ones
+        for (PromotionCourse promotionCourse : promotion.getPromotionCourses()) {
+            promotionCourse.setPromotion(promotion);
+            if (promotionCourse.getId() != null) {
+                existingCourseIds.remove(promotionCourse.getId());
+            }
+            incomingCourseIds.add(promotionCourse.getId());
+            promotionCoursesList.add(promotionCourseRepository.save(promotionCourse));
+        }
+
+        // Handle deletions: if an existing promotion course is not in the incoming list, delete it
+        for (Long existingCourseId : existingCourseIds) {
+            promotionCourseRepository.deleteById(existingCourseId);
+        }
+
+        // Update the promotion entity with the saved promotion courses and save it
+        promotion.setPromotionCourses(promotionCoursesList);
+        Promotion promotionDB = promotionRepository.save(promotion);
+
+        // Create and return the PromotionDTO
+        return convertToDTO(promotionDB);
+    }
+
+    private PromotionDTO convertToDTO(Promotion promotion) {
         PromotionDTO promotionDTO = new PromotionDTO();
-        promotionDTO.init(promotionDB);
+        promotionDTO.init(promotion);
         return promotionDTO;
     }
 

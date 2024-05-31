@@ -1,5 +1,6 @@
 package academic.planner.repositories;
 
+import academic.planner.entities.Person;
 import academic.planner.entities.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,7 +8,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface StudentRepository extends JpaRepository<Student, Long> {
+
+    Optional<Student> findByUsername(String username);
 
     @Query("SELECT s FROM Student s WHERE " +
             "(:username IS NULL OR s.username LIKE %:username%) AND " +

@@ -16,6 +16,10 @@ import { ClassRoom } from '../models/ClassRoom';
 import { Person } from '../models/Person';
 import { Promotion } from '../models/Promotion';
 import { Registration } from '../models/Registration';
+import { Schedule } from '../models/Schedule';
+import { Teacher } from '../models/Teacher';
+import { Student } from '../models/Student';
+import { PromotionCourse } from '../models/PromotionCourse';
 
 @Injectable({
   providedIn: 'root'
@@ -290,5 +294,40 @@ export class KernelServiceService {
       );
     });
   }
+
+  teacherByUsernameGet(username : string): Promise<Teacher>{
+    return new Promise((resolve, reject) => {
+      this.networkService.get(this.MODULE_GET_URL + "teacherByUsernameGet/" + username , true).then((response: any) => {
+          resolve(response);
+      }, error => {
+          reject(error);
+      }
+      );
+    });
+  }
+
+  studentByUsernameGet(username : string): Promise<Student>{
+    return new Promise((resolve, reject) => {
+      this.networkService.get(this.MODULE_GET_URL + "studentByUsernameGet/" + username , true).then((response: any) => {
+          resolve(response);
+      }, error => {
+          reject(error);
+      }
+      );
+    });
+  }
+
+
+  getSchedules(promotionId : number): Promise<Schedule[]>{
+    return new Promise((resolve, reject) => {
+      this.networkService.get(this.MODULE_GET_URL + "schedulesGet/" + promotionId   , true).then((response: any) => {
+          resolve(response);
+      }, error => {
+          reject(error);
+      }
+      );
+    });
+  }
+
 
 }

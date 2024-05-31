@@ -1,0 +1,67 @@
+<app-base>
+
+  <section class="page-shaped-section-conatiner">
+
+    <div class="section-header">
+      <h1 class="title">{{ 'courses' | translate}}</h1>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="grid-container" *ngIf="securityDTO.profile.code === 'teacher'">
+      <div class="card" *ngFor="let course of courses; let i = index">
+        <span class="float-card-button">
+          <ion-icon name="create-outline"></ion-icon>
+        </span>
+        <div class="image-container">
+          <p class="semester"> {{course.semester.name}} </p>
+          <img [alt]="course.name" [src]="getBackground(i)" />
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{ course.title }}</ion-card-title>
+          <ion-card-subtitle>{{course.teacher.firstName}} {{course.teacher.lastName}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ course.description }}</p>
+        </ion-card-content>
+        <div class="card-bottom-buttons">
+          <ion-button color="primary" fill="clear" (click)="openCoursePage(course.code)"> {{ 'moreDetailsLabel' |
+            translate }} &nbsp; <ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let registrationWithCourse of registrationWithCourses">
+      <br />
+      <h1>
+        {{ 'promotionLabel' | translate }} {{registrationWithCourse.registration.promotion.startYear | date: 'dd/MM/yyyy' }} - {{registrationWithCourse.registration.promotion.endYear | date: 'dd/MM/yyyy'}}
+      </h1> 
+      <p>{{registrationWithCourse.registration.promotion.academicProgram.name}}</p>
+      <br />
+    <div class="grid-container" *ngIf="securityDTO.profile.code === 'student'">
+        <div class="card" *ngFor="let promotionCourse of registrationWithCourse.promotionCourses; let i = index">
+          <div class="image-container">
+            <p class="semester"> {{promotionCourse.course.semester.name}} </p>
+            <img [alt]="promotionCourse.course.title" [src]="getBackground(i)" />
+          </div>
+          <ion-card-header>
+            <ion-card-title>{{ promotionCourse.course.title }}</ion-card-title>
+            <ion-card-subtitle>{{promotionCourse.course.teacher.firstName}} {{promotionCourse.course.teacher.lastName}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ promotionCourse.course.description }}</p>
+          </ion-card-content>
+          <div class="card-bottom-buttons">
+            <!-- Correcting the course code reference in the openCoursePage function call -->
+            <ion-button color="primary" fill="clear" (click)="openCoursePage(promotionCourse.course.code)">
+              {{ 'moreDetailsLabel' | translate }} &nbsp; 
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</app-base>

@@ -89,9 +89,11 @@ export class NetworkServiceService {
         },
         error: (error) => {
           if (toBeLoaded) this.spinner.hide();
-          console.log(error)
-          if(error.error && error.error.errorCode === 'unauthorized') this.router.navigateByUrl('/login');
-          else this.presentAlert('Oops!', error.error.errorCode && error.error.errorMessage ? error.error.errorCode + ' : ' + error.error.errorMessage : 'Something went wrong. Please try again');
+          if ((error.error && error.error.errorCode === 'unauthorized')) {
+            this.router.navigateByUrl('/login');
+          } else {
+            this.presentAlert('Oops!', error.error.errorCode && error.error.errorMessage ? error.error.errorCode + ' : ' + error.error.errorMessage : 'Something went wrong. Please try again');
+          }
           reject(error);
         }
       });
@@ -113,17 +115,7 @@ export class NetworkServiceService {
       this.http.delete(endPointUrL, httpOptions).subscribe({
         next: (response: any) => {
           this.spinner.hide();
-          if (response?.response?.code) {
-            if (response.response.code === ServerCode.ACCEPTED) {
-              resolve(response);
-            } else {
-              this.presentAlert('Oops!', response.error.message);
-              reject(response.error.message);
-            }
-          } else {
-            resolve(response);
-          }
-
+          resolve(response);
         },
         error: (error) => {
           if (toBeLoaded) this.spinner.hide();

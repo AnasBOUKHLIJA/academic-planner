@@ -15,6 +15,10 @@ public class Schedule {
     public Promotion promotion;
 
     @ManyToOne
+    @JoinColumn(name="course_id", foreignKey=@ForeignKey(name="fk_Schedule_course"), nullable=false)
+    public Course course;
+
+    @ManyToOne
     @JoinColumn(name="class_room_id", foreignKey=@ForeignKey(name="fk_Schedule_class_room"), nullable=false)
     public ClassRoom classRoom;
 
@@ -77,5 +81,13 @@ public class Schedule {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }
