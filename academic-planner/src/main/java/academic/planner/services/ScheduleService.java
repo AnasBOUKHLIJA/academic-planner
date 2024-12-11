@@ -39,6 +39,18 @@ public class ScheduleService {
         return scheduleDTOS;
     }
 
+    public List<ScheduleDTO> getTeacherSchedule(Long teacherId) {
+        List<Schedule> schedules = scheduleRepository.findByCourseTeacherId(teacherId);
+        List<ScheduleDTO> scheduleDTOS = new ArrayList<>();
+
+        for (Schedule schedule: schedules) {
+            ScheduleDTO scheduleDTO = new ScheduleDTO();
+            scheduleDTO.init(schedule);
+            scheduleDTOS.add(scheduleDTO);
+        }
+        return scheduleDTOS;
+    }
+
 
     public Schedule getById(Long id) {
         Optional<Schedule> optionalSchedule = scheduleRepository.findById(id);

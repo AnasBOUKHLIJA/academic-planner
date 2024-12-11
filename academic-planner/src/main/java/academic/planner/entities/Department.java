@@ -20,7 +20,7 @@ public class Department {
     @Column(name = "description", nullable=false)
     private String description;
 
-    @Column(name = "rank", nullable=false)
+    @Column(name = "rank_", nullable=false)
     private Integer rank;
 
     @ManyToOne

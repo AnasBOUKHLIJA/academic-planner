@@ -25,7 +25,7 @@ export class StudentsManagementComponent  implements OnInit {
 
   studentForm     : FormGroup;
   filterForm      : FormGroup;
-  pageSize        : number = 1;
+  pageSize        : number = 2;
   page            : number = 0;
   global          : GlobalConfig;
   studentsResponse: StudentsResponse;

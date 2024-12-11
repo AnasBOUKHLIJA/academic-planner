@@ -14,6 +14,7 @@ import { CourseManagementComponent } from './course-management/course-management
 import { UserComponent } from './user/user.component';
 import { StudentsComponent } from './students/students.component';
 import { CoursesComponent } from './courses/courses.component';
+import { GradesComponent } from './grades/grades.component';
 
 
 const routes: Routes = [
@@ -94,6 +95,13 @@ const routes: Routes = [
     path: 'courses', component: CoursesComponent,
     data: {
       title: "courses",
+      description: "Gérez les absences des étudiants et du personnel académique de manière organisée et efficace grâce au module de gestion des absences du planificateur académique."
+    }
+  },
+  {
+    path: 'grades', component: GradesComponent,
+    data: {
+      title: "grades",
       description: "Gérez les absences des étudiants et du personnel académique de manière organisée et efficace grâce au module de gestion des absences du planificateur académique."
     }
   },

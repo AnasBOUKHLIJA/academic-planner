@@ -9,5 +9,6 @@ import java.util.List;
 public interface PromotionCourseRepository extends JpaRepository<PromotionCourse, Long> {
     void deleteByPromotionId(Long promotionId);
     List<PromotionCourse> findByPromotionId(Long promotionId);
+    List<PromotionCourse> findByCourseId(Long courseId);
 
 }

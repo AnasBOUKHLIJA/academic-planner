@@ -1,2 +1,56 @@
-<p>
-</p>
+<app-base>
+
+
+    <section class="page-shaped-section-conatiner">
+
+        <div class="section-header">
+            <h1 class="title">{{ 'students' | translate}}</h1>
+        </div>
+
+        <ion-select [(ngModel)]="selectedCourse" (ionChange)="onCourseChange($event)"
+            label="{{ 'courseLabel' | translate }}" placeholder="{{ 'selectCoursePlaceholder' | translate }}">
+            <ion-select-option *ngFor="let course of courses" [value]="course">
+                {{ course.title | translate }}
+            </ion-select-option>
+        </ion-select>
+
+
+        <ion-select [(ngModel)]="selectedPromotion" (ionChange)="onPromotionChange($event)"
+            label="{{ 'promotionLabel' | translate }}" placeholder="{{ 'selectPromotionPlaceholder' | translate }}">
+            <ion-select-option *ngFor="let promotionCourse of promotionCourses" [value]="promotionCourse.promotion">
+                {{ 'promotionLabel' | translate }} {{promotionCourse.promotion.startYear | date: 'dd/MM/yyyy' }} -
+                {{promotionCourse.promotion.endYear | date: 'dd/MM/yyyy'}}
+            </ion-select-option>
+        </ion-select>
+
+        <br />  
+
+        <div class="table-responsive" *ngIf="registrations && registrations.length !== 0">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>{{ 'firstNameLabel' | translate }}</th>
+                        <th>{{ 'lastNameLabel' | translate }}</th>
+                        <th>{{ 'apogeeCodeLabel' | translate }}</th>
+                        <th>{{ 'CNE' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let registration of registrations; let i = index">
+                        <td>
+                            <img alt="" [src]="registration.student.thumbnail" />
+                        </td>
+                        <td>{{ registration.student.firstName }}</td>
+                        <td>{{ registration.student.lastName }}</td>
+                        <td>{{ registration.student.apogeeCode }}</td>
+                        <td>{{ registration.student.studentNationalCode }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+
+</app-base>

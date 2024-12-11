@@ -27,6 +27,7 @@ public class ScheduleDTO {
             this.promotion.setStartYear(schedule.getPromotion().getStartYear());
             this.promotion.setEndYear(schedule.getPromotion().getEndYear());
             this.promotion.setActualSemester(schedule.getPromotion().getActualSemester());
+            this.promotion.setAcademicProgram(schedule.getPromotion().academicProgram);
         }
 
         if(schedule.getCourse() != null) {

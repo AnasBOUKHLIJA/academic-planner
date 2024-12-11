@@ -20,22 +20,22 @@ export class UtilsService {
   global          : GlobalConfig;
   public pages = {
     admin: [
-      { code: 'dashboard',  url: '/', icon: 'home' },
+      { code: 'home',       url: '/', icon: 'home' },
       { code: 'university', url: '/university', icon: 'business' },
       { code: 'users',      url: '/users-management', icon: 'people' },
       { code: 'schedules',  url: '/schedules', icon: 'time' },
     ],
     teacher: [
-      { code: 'dashboard',   url: '/', icon: 'home' },
+      { code: 'home',       url: '/', icon: 'home' },
       { code: 'courses',     url: '/courses', icon: 'book' },
-      { code: 'grades',      url: '/grades', icon: 'school' },
       { code: 'students',    url: '/students', icon: 'people' },
+      { code: 'grades',      url: '/grades', icon: 'school' },
       { code: 'schedules',   url: '/schedules', icon: 'time' },
     ],
     student: [
-      { code: 'dashboard',   url: '/dashboard', icon: 'home' },
+      { code: 'home',         url: '/', icon: 'home' },
       { code: 'courses',     url: '/courses', icon: 'book' },
-      { code: 'grades',      url: '/grades', icon: 'school' },
+      // { code: 'grades',      url: '/grades', icon: 'school' },
       { code: 'schedules',   url: '/schedules', icon: 'time' },
     ]
   };

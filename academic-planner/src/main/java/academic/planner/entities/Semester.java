@@ -16,7 +16,7 @@ public class Semester {
     @Column(name = "name", nullable=false)
     private String name;
 
-    @Column(name= "rank", nullable=true)
+    @Column(name= "rank_", nullable=true)
     private Integer rank;
 
     //--------------------------------------------------------------------------------

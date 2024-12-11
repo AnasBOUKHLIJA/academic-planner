@@ -1,6 +1,5 @@
 <app-base>
-
-    <section class="page-shaped-section-conatiner">
+    <section class="page-shaped-section-conatiner" *ngIf="securityDTO.profile.code === 'admin'">
 
         <div class="section-header">
             <h1 class="title">{{ 'schedule' | translate}}</h1>
@@ -148,10 +147,12 @@
                             <td *ngIf="shouldRenderCell(day, hour)" [attr.colspan]="getColspan(day, hour)"
                                 [style.display]="getColspan(day, hour) > 1 ? 'table-cell' : 'table-cell'"
                                 [class.hour-column]="getColspan(day, hour) === 1">
-                                <div style="display: flex; justify-content: center; gap: 5px; align-items: center;" *ngIf="isCourseScheduled(day, hour)">
+                                <div style="display: flex; justify-content: center; gap: 5px; align-items: center;"
+                                    *ngIf="isCourseScheduled(day, hour)">
                                     {{ getCourse(day, hour) }}
-                                    <ion-button (click)="deleteSchedule(day, hour)" fill="clear" size="small" color="danger">
-                                        <ion-icon name="close-outline"></ion-icon> 
+                                    <ion-button (click)="deleteSchedule(day, hour)" fill="clear" size="small"
+                                        color="danger">
+                                        <ion-icon name="close-outline"></ion-icon>
                                     </ion-button>
                                 </div>
                             </td>
@@ -161,14 +162,144 @@
             </table>
             <div style="display: flex; justify-content: flex-end; align-items: center; margin: 8px 0;">
                 <ion-button type="submit" (click)="saveSchedule()">
-                    <ion-icon name="send-outline" slot="end" ></ion-icon>
+                    <ion-icon name="send-outline" slot="end"></ion-icon>
                     {{ 'saveButtonLabel' | translate }} &nbsp;
                 </ion-button>
             </div>
-            
+
         </div>
 
     </section>
 
+    <section class="page-shaped-section-conatiner" *ngIf="securityDTO.profile.code === 'teacher'">
 
+        <br />
+        <br />
+        <div class="table-responsive" *ngIf="scheduleData && scheduleData.length !== 0">
+
+            <div class="section-header">
+                <h1 class="title">{{ 'schedules' | translate}}</h1>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{{ 'codeLabel' | translate }}</th>
+                        <th>{{ 'titleLabel' | translate }}</th>
+                        <th>{{ 'academicProgramLabel' | translate }}</th>
+                        <th>{{ 'semesterLabel' | translate }}</th>
+                        <th>{{ 'creditHoursLabel' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of scheduleData">
+                        <td>{{ item.course.code }}</td>
+                        <td>{{ item.course.title }}</td>
+                        <td>{{ item.promotion.academicProgram.name }}</td>
+                        <td>{{ item.course.semester.code }}</td>
+                        <td>{{ item.course.creditHours }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+        <div class="schedule-table">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th class="day-column" [attr.colspan]="2">Day</th>
+                        <th *ngFor="let hour of hours" class="hour-column">{{ hour }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let day of days">
+                        <td class="day-column" [attr.colspan]="2">{{ 'days.' + day | translate }}</td>
+                        <ng-container *ngFor="let hour of hours">
+                            <td *ngIf="shouldRenderCell(day, hour)" [attr.colspan]="getColspan(day, hour)"
+                                [style.display]="getColspan(day, hour) > 1 ? 'table-cell' : 'table-cell'"
+                                [class.hour-column]="getColspan(day, hour) === 1">
+                                <div style="display: flex; justify-content: center; align-items: center;"
+                                    *ngIf="isCourseScheduled(day, hour)">
+                                    {{ getCourseForTeacher(day, hour) }}
+                                </div>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="page-shaped-section-conatiner" *ngIf="securityDTO.profile.code === 'student'">
+        <div class="section-header">
+            <h1 class="title">{{ 'schedule' | translate}}</h1>
+        </div>
+
+        <div *ngFor="let registrationWithSchedule of registrationWithSchedules">
+            <h1>
+                {{ 'promotionLabel' | translate }} {{registrationWithSchedule.registration.promotion.startYear | date:
+                'dd/MM/yyyy' }} - {{registrationWithSchedule.registration.promotion.endYear | date: 'dd/MM/yyyy'}}
+            </h1>
+            <p>{{registrationWithSchedule.registration.promotion.academicProgram.name}}</p>
+            <br />
+
+            <div class="table-responsive"
+                *ngIf="registrationWithSchedule && registrationWithSchedule.schedules && registrationWithSchedule.schedules.length !== 0">
+
+                <div class="section-header">
+                    <h1 class="title">{{ 'schedules' | translate}}</h1>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>{{ 'startTimeLabel' | translate }}</th>
+                            <th>{{ 'endTimeLabel' | translate }}</th>
+                            <th>{{ 'dayOfWeekLabel' | translate }}</th>
+                            <th>{{ 'semesterLabel' | translate }}</th>
+                            <th>{{ 'classRoomLabel' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let schedule of registrationWithSchedule.schedules">
+                            <td>{{ schedule.startTime }}</td>
+                            <td>{{ schedule.endTime }}</td>
+                            <td>{{ schedule.dayOfWeek }}</td>
+                            <td>{{ schedule.course.semester.name }}</td>
+                            <td>{{ schedule.classRoom.name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br />
+        <div class="schedule-table">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th class="day-column" [attr.colspan]="2">Day</th>
+                        <th *ngFor="let hour of hours" class="hour-column">{{ hour }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let day of days">
+                        <td class="day-column" [attr.colspan]="2">{{ 'days.' + day | translate }}</td>
+                        <ng-container *ngFor="let hour of hours">
+                            <td *ngIf="shouldRenderCell2(registrationWithSchedule.schedule, day, hour)" [attr.colspan]="getColspan2(registrationWithSchedule.schedule,day, hour)"
+                                [style.display]="getColspan2(registrationWithSchedule.schedule,day, hour) > 1 ? 'table-cell' : 'table-cell'"
+                                [class.hour-column]="getColspan2(registrationWithSchedule.schedule,day, hour) === 1">
+                                <div style="display: flex; justify-content: center; align-items: center;"
+                                    *ngIf="isCourseScheduled2(registrationWithSchedule.schedule,day, hour)">
+                                    {{ getCourse2(registrationWithSchedule.schedule, day, hour) }}
+                                </div>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+    </section>
 </app-base>

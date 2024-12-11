@@ -1,0 +1,29 @@
+/* your-component.component.css */
+.grade-input {
+    padding: 8px 12px;
+    margin: 4px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.grade-input:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.grade-input::placeholder {
+    color: #999;
+}
+
+/* Optionally, add some styles for error states if needed */
+.grade-input.ng-invalid.ng-touched {
+    border-color: #e74c3c;
+}
+
+.grade-input.ng-valid.ng-touched {
+    border-color: #2ecc71;
+}

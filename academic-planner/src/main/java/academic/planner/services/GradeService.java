@@ -1,9 +1,14 @@
 package academic.planner.services;
 
 import academic.planner.entities.Grade;
+import academic.planner.entities.Schedule;
+import academic.planner.msg.GradeRequest;
+import academic.planner.msg.ScheduleDTO;
+import academic.planner.msg.ScheduleRequest;
 import academic.planner.repositories.GradeRepository;
 import academic.planner.utils.AcademicPlannerException;
 import academic.planner.utils.ErrorCode;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +30,10 @@ public class GradeService {
         return gradeRepository.findAll();
     }
 
+    public List<Grade> getAll(Long promotionId, Long courseId) {
+        return gradeRepository.findByPromotionIdAndCourseId(promotionId, courseId);
+    }
+
     public Grade getById(Long id) {
         Optional<Grade> optionalGrade = gradeRepository.findById(id);
         if(! optionalGrade.isPresent()) throw new AcademicPlannerException(ErrorCode.grade_not_found, "Grade not found with id => " + id);
@@ -35,6 +44,21 @@ public class GradeService {
         return gradeRepository.save(grade);
     }
 
+    @Transactional
+    public List<Grade> save(GradeRequest gradeRequest) {
+        List<Grade> gradeList = new ArrayList<>();
+        gradeRepository.deleteByPromotionIdAndCourseId(gradeRequest.getPromotion().getId(), gradeRequest.getCourse().getId());
+
+        if(gradeRequest.getGrades() != null){
+            for (Grade grade: gradeRequest.getGrades()) {
+                grade.setPromotion(gradeRequest.getPromotion());
+                grade.setCourse(gradeRequest.getCourse());
+                Grade gradeDB = gradeRepository.save(grade);
+                gradeList.add(gradeDB);
+            }
+        }
+        return gradeList;
+    }
     public List<Grade> save(List<Grade> grades) {
         List<Grade> gradesList = new ArrayList<Grade>();
         for (Grade grade: grades) {

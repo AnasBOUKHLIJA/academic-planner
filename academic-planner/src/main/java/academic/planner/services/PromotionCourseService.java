@@ -27,8 +27,13 @@ public class PromotionCourseService {
     }
 
 
-    public List<PromotionCourse> getAll(Long promotionId) {
+    public List<PromotionCourse> getPromotionCourses(Long promotionId) {
         List<PromotionCourse> promotionCourses = promotionCourseRepository.findByPromotionId(promotionId);
+        return promotionCourses;
+    }
+
+    public List<PromotionCourse> getCoursePromotions(Long courseId) {
+        List<PromotionCourse> promotionCourses = promotionCourseRepository.findByCourseId(courseId);
         return promotionCourses;
     }
 }

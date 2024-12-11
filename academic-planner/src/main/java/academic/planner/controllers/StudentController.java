@@ -72,7 +72,7 @@ public class StudentController {
                 value = "/promotionCourseGet/{promotionId}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PromotionCourse>> promotionCourseGet(@PathVariable Long promotionId) {
-        return new ResponseEntity<>(promotionCourseService.getAll(promotionId), HttpStatus.OK);
+        return new ResponseEntity<>(promotionCourseService.getPromotionCourses(promotionId), HttpStatus.OK);
     }
 
 

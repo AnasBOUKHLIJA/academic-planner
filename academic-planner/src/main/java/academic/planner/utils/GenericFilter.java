@@ -1,5 +1,7 @@
 package academic.planner.utils;
 
+import academic.planner.entities.Person;
+import academic.planner.repositories.PersonRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,10 +21,12 @@ public class GenericFilter implements Filter {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
     private final JwtTokenManager jwtTokenManager;
+    private final PersonRepository personRepository;
 
     @Autowired
-    public GenericFilter(JwtTokenManager jwtTokenManager) {
+    public GenericFilter(JwtTokenManager jwtTokenManager, PersonRepository personRepository) {
         this.jwtTokenManager = jwtTokenManager;
+        this.personRepository = personRepository;
     }
 
     @Override
@@ -57,6 +61,22 @@ public class GenericFilter implements Filter {
                     token = token.substring("Bearer ".length());
                 }
 
+                Optional<Person> optionalPerson = personRepository.findByUsername(username);
+                if(! optionalPerson.isPresent()) throw new AcademicPlannerException(ErrorCode.person_not_found, "Person not found with username => " + username);
+
+                if(httpRequest.getRequestURI().startsWith("/academic-planner/api/v1/admin")){
+                    if(! optionalPerson.get().getProfile().getCode().equals("admin")){
+                        throw new AcademicPlannerException(ErrorCode.unauthorized, "You are not authorized. Please login.");
+                    }
+                } else if(httpRequest.getRequestURI().startsWith("/academic-planner/api/v1/teacher")){
+                    if(! optionalPerson.get().getProfile().getCode().equals("teacher")){
+                        throw new AcademicPlannerException(ErrorCode.unauthorized, "You are not authorized. Please login.");
+                    }
+                } else if(httpRequest.getRequestURI().startsWith("/academic-planner/api/v1/student")) {
+                    if(! optionalPerson.get().getProfile().getCode().equals("student")){
+                        throw new AcademicPlannerException(ErrorCode.unauthorized, "You are not authorized. Please login.");
+                    }
+                }
                 // Log request
                 logger.info("Incoming request -> Method: {}, URI: {}, username: {}",
                         httpRequest.getMethod(),  httpRequest.getRequestURI(), username);
